@@ -1,0 +1,42 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/order/order",
+    "pages/center/center",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "navigationBarBackgroundColor": "#e61773",
+    "navigationBarTitleText": "五洲到家",
+    "navigationBarTextStyle":"light",
+    "backgroundColor": "#e61773",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true
+  },
+ "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#e61773",
+    "backgroundColor": "#ffffff",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "image/tabbar/home_un.png",
+      "selectedIconPath": "image/tabbar/home.png"
+    }, {
+      "pagePath": "pages/order/order",
+      "text": "订单",
+      "iconPath": "image/tabbar/order_un.png",
+      "selectedIconPath": "image/tabbar/order.png"
+    }, {
+      "pagePath": "pages/center/center",
+      "text": "我的",
+      "iconPath": "image/tabbar/user_un.png",
+      "selectedIconPath": "image/tabbar/user.png"
+    }]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}
