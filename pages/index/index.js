@@ -1,6 +1,16 @@
 //index.js
 //获取应用实例
 var app = getApp()
+
+// 引入SDK核心类
+var QQMapWX = require('../../lib/qqmap-wx-jssdk.min.js');
+ 
+// 实例化API核心类
+var demo = new QQMapWX({
+    key: 'LHVBZ-DQVWW-C2YRC-REKYI-HRUV7-JPFYV' // 必填
+});
+ 
+
 Page({
   data: {
     motto: 'Hello World',
@@ -21,6 +31,36 @@ Page({
       that.setData({
         userInfo:userInfo
       })
-    })
+    });
+
+    // // 调用接口
+    // demo.reverseGeocoder({
+    //     location: {
+    //         latitude: 39.984060,
+    //         longitude: 116.307520
+    //     },
+    //     success: function(res) {
+    //         console.log(res);
+    //     },
+    //     fail: function(res) {
+    //         console.log(res);
+    //     },
+    //     complete: function(res) {
+    //         console.log(res);
+    //     }
+    // });
+
+    wx.request({
+      url: 'https://www.wzhouhui.com/dj/Location/getLocation', //仅为示例，并非真实的接口地址
+      method: 'post',
+      data: {
+        lng: '116.307520' ,
+        lat: '39.984060'
+      },
+      success: function(res) {
+        console.log(res)
+      }
+  });
+
   }
 })

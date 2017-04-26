@@ -1,6 +1,7 @@
 var util = require('./util.js');
 var ports = require('./ports.js');
-/* 门店地址处理脚本 */
+var location = require('./address.js');
+/* 首页承载页，数据源处理逻辑 */
 function address(){
     var _self = this;
     //门店派发页面
@@ -47,17 +48,50 @@ address.prototype = {
             this.getInfoByAddress();
         }
     },
-    getInfoByAddress: function(){
+    getAddressInfo: function(){
         var _self = this, token = util.getStorage("token"),
         ajaxCfg={
-            method: 'post',
+            method: 'POST',
             url: ports.getLocation,
-            data: JSON.stringify(_self.currentAddress)
+            data: _self.currentAddress
         };
         if(token){
             ajaxCfg.headers={'X-Auth-Token':token};
         }
         
-        return commonAjax(ajaxCfg);
+        return util.wxRequest(ajaxCfg);
+    },
+    // 用地址信息获取可配送状态及分发信息
+    getInfoByAddress(addressData){
+        var _self = this;
+        // 处理地址逻辑
+        location.getLocation({
+            gpsInfo: addressData,
+            token: addressData ? false : true
+        }).then((result)=>{
+            _self.userLocationData = result.data;
+            // 将最终得到地址地址存入本地
+            util.setStoreage("final_address", JSON.stringify(_self.userLocationData.final_address));
+            var 
+                // 分发结果
+                switchResult = _self.switchAddress(),
+                // 组合分发结果数据
+                pageSwitchInfo={
+                    page: switchResult.page,
+                    // 结果页弹层类型
+                    popType: switchResult.popType || 0,
+                    title: switchResult.txt
+                };
+
+            // 将分发信息存入本地
+            util.setStoreage("page_switch_info", JSON.stringify(pageSwitchInfo));
+            // 进入结果页前 打上进入线下店标识
+            // asyncStoreInfo(function(){
+            //     // 跳转到分发页面
+            //     location.href=_self.storePage[pageSwitchInfo.page];
+            // });
+        }).catch((e)=>{
+           console.warn('index/index:getInfoByAddress:',e);
+        });
     }
 }

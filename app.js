@@ -1,6 +1,7 @@
 //app.js
 App({
   onLaunch: function (options) {
+
     //调用API从本地缓存中获取数据， 待删
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
