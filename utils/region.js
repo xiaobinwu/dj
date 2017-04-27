@@ -62,14 +62,14 @@ function updateList() {
     return ajaxGetRegion().then(res => {
         var data = rankData(res);
         var storage = JSON.stringify(data);
-        util.setStoreage('regionList', storage);
+        util.setStorage('regionList', storage);
         return Promise.resolve(data);
     })
 }
 
 function getList() {
     return new Promise((resolve, reject) => {
-        var regionList = util.getStoreage('regionList');
+        var regionList = util.getStorage('regionList');
         if(regionList) {
             resolve(JSON.parse(regionList));
         }else {
@@ -79,7 +79,7 @@ function getList() {
                 reject(e);
             })
         }
-    })
+    });
 }
 
 function getRegionId(regionName) {

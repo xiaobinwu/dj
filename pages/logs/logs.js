@@ -7,15 +7,15 @@ Page({
   },
   onLoad: function (options) {
     console.log(options);
-    var a = [];
+    var arr = [];
     for(var key in options){
-      a.push(key);
+      arr.push({idx: key, opt: options[key]});
     }
     this.setData({
       logs: (wx.getStorageSync('logs') || []).map(function (log) {
         return util.formatTime(new Date(log))
       }),
-      logText: a
+      logText: arr
     })
   }
 })

@@ -15,7 +15,7 @@ var qqmapsdk = new QQMapWX({
 /*获取gps坐标 */
 function getCoords(){
     var getLocationPromisified = util.wxPromisify(wx.getLocation);
-    getLocationPromisified({
+    return getLocationPromisified({
         type: 'wgs84'
     }).then(function(res){
         return Promise.resolve({
@@ -24,7 +24,7 @@ function getCoords(){
         });
     }).catch(function(err){
         wx.showToast({
-            title: 'get location failed',
+            title: '您不允许获取您的位置',
             duration: 2000
         }); 
     });
@@ -35,7 +35,7 @@ function getCoords(){
  */
 function saveGPSInfo(info){
     // 将GPS信息存储以后面备用
-    util.setStoreage('gps_info',JSON.stringify(info));
+    util.setStorage('gps_info',JSON.stringify(info));
 }
 
 /**
@@ -52,37 +52,34 @@ function getGPSInfo(){
             region_name:''
         };
         getCoords().then((point)=>{
+            console.log(point)
             // 请求用户授权定位
             //逆地址解析
-            var reverseGeocoder = util.wxPromisify(qqmapsdk.reverseGeocoder);
-            return reverseGeocoder({
+            var ReverseGeocoder = util.wxPromisify(qqmapsdk.reverseGeocoder, qqmapsdk); //需改变作用域
+            return ReverseGeocoder({
                 location:{
                     latitude: point.lat,
                     longitude: point.lng 
                 }
             });
         }).then((res)=>{// 拿到腾讯地图解析过后的数据
+            // console.log(res)
             // 经度
             data.lng = res.result.ad_info.location.lng;
             // 纬度
             data.lat=res.result.ad_info.location.lat;
             //详细地址
             data.location_addr = res.result.address;
-
             return region.getRegionId(res.result.address_component.city);
-
         }).then((region)=>{// 通过城市名拿到城市区域id后
-
             data.region_id = region.value;
             data.region_name = region.name;
-
             // 全量式返回定位结果
             saveGPSInfo(data);
             resolve({data});
 
         }).catch((err)=>{
 
-            console.warn('address:getGPSInfo=>',err);
             // 增量式返回定位结果
             saveGPSInfo(data);
             // 结果无论怎样都需要返回后端进行统一处理,所以不用reject
@@ -105,7 +102,7 @@ function getLocation(options){
         needToken = 'token' in options ? options.token : true;
         // 如果本地缓存token，则使用
         if(token && needToken){ 
-            ajaxCfg.headers={'X-Auth-Token':token};
+            ajaxCfg.header={'X-Auth-Token':token};
         }        
         return new Promise((resolve,reject)=>{
             // 如果有已存在的定位信息(一般来自本地存储)
@@ -122,9 +119,15 @@ function getLocation(options){
                     if(result.err){
                         options.gpsError && options.gpsError(result.err);
                     }
+                    if(ajaxCfg.header){
+                        ajaxCfg.header.push({'content-type': 'application/x-www-form-urlencoded'});
+                    }else{
+                        ajaxCfg.header={'content-type': 'application/x-www-form-urlencoded'};
+                    }
                     ajaxCfg.data= result.data;
                     return util.wxRequest(ajaxCfg, true);
                 }).then(result=>{
+                    console.log(result);
                     resolve(result);
                 }).catch(err=>{
                     reject(err);
