@@ -1,0 +1,10 @@
+<template name="slider">
+    <swiper class="slider" indicator-dots="{{true}}"
+    autoplay="{{true}}" interval="5000" duration="600" indicator-color="#ffffff" indicator-active-color="#e61773" circular="{{true}}" bindchange="_sliderChange">
+    <block wx:for="{{slider.picList}}" wx:key="*this">
+        <swiper-item>
+        <image src="{{slider.showArr[index] ? item : '../../image/loading-super.gif'}}" class="slide-image {{!slider.showArr[index] ? 'default-slide-image' : ''}}"/>
+        </swiper-item>
+    </block>
+    </swiper>
+</template>

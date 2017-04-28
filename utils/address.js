@@ -19,8 +19,8 @@ function getCoords(){
         type: 'wgs84'
     }).then(function(res){
         return Promise.resolve({
-            lat: res.latitude,
-            lng: res.longitude
+            lat: 29.648422,
+            lng: 91.15645
         });
     }).catch(function(err){
         wx.showToast({
@@ -79,7 +79,6 @@ function getGPSInfo(){
             resolve({data});
 
         }).catch((err)=>{
-
             // 增量式返回定位结果
             saveGPSInfo(data);
             // 结果无论怎样都需要返回后端进行统一处理,所以不用reject

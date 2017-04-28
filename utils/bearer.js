@@ -49,19 +49,19 @@ address.prototype = {
             this.getInfoByAddress();
         }
     },
-    getAddressInfo: function(){
-        var _self = this, token = util.getStorage("token"),
-        ajaxCfg={
-            method: 'POST',
-            url: ports.getLocation,
-            data: _self.currentAddress
-        };
-        if(token){
-            ajaxCfg.headers={'X-Auth-Token':token};
-        }
+    // getAddressInfo: function(){
+    //     var _self = this, token = util.getStorage("token"),
+    //     ajaxCfg={
+    //         method: 'POST',
+    //         url: ports.getLocation,
+    //         data: _self.currentAddress
+    //     };
+    //     if(token){
+    //         ajaxCfg.headers={'X-Auth-Token':token};
+    //     }
         
-        return util.wxRequest(ajaxCfg);
-    },
+    //     return util.wxRequest(ajaxCfg);
+    // },
     // 用地址信息获取可配送状态及分发信息
     getInfoByAddress: function(addressData){
         var _self = this;
@@ -103,7 +103,7 @@ address.prototype = {
         }).catch((e)=>{
             console.log(e)
             wx.showToast({
-                title: "失败",
+                title: "定位失败",
                 duration: 2000
             }); 
         });

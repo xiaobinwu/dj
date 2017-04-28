@@ -1,2 +1,31 @@
 <!--pages/more/more.wxml-->
-<text>pages/more/more.wxml</text>
+<import src="../../template/slider.wxml"/>
+<template is="slider" data="{{slider}}"/>
+<view class="container">
+    <!-- 全部门店 -->
+    <view class="store-list-all">
+        <text class="title">期待与您不期而遇</text>
+        <text class="sub-title">五洲会2017将覆盖100个城市，新增1000家门店</text>
+        <view class="store-list clearfix">
+            <view class="pstore-item" wx:for="{{allStoreData}}" wx:key="region_name" data-region-name="111" data-alpha-beta="1" bindtap="itemProvClick">
+                <text class="name">{{item.region_name}}</text>
+                <text class="nums">{{item.store_nums}}家</text>
+            </view>
+        </view>
+    </view>
+    <!--本地门店-->
+    <view class="store-list-local"  wx:if="showCurrentStoreList">
+        <view class="store-count" wx:if="storeMoreData.length > 0">
+            当前区域共有门店{{storeMoreData.length}}家
+        </view>
+        <view class="store-count" wx:else>当前所选区域暂无门店</view>
+        <view class="store-list-box">
+            <view class="store-item">
+
+            </view>
+        </view>
+    </view>
+    <view class="no-store-tip-msg" wx:else>
+        本地区暂不支持，您可以通过查看其他支持的省份地区，了解我们的门店信息！或者登录我们的PC官方网站：<text>https://www.wzhouhui.com/</text>进行线上购买下单
+    </view>
+</view>
