@@ -9,7 +9,7 @@ Page({
     console.log(options);
     var arr = [];
     for(var key in options){
-      arr.push(key);
+      arr.push({idx: key, opt: options[key]});
     }
     this.setData({
       logs: (wx.getStorageSync('logs') || []).map(function (log) {

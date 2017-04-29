@@ -1,7 +1,9 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/order/order",
+    "pages/home/home",
+    "pages/list/list",
+    "pages/more/more",
     "pages/center/center",
     "pages/logs/logs"
   ],

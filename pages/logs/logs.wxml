@@ -1,7 +1,7 @@
 <!--logs.wxml-->
 <view class="container log-list">
-  <block wx:for="{{logText}}" wx:key="*this">
-    <text>{{item}}</text>
+  <block wx:for="{{logText}}">
+    <text>{{item.idx}}:{{item.opt}}</text>
   </block> 
   
   <block wx:for="{{logs}}" wx:for-item="log" wx:key="*this">

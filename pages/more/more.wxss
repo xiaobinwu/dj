@@ -1,0 +1,45 @@
+/* pages/more/more.wxss */
+.store-list-all{
+    padding: 20rpx;
+    text-align: center;
+    /*background-color: #fff;*/
+}
+.title{
+    display: block;
+    font-size: 16px;
+    color: #222;
+    padding: 10rpx 0 20rpx;
+}
+.sub-title{
+    font-size: 12px;
+    display: block;
+    color: #666;
+}
+.store-list{
+    margin-top: 30rpx;
+    font-size: 12px;
+    border: solid #e8e8e8;
+    border-width: 1px 0 0 1px;
+}
+.pstore-item{
+    float: left;
+    display: flex;
+    width: 33.33%; 
+    color: #222;
+}
+.pstore-item text{
+    display: block; /**此处必须为block**/
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 10rpx 0;
+    border: solid #e8e8e8;
+    border-width: 0 1px 1px 0;   
+}
+.pstore-item .name{
+    width: 65%;
+    background-color: #fafafa;
+}
+.pstore-item .nums{
+    width: 35%;
+}

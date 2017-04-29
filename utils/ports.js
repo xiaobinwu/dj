@@ -7,4 +7,6 @@ module.exports = {
     getLocation: wdomain + '/Location/getLocation',
     // 有门店的省市区列表
     regionList: wdomain + '/store/regionList',
+    //门店模块
+    storeMore: wdomain + '/store/more',
 }

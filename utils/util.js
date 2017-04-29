@@ -30,7 +30,7 @@ function formatNumber(n) {
 
 /* api接口promise 柯里化*/
 var Promise = require('../lib/es6-promise.min.js'); 
-function wxPromisify(fn) {  
+function wxPromisify(fn, scope) {  
   return function (obj = {}) {    
     return new Promise((resolve, reject) => {      
       obj.success = function (res) {        
@@ -38,8 +38,13 @@ function wxPromisify(fn) {
       }      
       obj.fail = function (res) {        
         reject(res);      
+      }
+      if(scope){
+        var newFn = fn.bind(scope);
+        newFn(obj);
+      }else{
+        fn(obj);
       }      
-      fn(obj);    
     })  
   }
 }
@@ -130,7 +135,7 @@ function getToken() {
     // });
 
     return getOpenId().then(() => {
-        token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwOlwvXC93d3cud3pob3VodWkuY29tIiwiYXVkIjoiaHR0cDpcL1wvd3d3Lnd6aG91aHVpLmNvbSIsImlhdCI6MTQ5MzE3NDU0MCwibmJmIjoxNDkzMTc0NTQwLCJleHAiOjE0OTM3NzkzNDAsInN1YiI6IjM3ODU2In0.BD_WHZ8TK3dgQNr5pc9LD4uZVB1MWNz29Ytge86xTueLaj0H79Xo1Pnc-S5F0bexTJDwfU2clK7FxPI5CuyCoQ';
+        token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJpc3MiOiJodHRwOlwvXC93d3cud3pob3VodWkuY29tIiwiYXVkIjoiaHR0cDpcL1wvd3d3Lnd6aG91aHVpLmNvbSIsImlhdCI6MTQ5MzI1OTk3OSwibmJmIjoxNDkzMjU5OTc5LCJleHAiOjE0OTM4NjQ3NzksInN1YiI6IjM3ODU2In0.2eAOmIvhkMdjh6ll2swrhtx48sLVb6izyqb-5WfinIorVw6ZS6Mp2L6PRfHybehr';
         if(token) {
             if(token === '0') {
                 return Promise.reject({
@@ -174,7 +179,7 @@ function wxRequest(options, tokenNotRequired){
 
 
 /* store封装 */
-function setStoreage(key, value, isSync=true){
+function setStorage(key, value, isSync=true){
   if(isSync){
       try {
           wx.setStorageSync(key, value);
@@ -241,7 +246,7 @@ module.exports = {
   formatTime: formatTime,
   getStorage: getStorage,
   removeStorage: removeStorage,
-  setStoreage: setStoreage,
+  setStorage: setStorage,
   wxPromisify: wxPromisify,
   wxRequest: wxRequest
 }
