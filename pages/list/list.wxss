@@ -1,1 +1,91 @@
 /* pages/list/list.wxss */
+.warn-msg-box{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    padding: 23rpx 20rpx;
+    background-color: #fff9e3;
+    border-bottom: 1px solid #efe5a7;   
+    box-sizing: border-box; 
+}
+.msg-box{
+    flex: 1;
+    padding-left: 8rpx;
+}
+.msg-box .msg-box-text1{
+    margin-bottom: 6rpx;
+    font-size: 15px;
+    color: #333;
+}
+.msg-box .msg-box-text2{
+    font-size: 12px;
+    color: #999;
+}
+.store-list{
+    background-color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+}
+.store-item{
+    margin:0 20rpx;
+    padding: 20rpx 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e8e8e8;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.store-pic{
+    width: 200rpx;
+    height: 200rpx;
+}
+.store-info{
+    overflow: hidden;
+    flex: 1;
+    padding-left: 20rpx;
+    color: #222;
+}
+.store-name{
+    font-size: 16px;
+}
+.store-address{
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 10rpx 0;
+    font-size: 14px;
+}
+.store-distance{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #666;
+}
+.store-status{
+    padding: 3rpx 20rpx;
+    border-radius: 4px;
+    background-color: #ccc;
+    color: #fff;
+}
+.store-status.green{
+    background-color: #25ae5f;
+    color:#fff;
+}
+.store-discount{
+    padding: 10rpx 0;
+}
+/*优惠小标签*/
+.dtag{
+    display: inline-block;
+    margin: 4rpx;
+    margin-top: 0;
+    padding: 1rpx 6rpx;
+    color: #fff;
+    font-style: normal;
+    font-weight: normal;
+    background-color: #49caec;
+    border-radius: 4px;
+    font-size: 12px;
+}

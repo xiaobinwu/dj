@@ -1,2 +1,31 @@
 <!--pages/list/list.wxml-->
-<text>pages/list/list.wxml</text>
+<import src="../../template/slider.wxml"/>
+<template is="slider" data="{{slider}}"/>
+<view class="container">
+    <view class="warn-msg-box">
+        <view class="msg-box">
+            <view class="msg-box-text1">暂无可支持配送的门店</view>
+            <view class="msg-box-text2">为您推荐的为附近的五洲会门店，请考虑更换地址</view>
+        </view>
+    </view>
+    <view class="store-list" wx:if="{{storeData.store_list}}">
+        <view class="store-item" wx:for="{{storeData.store_list}}" wx:for-index="idx" wx:for-item="store" data-store="{{store}}" bindtap="toStoreDetail" wx:key="id">
+            <image src="{{store.store_logo_format}}" class="store-pic"></image>
+            <view class="store-info">
+                <view class="store-name"> {{store.store_name}} </view>
+                <view class="store-address">{{store.store_address}}</view>
+                <view class="store-distance">
+                    <view class="distance">
+                        <text>{{store.distance_format}}</text>
+                    </view>
+                    <view class="store-status {{store.delivery_sta_format == '可配送' ? 'green' : ''}}">
+                        {{store.delivery_sta_format}}
+                    </view>
+                </view>
+                <view class="store-discount">
+                    <text class="dtag" wx:for="{{store.store_activity_list}}" wx:for-item="tagItem" wx:key="*this" style="background-color: {{ tagItem[1] }}">{{tagItem[0]}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

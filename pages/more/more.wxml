@@ -7,21 +7,32 @@
         <text class="title">期待与您不期而遇</text>
         <text class="sub-title">五洲会2017将覆盖100个城市，新增1000家门店</text>
         <view class="store-list clearfix">
-            <view class="pstore-item" wx:for="{{allStoreData}}" wx:key="region_name" data-region-name="111" data-alpha-beta="1" bindtap="itemProvClick">
+            <view class="pstore-item" wx:for="{{allStoreData}}" wx:key="region_name" data-region-name="{{item.region_name}}" bindtap="itemProvClick">
                 <text class="name">{{item.region_name}}</text>
                 <text class="nums">{{item.store_nums}}家</text>
             </view>
         </view>
     </view>
     <!--本地门店-->
-    <view class="store-list-local"  wx:if="showCurrentStoreList">
+    <view class="store-list-local"  wx:if="{{!showCurrentStoreList}}">
         <view class="store-count" wx:if="storeMoreData.length > 0">
             当前区域共有门店{{storeMoreData.length}}家
         </view>
         <view class="store-count" wx:else>当前所选区域暂无门店</view>
         <view class="store-list-box">
-            <view class="store-item">
-
+            <view class="store-item" wx:for="{{storeMoreData}}" wx:key="{{item.id}}" data-item="{{item}}" catchtap="toStoreDetail">
+                <view class="store-status {{item.delivery_sta_format == '可配送' ? 'green' : 'gray'}}" > {{item.delivery_sta_format}} </view>
+                <image class="store-pic" src="{{item.landmark_img_format||item.store_picture_list[0]}}"></image>
+                <view class="store-basic-info">
+                    <view class="store-name">
+                        <text class="sd-name"> {{item.store_name}} </text>
+                        <text class="dtag" wx:for="{{item.store_activity_list}}" wx:for-item="tagItem" wx:key="*this" style="background-color: {{ tagItem[1] }}">{{tagItem[0]}}</text>
+                    </view>
+                    <view class="store-distance">
+                        <text>{{item.distance_format}}</text>
+                    </view>
+                </view>
+                <view class="store-adress">{{item.store_address}}</view>
             </view>
         </view>
     </view>

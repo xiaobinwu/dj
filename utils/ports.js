@@ -9,4 +9,5 @@ module.exports = {
     regionList: wdomain + '/store/regionList',
     //门店模块
     storeMore: wdomain + '/store/more',
+    storeSearch: wdomain + '/store/searchStore',
 }

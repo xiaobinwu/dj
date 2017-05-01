@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  /*background-color: #eee;*/
+  background-color: #eee;
 } 
 .slider {
     display: block;

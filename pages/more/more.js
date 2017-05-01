@@ -2,6 +2,17 @@
 var polyfill = require('../../utils/polyfill.js')
 var util = require('../../utils/util.js');
 var ports = require('../../utils/ports.js');
+// 优惠标签配色
+var tagColor=[
+    // 浅蓝
+    '#49C8EB',
+    // 浅绿
+    '#08DDA7',
+    // 紫
+    '#984CEC',
+    // 玫红
+    '#FE0F6A'
+];
 var dialog = [
     {
       title: '未获得定位服务',
@@ -58,10 +69,10 @@ Page({
   data:{
       slider:{
           picList: [
-              '//img02.wzhouhui.net/optm/ad/2017/03/08/orig/e22542db46cefea5dfb51f7c7ba8d3817824e65c.jpg',
-              '//img02.wzhouhui.net/optm/ad/2017/03/08/orig/610d7f02a200cdb27b005b4d5cb2b67f2e6314d0.jpg',
-              '//img02.wzhouhui.net/optm/ad/2017/03/08/orig/05f531fa8b97da6987153b20ca71f3844c56e62a.jpg',
-              '//img02.wzhouhui.net/optm/ad/2017/03/08/orig/d51c19b84bbc45a8d15b460fcd6ae99768527638.jpg'
+              'https://img02.wzhouhui.net/optm/ad/2017/03/08/orig/e22542db46cefea5dfb51f7c7ba8d3817824e65c.jpg',
+              'https://img02.wzhouhui.net/optm/ad/2017/03/08/orig/610d7f02a200cdb27b005b4d5cb2b67f2e6314d0.jpg',
+              'https://img02.wzhouhui.net/optm/ad/2017/03/08/orig/05f531fa8b97da6987153b20ca71f3844c56e62a.jpg',
+              'https://img02.wzhouhui.net/optm/ad/2017/03/08/orig/d51c19b84bbc45a8d15b460fcd6ae99768527638.jpg'
           ],
           showArr: [true, false, false, false]
       },
@@ -108,16 +119,18 @@ Page({
       });
   },
   itemProvClick(event){
-      console.log(event)
-      // var  provId = this.data.provincesData.filter(item=>{
-      //          return item.name == e.target.dataset.regionName;
-      //     })[0].value;
-      //     console.log(provId)
-      // this.getData({
-      //     province_id: provId,
-      //     city_id:0,
-      //     flag:0
-      // });
+      var  provId = this.data.provincesData.filter(item=>{
+               return item.name == (event.target.dataset.regionName || event.currentTarget.dataset.regionName);
+          })[0].value;
+      this.getData({
+          province_id: provId,
+          city_id:0,
+          flag:0
+      });
+  },
+  //去门店详情页
+  toStoreDetail(event){
+        console.log(event)
   },
   //获取门店数据
   getData: function(data){
@@ -146,6 +159,13 @@ Page({
                 allStoreData: data.storeDistribution
             });
           }
+          //整理标签颜色
+          for(let i = 0; i < data.store_list.length; i++){
+              var store_item = data.store_list[i];
+              for(let j = 0; j < store_item.store_activity_list.length;j++){
+                    store_item.store_activity_list[j] = _self.dTag(store_item.store_activity_list[j],j);
+              }
+          }
           // 门店列表数据
           _self.setData({
               storeMoreData: data.store_list
@@ -156,6 +176,11 @@ Page({
               duration: 2000
           }); 
       });
+  },
+  dTag:function(tag, index){
+        var tagName=/^\[(.)\]/.exec(tag)[1];
+        // 循环使用颜色
+        return [tagName,tagColor[index%tagColor.length]];
   },
   onLoad:function(options){
       var _self = this,
@@ -193,12 +218,15 @@ Page({
         // 清空分发配置
         util.removeStorage("page_switch_info");
         if(switchInfo.popType){
-            // dialog[switchInfo.popType-1].cancelColor = "#666666";
-            // dialog[switchInfo.popType-1].confirmColor = "#666666";
-            // wx.showModal(dialog[switchInfo.popType-1]);
+            dialog[switchInfo.popType-1].cancelColor = "#666666";
+            dialog[switchInfo.popType-1].confirmColor = "#666666";
+            wx.showModal(dialog[switchInfo.popType-1]);
         }
     }
   },
+  onPullDownRefresh: function(){
+    wx.stopPullDownRefresh()
+  },  
   onReady:function(){
     // 页面渲染完成
   },
