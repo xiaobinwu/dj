@@ -1,2 +1,3 @@
 <!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<import src="../../template/slider.wxml"/>
+<template is="slider" data="{{slider}}"/>

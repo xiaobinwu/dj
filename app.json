@@ -20,7 +20,7 @@
     "selectedColor": "#e61773",
     "backgroundColor": "#ffffff",
     "list": [{
-      "pagePath": "pages/index/index",
+      "pagePath": "pages/home/home",
       "text": "首页",
       "iconPath": "image/tabbar/home_un.png",
       "selectedIconPath": "image/tabbar/home.png"

@@ -19,8 +19,8 @@ function getCoords(){
         type: 'wgs84'
     }).then(function(res){
         return Promise.resolve({
-            lat: 22.5366700000,
-            lng: 114.0118900000
+            lat: 22.5099650000,
+            lng: 113.9256690000
         });
     }).catch(function(err){
         wx.showToast({

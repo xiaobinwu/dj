@@ -8,6 +8,7 @@ module.exports = {
     // 有门店的省市区列表
     regionList: wdomain + '/store/regionList',
     //门店模块
+    storeShow: wdomain + '/store/show',
     storeMore: wdomain + '/store/more',
     storeSearch: wdomain + '/store/searchStore',
 }

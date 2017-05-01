@@ -6,6 +6,5 @@ var ports = require('../../utils/ports.js');
 Page({
   onLoad: function () {
     bearer.init();
-
   }
 })
