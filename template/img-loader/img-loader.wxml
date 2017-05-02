@@ -1,0 +1,4 @@
+
+<template name="img-loader">
+    <image wx:for="{{ imgLoadList }}" wx:key="*this" src="{{ item }}" data-src="{{ item }}" bindload="_imgOnLoad" binderror="_imgOnLoadError" style="opacity:0" />
+</template>
