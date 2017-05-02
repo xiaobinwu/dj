@@ -102,9 +102,10 @@
     font-size: 16px;
     font-weight: bold;
 }
-.store-distance{
+.store-distance, .store-distance .icon{
     font-size: 12px;
     color: #666;
+    margin-right: 5rpx;
 }
 .store-adress{
     font-size: 14px;
@@ -133,3 +134,4 @@
 .no-store-tip-msg text{
     color:#e61773;
 }
+@import "../../css/font.wxss";

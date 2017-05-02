@@ -240,7 +240,19 @@ function removeStorage(key, isSync=true){
       });
   }
 }
-
+// 优惠标签配色
+function getTagColor(){
+    return [
+        // 浅蓝
+        '#49C8EB',
+        // 浅绿
+        '#08DDA7',
+        // 紫
+        '#984CEC',
+        // 玫红
+        '#FE0F6A'
+    ];
+}
 
 module.exports = {
   formatTime: formatTime,
@@ -248,5 +260,6 @@ module.exports = {
   removeStorage: removeStorage,
   setStorage: setStorage,
   wxPromisify: wxPromisify,
-  wxRequest: wxRequest
+  wxRequest: wxRequest,
+  getTagColor: getTagColor
 }

@@ -1,19 +1,12 @@
 // pages/list/list.js
 var util = require('../../utils/util.js');
 var ports = require('../../utils/ports.js');
+//引入灯箱组件
+var Slider = require('../../template/slider/slider.js');
 // 引入promise
 var Promise = require('../../lib/es6-promise.min.js'); 
 // 优惠标签配色
-var tagColor=[
-    // 浅蓝
-    '#49C8EB',
-    // 浅绿
-    '#08DDA7',
-    // 紫
-    '#984CEC',
-    // 玫红
-    '#FE0F6A'
-];
+var tagColor = util.getTagColor();
 var dialog = [
     {
       title: '您有可支持配送的地址',
@@ -44,27 +37,12 @@ var dialog = [
 ];
 Page({
   data:{
-      slider:{
-          picList: [],
-          showArr: [true, false, false, false]
-      },
       storeData: {},
       showAddress: '',
       finalAddress: '',
       lng: 0,
       lat: 0,
       gpsInfo:{}
-  },
-  _sliderChange: function(e){
-      var showArr = this.data.slider.showArr;
-      for(let i = 0; i < showArr.length; i++){
-        if(i === e.detail.current){
-          showArr[i] = true;
-        }
-      }
-      this.setData({
-        'slider.showArr': showArr
-      });
   },
   // 获取门店列表
   getStoreList(){
@@ -92,6 +70,8 @@ Page({
         return [tagName,tagColor[index%tagColor.length]];
   },
   onLoad:function(options){
+      //初始化灯箱组件
+      this.slider = new Slider(this);
       var finalAddress = util.getStorage('final_address');
       if(finalAddress){
           var tempfinalAddress = JSON.parse(finalAddress);
@@ -111,9 +91,9 @@ Page({
                   }
               }
               this.setData({
-                storeData: result.data,
-                'slider.picList': picList
+                storeData: result.data
               });
+              this.slider.initData(picList);
           })
       }
       // 来自顶页面分发（确定使用哪种弹窗提示）

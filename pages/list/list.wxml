@@ -1,8 +1,9 @@
 <!--pages/list/list.wxml-->
-<import src="../../template/slider.wxml"/>
+<import src="../../template/slider/slider.wxml"/>
 <template is="slider" data="{{slider}}"/>
 <view class="container">
     <view class="warn-msg-box">
+        <span class="icon icon-warning"></span>
         <view class="msg-box">
             <view class="msg-box-text1">暂无可支持配送的门店</view>
             <view class="msg-box-text2">为您推荐的为附近的五洲会门店，请考虑更换地址</view>
@@ -16,6 +17,7 @@
                 <view class="store-address">{{store.store_address}}</view>
                 <view class="store-distance">
                     <view class="distance">
+                        <span class="icon icon-gps"></span>
                         <text>{{store.distance_format}}</text>
                     </view>
                     <view class="store-status {{store.delivery_sta_format == '可配送' ? 'green' : ''}}">

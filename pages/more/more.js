@@ -2,17 +2,10 @@
 var polyfill = require('../../utils/polyfill.js')
 var util = require('../../utils/util.js');
 var ports = require('../../utils/ports.js');
+//引入灯箱组件
+var Slider = require('../../template/slider/slider.js');
 // 优惠标签配色
-var tagColor=[
-    // 浅蓝
-    '#49C8EB',
-    // 浅绿
-    '#08DDA7',
-    // 紫
-    '#984CEC',
-    // 玫红
-    '#FE0F6A'
-];
+var tagColor = util.getTagColor();
 var dialog = [
     {
       title: '未获得定位服务',
@@ -67,15 +60,6 @@ if(regionList){
 }
 Page({
   data:{
-      slider:{
-          picList: [
-              'https://img02.wzhouhui.net/optm/ad/2017/03/08/orig/e22542db46cefea5dfb51f7c7ba8d3817824e65c.jpg',
-              'https://img02.wzhouhui.net/optm/ad/2017/03/08/orig/610d7f02a200cdb27b005b4d5cb2b67f2e6314d0.jpg',
-              'https://img02.wzhouhui.net/optm/ad/2017/03/08/orig/05f531fa8b97da6987153b20ca71f3844c56e62a.jpg',
-              'https://img02.wzhouhui.net/optm/ad/2017/03/08/orig/d51c19b84bbc45a8d15b460fcd6ae99768527638.jpg'
-          ],
-          showArr: [true, false, false, false]
-      },
       // 全国门店数据
       allStoreData: [],
       // 更多门店数据
@@ -98,17 +82,6 @@ Page({
       lat: 22.514068,
       showAddress:'',
       showCurrentStoreList:true
-  },
-  _sliderChange: function(e){
-      var showArr = this.data.slider.showArr;
-      for(let i = 0; i < showArr.length; i++){
-        if(i === e.detail.current){
-          showArr[i] = true;
-        }
-      }
-      this.setData({
-        'slider.showArr': showArr
-      });
   },
   computed: function(){
       var _self = this;
@@ -183,6 +156,13 @@ Page({
         return [tagName,tagColor[index%tagColor.length]];
   },
   onLoad:function(options){
+      this.slider = new Slider(this);
+      this.slider.initData([
+            'https://img02.wzhouhui.net/optm/ad/2017/03/08/orig/e22542db46cefea5dfb51f7c7ba8d3817824e65c.jpg',
+            'https://img02.wzhouhui.net/optm/ad/2017/03/08/orig/610d7f02a200cdb27b005b4d5cb2b67f2e6314d0.jpg',
+            'https://img02.wzhouhui.net/optm/ad/2017/03/08/orig/05f531fa8b97da6987153b20ca71f3844c56e62a.jpg',
+            'https://img02.wzhouhui.net/optm/ad/2017/03/08/orig/d51c19b84bbc45a8d15b460fcd6ae99768527638.jpg'
+      ]);
       var _self = this,
           // 本地缓存中有地址信息时
           finalAddress = util.getStorage('final_address');

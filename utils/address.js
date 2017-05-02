@@ -18,8 +18,11 @@ function getCoords(){
     return getLocationPromisified({
         type: 'wgs84'
     }).then(function(res){
+        //列表 => 22.5373800000 114.0129300000
+        //主页 => 22.5099650000 113.9256690000
+        //更多 => 29.6441500000 91.1145000000
         return Promise.resolve({
-            lat: 22.5099650000,
+            lat: 22.5099650000 ,
             lng: 113.9256690000
         });
     }).catch(function(err){

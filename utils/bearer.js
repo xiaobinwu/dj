@@ -96,7 +96,6 @@ address.prototype = {
             // });
 
             //关闭承载页，跳转到应用内的某个页面。    
-            console.log(pageSwitchInfo.page)
             if(pageSwitchInfo.page === 1){
                 wx.switchTab({
                     url: _self.storePage[pageSwitchInfo.page]

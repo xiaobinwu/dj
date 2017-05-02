@@ -1,3 +1,80 @@
 <!--pages/home/home.wxml-->
-<import src="../../template/slider.wxml"/>
-<template is="slider" data="{{slider}}"/>
+<import src="../../template/slider/slider.wxml"/>
+<view class="slider-container">
+    <template is="slider" data="{{slider}}"/>
+    <view catchtap="toStoreDetail" class="btn-show-store-detail">门店详情</view>
+</view>
+<!-- 店铺简介 -->
+<view class="store-intro">
+    <view class="store-pic-name">
+        <view class="store-name" catchtap="toStoreDetail">
+            <text>{{storeData.store_name}}</text>
+            <text class="store-status {{storeData.store_sta < 2 ? 'green' : 'gray'}}" >{{storeData.store_sta_format}}</text>
+        </view>
+        <navigator url="../more/more" class="btn-more-store">
+            <text class="btn-more-store-text">更多门店</text>
+            <span class="icon icon-right"></span>    
+        </navigator>
+    </view>
+</view>
+<!-- 优惠信息 -->
+<view class="discount-info" catchtap="changeShowStoreDetail">
+    <view class="discount-msg">
+        <text class="label">优惠：</text>
+        <text class="dtag" style="background-color:{{storeData.store_activity_format.backgroundColor}}">{{storeData.store_activity_format.tag}}</text>
+        <text class="tagstr">{{storeData.store_activity_format.tagStr}}</text>
+    </view>
+    <i class="icon icon-right btn-show-discount"></i>
+</view>
+<!-- 营销位 -->
+<view class="sale-box" wx:if="{{saleList.length > 0}}">
+    <view class="pt20"></view>
+    <view class="sale-md sale-md{{saleType}}">
+        <view wx:for="{{saleList}}" wx:for-item="sale_item" class="sale-md-item{{index}}" data-title="{{sale_item.actionTitle}}" data-href="sale_item.actionValue" bindtap="saleTap">
+            <image src="{{sale_item.iconUrl}}"></image>
+        </view>
+    </view>
+</view>
+<view class="pt20"></view>
+<!-- 门店详情弹层 -->
+<view class="mask-store-detail {{showStoreDetail ? 'show' : '' }}" catchtap="changeShowStoreDetail">
+    <view class="store-detail-scroll">
+        <view class="store-detail-name">{{storeData.store_name}}</view>
+        <view class="store-address">
+            <span class="icon icon-gps"></span>
+            <text>{{storeData.store_address}}</text>
+        </view>
+        <view class="mask-title">
+            <view class="line l"></view>
+            <view class="span">
+                <text class="i"></text>
+                <text class="strong">优惠信息</text>
+                <text class="i"></text>
+            </view>
+            <view class="line r"></view>
+        </view>
+        <view class="discount-list">
+            <view wx:for="{{storeData.store_activity_list}}" wx:for-item="store_activity_item">
+                <view class="store-activity-item">
+                    <text class="dtag" style="background-color:{{store_activity_item.backgroundColor}}">{{store_activity_item.tag}}</text>
+                    <text class="tagstr">{{store_activity_item.tagStr}}</text>       
+                </view>
+            </view>
+        </view>
+        <view class="mask-title">
+            <view class="line l"></view>
+            <view class="span">
+                <text class="i"></text>
+                <text class="strong">门店公告</text>
+                <text class="i"></text>
+            </view>
+            <view class="line r"></view>
+        </view>
+        <view class="store-announcement" wx:for="{{storeAnnouncement}}" wx:for-item="store_announcement_item">
+            {{store_announcement_item}}
+        </view>
+        <view class="btn-close-store-detail">
+            <span class="icon icon-close-round"></span>
+        </view>
+    </view>    
+</view>

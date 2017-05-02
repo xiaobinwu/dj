@@ -63,6 +63,10 @@
     font-size: 12px;
     color: #666;
 }
+.store-distance .icon{
+    font-size: 12px;
+    margin-right: 5rpx;
+}
 .store-status{
     padding: 3rpx 20rpx;
     border-radius: 4px;
@@ -89,3 +93,4 @@
     border-radius: 4px;
     font-size: 12px;
 }
+@import "../../css/font.wxss";

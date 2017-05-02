@@ -1,6 +1,10 @@
 // pages/home/home.js
 var util = require('../../utils/util.js');
 var ports = require('../../utils/ports.js');
+//引入灯箱组件
+var Slider = require('../../template/slider/slider.js');
+// 优惠标签配色
+var tagColor = util.getTagColor();
 var dialog = [
     {
       title: '发现您的收货地址已变更',
@@ -16,12 +20,11 @@ var dialog = [
       }
     }
 ];
+//营销位配置
+var cfg={1:5,2:7,3:8,4:4};
 Page({
   data:{
-      slider:{
-          picList: [],
-          showArr: [true, false, false, false]
-      },
+      storeAnnouncement: '', //门店公告
       // 当前地址信息
       address:{},
       showAddress:'',
@@ -53,18 +56,13 @@ Page({
       // scrollView原距离顶部的距离
       oldScrollTop:0,
   },
-  _sliderChange: function(e){
-      var showArr = this.data.slider.showArr;
-      for(let i = 0; i < showArr.length; i++){
-        if(i === e.detail.current){
-          showArr[i] = true;
-        }
-      }
-      this.setData({
-        'slider.showArr': showArr
-      });
-  },  
-  handleShowByAddress(){
+  saleTap: function(e){
+      console.log(e);
+  },
+  toStoreDetail: function(){
+      console.log('打开详情页');
+  },
+  handleShowByAddress: function(){
       var _self = this;
       // 显示地址
       this.setData({
@@ -77,7 +75,7 @@ Page({
       });      
   },
   // 获取门店首页信息
-  getStoreInfo(){
+  getStoreInfo: function(){
       var _this = this,
           adr = this.data.address,
           selectStoreId = util.getStorage("select_store_id");
@@ -101,20 +99,83 @@ Page({
             return Promise.reject(e);
         });
   },
+  changeShowStoreDetail: function(){
+        var _self = this;
+        this.setData({
+            showStoreDetail: !_self.data.showStoreDetail
+        });
+  },
+  // 处理优惠标签
+  handleAct: function(str,index){
+        if(!str){
+            return '';
+        }
+        var arrStr=str.split(/[:：]/),
+            tag=arrStr[0].replace(/[\[\]]/g,''),
+            tagStr=arrStr[1];
+        return {
+            backgroundColor: tagColor[index % tagColor.length],
+            tag: tag,
+            tagStr: tagStr
+        };
+  },
+  //切分公告字符串
+  splitStoreAnnouncement: function(str){
+    if(str == ''){ return ''; }
+    return str.split(/\n|\r\n/g);
+  },
   // 设置首页数据
-  setStoreData(idxData){
-      var _this = this;
-
+  setStoreData: function(idxData){
+      this.slider.initData(idxData.store_info.store_picture_list); //初始化swiper图片
+      var _self = this;
+      idxData.store_info.store_activity_format = this.handleAct(idxData.store_info.store_activity_format);
+      var store_activity_list = idxData.store_info.store_activity_list;
+      for(let i = 0; i < store_activity_list.length; i++){
+            store_activity_list[i] = this.handleAct(store_activity_list[i], i);
+      }
       this.setData({
         idxData: idxData, // 首页通用数据
         storeData: idxData.store_info, // 门店信息
-        saleList: idxData.module.data, // 营销位
-        saleType: idxData.module.show_type,
+        // saleList: idxData.module.data.slice(0,cfg[idxData.module.show_type]), // 营销位
+        // saleType: idxData.module.show_type,
+        saleList: [
+                {
+                    "iconUrl": "https://img01.wzhouhui.net/optm/app/2017/05/02/orig/2852153ca4449ade4c4f64168b4003554905d301.jpg", 
+                    "actionType": "1", 
+                    "actionValue": "https://www.baidu.com/?share_abled=0&app_type=ios", 
+                    "actionTitle": "图1"
+                }, 
+                {
+                    "iconUrl": "https://img01.wzhouhui.net/optm/app/2016/03/10/orig/7c72444f7cb469b3ab9c169069ec769e25ece1ae.jpg", 
+                    "actionType": "1", 
+                    "actionValue": "://?share_abled=0&app_type=ios", 
+                    "actionTitle": "图2"
+                }, 
+                {
+                    "iconUrl": "https://img01.wzhouhui.net/optm/app/2016/03/09/orig/a8149ca13cab823775b80d03a2ffb35c4fd708ad.jpg", 
+                    "actionType": "1", 
+                    "actionValue": "://?share_abled=0&app_type=ios", 
+                    "actionTitle": "图3"
+                }, 
+                {
+                    "iconUrl": "http://img01.wzhouhui.net/optm/app/2016/03/10/orig/bb805a6b7e1ed390778526bf492bcdf2206eb4c7.jpg", 
+                    "actionType": "1", 
+                    "actionValue": "://?share_abled=0&app_type=ios", 
+                    "actionTitle": "图4"
+                }
+            ], // 营销位
+        saleType: 1,
+
+
         showProCate: idxData.cates[0].cate_id,// 商品分类默认第一项
-        'slider.picList': idxData.store_info.store_picture_list //初始化swiper图片
-      })
+        
+      });
+      this.setData({
+         storeAnnouncement: _self.splitStoreAnnouncement(_self.data.idxData.announcement || _self.data.storeData.announcement)
+      });
       // 优先使用用户选中的address_id
-      var addressId = this.data.address.address_id,                                      currentAddress = util.getStorage("currentAddress");
+      var addressId = this.data.address.address_id,
+          currentAddress = util.getStorage("currentAddress");
       if(currentAddress){
           currentAddress = JSON.parse(currentAddress);
           addressId = currentAddress.address_id;
@@ -141,6 +202,8 @@ Page({
       // });
   },
   onLoad:function(options){
+      //初始化灯箱组件
+      this.slider = new Slider(this);
       /**
        * 1.拿到处理过的地址信息 final_address
        * 2.通过地址信息获取门店信息(region_id,lat,lng)

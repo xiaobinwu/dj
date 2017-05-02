@@ -29,3 +29,8 @@
     display: table!important;
     clear: both;
 }
+/*布局相关*/
+.pt20{
+    height: 20rpx;
+    background-color: #eee;
+}
