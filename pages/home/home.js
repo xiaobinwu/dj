@@ -77,17 +77,26 @@ Page({
   },
   //点击分类
   cateClick: function(e){
-      if(e.currentTarget.dataset.index){}
+      this.scrollLeftChange(e.currentTarget.dataset.index);
       this.setData({
             currentIndex: e.currentTarget.dataset.index
       });
   },     
   //滑动产品swiper
   productSwiperScroll: function(e){
+      this.scrollLeftChange(e.detail.current);
       this.setData({
             currentIndex: e.detail.current
       });
   }, 
+  //分类滚动条位置变化
+  scrollLeftChange: function(index){
+       var winWidth = wx.getSystemInfoSync().windowWidth;
+       var rpx = 750/winWidth;
+       this.setData({
+            scrollLeft: index * 168 / rpx
+       });
+  },
   //点击营销位
   saleTap: function(e){
       console.log(e);
