@@ -30,12 +30,49 @@
 <view class="sale-box" wx:if="{{saleList.length > 0}}">
     <view class="pt20"></view>
     <view class="sale-md sale-md{{saleType}}">
-        <view wx:for="{{saleList}}" wx:for-item="sale_item" class="sale-md-item{{index}}" data-title="{{sale_item.actionTitle}}" data-href="sale_item.actionValue" bindtap="saleTap">
-            <image src="{{sale_item.iconUrl}}"></image>
+        <view wx:for="{{saleList}}" wx:for-item="sale_item" class="sale-md-item{{index}}" data-title="{{sale_item.actionTitle}}" data-href="{{sale_item.actionValue}}" bindtap="saleTap">
+            <image src="{{sale_item.iconUrl}}" mode="aspectFill"></image>
         </view>
     </view>
 </view>
 <view class="pt20"></view>
+
+<!-- 商品(分类导航|商品列表) -->
+<view class="com-product">
+        <scroll-view  scroll-x="{{true}}" scroll-with-animation="{{true}}" scroll-left="{{scrollLeft}}"  class="scroll-bar" style="width:100%;" wx:if="{{showProCate}}">
+            <view style="width: {{idxData.cates.length * 168}}rpx">
+                <view wx:for="{{idxData.cates}}" wx:for-item="cate" class="cate-item {{index == currentIndex ? 'active' : ''}}" data-id="{{cate.cate_id}}" data-index="{{index}}" bindtap="cateClick">{{cate.cate_name}}</view>
+            </view>
+        </scroll-view>
+        <view class="product-wrap">
+            <swiper class="product-swiper" current="{{currentIndex}}" autoplay="{{false}}"  bindchange="productSwiperScroll">
+                <swiper-item wx:for="{{idxData.cates}}">
+                    <view class="pro-list">
+
+                        <text style="font-size: 20px;">{{index}}</text>
+                        <view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="i">
+                            <view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="j">
+                                <view wx:if="{{i <= j}}">
+                                {{i}} * {{j}} = {{i * j}}
+                                </view>
+                            </view>
+                        </view>
+                        <view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="i">
+                            <view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="j">
+                                <view wx:if="{{i <= j}}">
+                                {{i}} * {{j}} = {{i * j}}
+                                </view>
+                            </view>
+                        </view>
+
+                    </view>
+                </swiper-item>
+            </swiper>
+        </view>
+
+</view>
+
+
 <!-- 门店详情弹层 -->
 <view class="mask-store-detail {{showStoreDetail ? 'show' : '' }}" catchtap="changeShowStoreDetail">
     <view class="store-detail-scroll">

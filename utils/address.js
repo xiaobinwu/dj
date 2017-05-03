@@ -1,9 +1,8 @@
 /* 地址逻辑处理脚本 */
-
-
 var util = require('./util.js');
 var ports = require('./ports.js');
 var region = require('./region.js');
+var polyfill = require('./polyfill.js');
 // 引入promise
 var Promise = require('../lib/es6-promise.min.js'); 
 // 引入SDK核心类
@@ -138,7 +137,33 @@ function getLocation(options){
         });
 }
 
+// 设置当前地址
+function setCurrentAddress(obj) {
+    var addressObj = {
+        address_id: null,
+        province: null,
+        city: null,
+        district: null,
+        province_name: null,
+        city_name: null,
+        district_name: null,
+        addressline: null,
+        address_lng: null,
+        address_lat: null
+    }
+    addressObj = polyfill.object.assignIn(addressObj, obj);
+    util.setStorage('currentAddress', JSON.stringify(addressObj));
+}
+
+// 删除当前地址
+function cleanCurrentAddress() {
+    util.removeStorage('currentAddress');
+}
+
+
 module.exports = {
   getGPSInfo: getGPSInfo,
-  getLocation: getLocation
+  getLocation: getLocation,
+  setCurrentAddress: setCurrentAddress,
+  cleanCurrentAddress: cleanCurrentAddress
 }

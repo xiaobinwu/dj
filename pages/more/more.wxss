@@ -6,18 +6,18 @@
 }
 .title{
     display: block;
-    font-size: 16px;
+    font-size: 32rpx;
     color: #222;
     padding: 10rpx 0 20rpx;
 }
 .sub-title{
-    font-size: 12px;
+    font-size: 24rpx;
     display: block;
     color: #666;
 }
 .store-list{
     margin-top: 30rpx;
-    font-size: 12px;
+    font-size: 24rpx;
     border: solid #e8e8e8;
     border-width: 1px 0 0 1px;
 }
@@ -53,7 +53,7 @@
     padding: 20rpx 30rpx;
     background-color: #fff;
     border-bottom: solid #e8e8e8 1px;
-    font-size: 12px;
+    font-size: 24rpx;
     color: #999;
 }
 .store-item{
@@ -74,7 +74,7 @@
     height: 60rpx;
     background: url(../../image/store-status.png) no-repeat;
     background-size: 130rpx auto;
-    font-size: 14px;
+    font-size: 28rpx;
     color: #fff;
 }
 .store-status.green{
@@ -99,16 +99,16 @@
 .store-name{
     display: flex;
     align-items: center;
-    font-size: 16px;
+    font-size: 32rpx;
     font-weight: bold;
 }
 .store-distance, .store-distance .icon{
-    font-size: 12px;
+    font-size: 24rpx;
     color: #666;
     margin-right: 5rpx;
 }
 .store-adress{
-    font-size: 14px;
+    font-size: 28rpx;
     color: #666;
 }
 /*优惠小标签*/
@@ -121,13 +121,13 @@
     font-weight: normal;
     background-color: #49caec;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 24rpx;
 }
 .no-store-tip-msg{
     padding: 50rpx 20rpx;
     line-height: 1.5;
     background-color: #fff;
-    font-size: 14px;
+    font-size: 28rpx;
     color: #222;
     text-align: justify;
 }

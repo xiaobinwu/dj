@@ -14,7 +14,7 @@
     height: 86rpx;
     border: solid #ccc 3rpx;
     background-color: rgba(255,255,255,.8);
-    font-size: 12px;
+    font-size: 24rpx;
     color: #222;
     text-align: center;
     border-radius: 86rpx;
@@ -34,7 +34,7 @@
     flex-grow: 1;
     display: flex;
     align-items: center;
-    font-size: 16px;
+    font-size: 32rpx;
     color: #222;
 }
 .store-status{
@@ -42,7 +42,7 @@
     margin-left: 8rpx;
     border: solid #25ae5f 3rpx;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 24rpx;
     color: #25ae5f;
     padding: 3rpx 4rpx;
 }
@@ -61,10 +61,10 @@
     padding: 20rpx;
     padding-right: 0;
     color: #999;
-    font-size: 15px;
+    font-size: 30rpx;
 }
 .btn-more-store .icon{
-    font-size: 12px;
+    font-size: 24rpx;
 }
 .discount-info{
     display: flex;
@@ -77,7 +77,7 @@
 .discount-msg{
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 28rpx;
 }
 .discount-msg .label{
     flex-shrink: 0;
@@ -93,7 +93,7 @@
 .btn-show-discount{
     flex: 0 0 45rpx;
     color: #666;
-    font-size: 15px;
+    font-size: 30rpx;
     text-align: center;
 }
 /*优惠小标签*/
@@ -106,7 +106,7 @@
     font-weight: normal;
     background-color: #49caec;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 24rpx;
 }
 /*弹框*/
 .mask-store-detail{
@@ -122,7 +122,7 @@
     overflow-y: auto;
     background-color: rgba(0,0,0,.8);
     color: #fff;
-    font-size: 15px;
+    font-size: 30rpx;
     transform: scale(0);
     transition: transform .2s;
 }
@@ -136,11 +136,11 @@
     align-items: center;
 }
 .store-detail-scroll .store-detail-name{
-    font-size: 20px;
+    font-size: 40rpx;
 }
 .store-address{
     margin-top: 25rpx;
-    font-size: 14px;
+    font-size: 28rpx;
 }
 .store-address text{
     margin-left: 5rpx;
@@ -191,7 +191,7 @@
 }
 .store-activity-item .tagstr{
     word-break: break-all;
-    font-size: 14px;
+    font-size: 28rpx;
 }
 .store-announcement{
     width:80%;
@@ -219,11 +219,12 @@
 }
 .sale-md image{
     display: block;
-    width: 100%;
-    height: 100%;  
+    margin: auto;
+    max-height: 100%;
+    max-width: 100%;
 }
 .sale-md1{
-    height: 402rpx;
+    height: 400rpx;
 }
 .sale-md1 .sale-md-item0{
     left: 0;
@@ -372,5 +373,32 @@
     top:50%;
     border-right:none;
     border-bottom: none;
+}
+/* 商品列表 */
+.com-product{
+    background-color: #fff;
+}
+.com-product .pro-cate{
+    width: 100%;
+    height: 80rpx;
+}
+.com-product .scroll-bar{
+    height: 80rpx;
+}
+.com-product .cate-item{
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 28rpx;
+    border-bottom: solid transparent 3px;
+    height: 75rpx;
+    width: 112rpx;
+    color: #222;
+    font-size: 28rpx;
+}
+.com-product .cate-item.active{
+    color:#e61773;
+    border-color: #e61773;
 }
 @import "../../css/font.wxss";

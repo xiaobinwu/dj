@@ -14,11 +14,11 @@
 }
 .msg-box .msg-box-text1{
     margin-bottom: 6rpx;
-    font-size: 15px;
+    font-size: 30rpx;
     color: #333;
 }
 .msg-box .msg-box-text2{
-    font-size: 12px;
+    font-size: 24rpx;
     color: #999;
 }
 .store-list{
@@ -46,7 +46,7 @@
     color: #222;
 }
 .store-name{
-    font-size: 16px;
+    font-size: 32rpx;
 }
 .store-address{
     width: 100%;
@@ -54,17 +54,17 @@
     white-space: nowrap;
     overflow: hidden;
     padding: 10rpx 0;
-    font-size: 14px;
+    font-size: 28rpx;
 }
 .store-distance{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 12px;
+    font-size: 24rpx;
     color: #666;
 }
 .store-distance .icon{
-    font-size: 12px;
+    font-size: 24rpx;
     margin-right: 5rpx;
 }
 .store-status{
@@ -91,6 +91,6 @@
     font-weight: normal;
     background-color: #49caec;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 24rpx;
 }
 @import "../../css/font.wxss";
