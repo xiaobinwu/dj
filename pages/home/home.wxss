@@ -401,4 +401,46 @@
     color:#e61773;
     border-color: #e61773;
 }
+/*分类下无商品时*/
+.no-products{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    min-height: 500rpx;
+    background-color: #eee;
+}
+.no-products image{
+    width: 276rpx;
+    height: 226rpx;
+}
+.no-products view{
+    text-align: center;
+    color: #999;
+    font-size: 32rpx;
+}
+/*数据加载时*/
+.products-loading{
+    color: #999;
+    font-size: 28rpx;
+    text-align: center;
+    height: 80rpx;
+    line-height:80rpx;
+}
+.products-loading text{
+    margin-left: 20rpx;
+}
+.products-loading image{
+    width: 40rpx;
+    height: 40rpx;
+    vertical-align: sub;
+}
+/*没有更多数据*/
+.no-more-products{
+    color: #999;
+    text-align: center;
+    font-size: 28rpx;
+    margin-top: 20rpx;
+}
 @import "../../css/font.wxss";
+@import "../../template/product-item/product-item.wxss";

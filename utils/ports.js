@@ -11,4 +11,10 @@ module.exports = {
     storeShow: wdomain + '/store/show',
     storeMore: wdomain + '/store/more',
     storeSearch: wdomain + '/store/searchStore',
+
+    // 商品
+    goodsDetail: wdomain+'/goods/goodsDetail',
+    goodsSearchGoods:wdomain+'/goods/searchGoods',
+    goodsGoodslist:wdomain+'/goods/goodslist',
+
 }

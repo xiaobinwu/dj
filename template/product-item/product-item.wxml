@@ -1,0 +1,25 @@
+<template name="productItem">
+    <view class="pro-item" data-goods-id="{{product.goods_id}}" catchtap="goDetail" wx:if="{{product}}">
+        <view class="pro-pic">
+            <image src="{{product.goods_grid}}"></image>
+            <view class="tag-wrap" wx:if="{{product.valid==0}}">
+                <view class="tag-soldout"></view>
+            </view>
+        </view>
+        <view class="pro-info">
+            <text class="pro-title dot-m">{{product.goods_title}}</text>
+            <view class="pro-discount">
+                <text class="tag" wx:for="{{product.tags}}">
+                    {{item.name}}
+                </text>
+            </view>
+            <view class="pro-price">
+                <text class="sale_price" >&yen; {{product.sale_price}}</text>
+                <text class="market_price" wx:if="{{product.market_price}}">&yen; {{product.market_price}}</text>
+            </view>
+        </view>
+        <view class="buy-count" wx:if="{{showCartCtrl}}">
+
+        </view>
+    </view>
+</template>

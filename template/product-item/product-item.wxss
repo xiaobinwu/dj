@@ -1,0 +1,83 @@
+.pro-item{
+    display: flex;
+    position: relative;
+    padding: 20rpx;
+    border-bottom: solid #e8e8e8 1px;
+    background-color: #fff;
+}
+.pro-pic{
+    position:relative;
+    flex-shrink: 0;
+    width: 220rpx;
+    height: 220rpx;
+    background:#f8f8f8 url(../../image/loading-normal.gif) center center no-repeat;
+    background-size: 60rpx auto;    
+}
+.pro-pic image{
+    width: 100%;
+    height: 100%;
+} 
+.pro-pic .tag-wrap{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pro-pic .tag-soldout{
+    display: block;
+    width: 140rpx;
+    height: 140rpx;
+    background: url(../../image/tag-soldout2.png) no-repeat;
+    background-size: 140rpx auto;
+}
+.pro-info{
+    padding-left: 20rpx;
+    width: 530rpx;
+}
+.pro-info .pro-title{
+    font-size: 30rpx;
+    color: #444;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.pro-info .pro-intro{
+    line-height: 50rpx;
+    font-size: 28rpx;
+    color: #999;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.pro-info .pro-discount{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 100rpx 0;
+    height: 100rpx;
+    font-size: 0;
+}
+.pro-info .pro-discount .tag{
+    padding: 3rpx;
+    color: #999;
+    font-size: 24rpx;
+}
+.pro-info .pro-price{
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 0;
+}
+.pro-info .pro-price .sale_price{
+    font-size: 32rpx;
+    font-weight: bold;
+    color: #e61773;
+}
+.pro-info .pro-price .market_price{
+    font-size: 24rpx;
+    color: #ccc;
+    text-decoration: line-through;
+}

@@ -53,8 +53,6 @@ Page({
       // 显示商品某项分类
       showProCate:false,
 
-      productHeadFixed:false,
-
       // 是不中显示购物车列表面板
       showCartPanel:false,
       // 门店数据
@@ -64,37 +62,47 @@ Page({
       // 购物车综合信息
       cartBaseInfo:[],
 
-      // 正在往下滑动 
-      scrollBottomIng:false,
-
-      // scrollView原距离顶部的距离
-      oldScrollTop:0,
       
       //单前分类栏目所属类型index
       currentIndex: 0,
+      //当前分类Id
+      currentCateId: 0,
       //设置分类滚动条位置
-      scrollLeft: 0
+      scrollLeft: 0,
+      //产品数组
+      pros:[],
+      //分页信息
+      pages:{},
+      // 商品分类loading标识
+      showLoadingFlag:[],
+      //商品分类loaded标识
+      showLoadedFlag: []
   },
   //点击分类
   cateClick: function(e){
       this.scrollLeftChange(e.currentTarget.dataset.index);
       this.setData({
-            currentIndex: e.currentTarget.dataset.index
+            currentIndex: e.currentTarget.dataset.index,
+            currentCateId: e.currentTarget.dataset.id
       });
   },     
   //滑动产品swiper
   productSwiperScroll: function(e){
+      var _self = this;
       this.scrollLeftChange(e.detail.current);
       this.setData({
-            currentIndex: e.detail.current
+            currentIndex: e.detail.current,
+            currentCateId: _self.data.idxData.cates[e.detail.current].cate_id
       });
   }, 
   //分类滚动条位置变化
   scrollLeftChange: function(index){
        var winWidth = wx.getSystemInfoSync().windowWidth;
        var rpx = 750/winWidth;
+       var arr = new Array(this.data.idxData.cates.length).fill(false);
        this.setData({
-            scrollLeft: index * 168 / rpx
+            scrollLeft: index < 4 ? 0 : index * 168 / rpx,
+            showLoadingFlag: arr.fill(true, index, index+1)
        });
   },
   //点击营销位
@@ -141,6 +149,41 @@ Page({
             return Promise.reject(e);
         });
   },
+    // 获取商品列表
+  getProductList(cateId,index){
+        if(typeof this.data.pages[index]=='undefined'){
+            //TODO，实现this.pages[index]={}
+            var param = {};
+            var string = "pages["+index+"]";
+            param[string] = {};
+            this.setData(param);
+        }
+        if(typeof this.data.pages[index].page=='undefined'){
+            //this.pages[index].page=0;
+            var param = {};
+            var string = "pages["+index+"].page";
+            param[string] = 0;            
+            this.setData(param);
+        }
+        var _self = this;
+        return util.wxRequest({
+            method: 'POST',
+            url: ports.goodsGoodslist,
+            header: {
+            'content-type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+                store_id: _self.data.storeData.id,
+                cat_id: cateId,
+                page: _self.data.pages[index].page
+            }
+        }).then(function(result) {
+            return Promise.resolve(result);
+        }).catch((e)=>{
+            return Promise.reject(e);
+        });
+  },
+  //门店公告控制
   changeShowStoreDetail: function(){
         var _self = this;
         this.setData({
@@ -169,7 +212,8 @@ Page({
   // 设置首页数据
   setStoreData: function(idxData){
       this.slider.initData(idxData.store_info.store_picture_list); //初始化swiper图片
-      var _self = this;
+      var _self = this,
+          cateFlagArr = new Array(idxData.cates.length).fill(false); //初始化分类标识位数组
       //优惠标签处理
       idxData.store_info.store_activity_format = this.handleAct(idxData.store_info.store_activity_format);
       var store_activity_list = idxData.store_info.store_activity_list;
@@ -181,38 +225,10 @@ Page({
         storeData: idxData.store_info, // 门店信息
         saleList: idxData.module.data.slice(0,cfg[idxData.module.show_type]), // 营销位
         saleType: idxData.module.show_type,
-        //待删
-        // saleList: [
-        //         {
-        //             "iconUrl": "https://img01.wzhouhui.net/optm/app/2017/05/02/orig/2852153ca4449ade4c4f64168b4003554905d301.jpg", 
-        //             "actionType": "1", 
-        //             "actionValue": "https://www.baidu.com/?share_abled=0&app_type=ios", 
-        //             "actionTitle": "图1"
-        //         }, 
-        //         {
-        //             "iconUrl": "https://img01.wzhouhui.net/optm/app/2016/03/10/orig/7c72444f7cb469b3ab9c169069ec769e25ece1ae.jpg", 
-        //             "actionType": "1", 
-        //             "actionValue": "://?share_abled=0&app_type=ios", 
-        //             "actionTitle": "图2"
-        //         }, 
-        //         {
-        //             "iconUrl": "https://img01.wzhouhui.net/optm/app/2016/03/09/orig/a8149ca13cab823775b80d03a2ffb35c4fd708ad.jpg", 
-        //             "actionType": "1", 
-        //             "actionValue": "://?share_abled=0&app_type=ios", 
-        //             "actionTitle": "图3"
-        //         }, 
-        //         {
-        //             "iconUrl": "http://img01.wzhouhui.net/optm/app/2016/03/10/orig/bb805a6b7e1ed390778526bf492bcdf2206eb4c7.jpg", 
-        //             "actionType": "1", 
-        //             "actionValue": "://?share_abled=0&app_type=ios", 
-        //             "actionTitle": "图4"
-        //         }
-        //     ], // 营销位
-        // saleType: 1,
-
-
         showProCate: idxData.cates ? true : false,
-        
+        currentCateId: idxData.cates[0].cate_id,
+        showLoadingFlag: cateFlagArr,
+        showLoadedFlag: cateFlagArr
       });
       this.setData({
          storeAnnouncement: _self.splitStoreAnnouncement(_self.data.idxData.announcement || _self.data.storeData.announcement)
@@ -282,6 +298,7 @@ Page({
   },
   onReady:function(){
     // 页面渲染完成
+    console.log(this.data)
   },
   onShow:function(){
     // 页面显示

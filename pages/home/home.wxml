@@ -1,5 +1,6 @@
 <!--pages/home/home.wxml-->
 <import src="../../template/slider/slider.wxml"/>
+<import src="../../template/product-item/product-item.wxml"/>
 <view class="slider-container">
     <template is="slider" data="{{slider}}"/>
     <view catchtap="toStoreDetail" class="btn-show-store-detail">门店详情</view>
@@ -38,8 +39,8 @@
 <view class="pt20"></view>
 
 <!-- 商品(分类导航|商品列表) -->
-<view class="com-product">
-        <scroll-view  scroll-x="{{true}}" scroll-with-animation="{{true}}" scroll-left="{{scrollLeft}}"  class="scroll-bar" style="width:100%;" wx:if="{{showProCate}}">
+<view class="com-product" wx:if="{{showProCate}}">
+        <scroll-view  scroll-x="{{true}}" scroll-left="{{scrollLeft}}"  class="scroll-bar" style="width:100%;" >
             <view style="width: {{idxData.cates.length * 168}}rpx">
                 <view wx:for="{{idxData.cates}}" wx:for-item="cate" class="cate-item {{index == currentIndex ? 'active' : ''}}" data-id="{{cate.cate_id}}" data-index="{{index}}" bindtap="cateClick">{{cate.cate_name}}</view>
             </view>
@@ -48,23 +49,20 @@
             <swiper class="product-swiper" current="{{currentIndex}}" autoplay="{{false}}"  bindchange="productSwiperScroll">
                 <swiper-item wx:for="{{idxData.cates}}">
                     <view class="pro-list">
-
-                        <text style="font-size: 20px;">{{index}}</text>
-                        <view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="i">
-                            <view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="j">
-                                <view wx:if="{{i <= j}}">
-                                {{i}} * {{j}} = {{i * j}}
-                                </view>
-                            </view>
+                        <block  wx:for="{{pros[index]}}" wx:for-item="pro" wx:for-index="idx">
+                             <template is="productItem" data="{{ product: pro, index: idx,  showCartCtrl: storeData.delivery_sta==1 }}" />
+                        </block>
+                        <view class="no-products" wx:if="{{pros[index].length == 0}}">
+                            <image src="../../image/no-pros.png"></image>
+                            <view>啊哦，还没有商品数据</view>
                         </view>
-                        <view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="i">
-                            <view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="j">
-                                <view wx:if="{{i <= j}}">
-                                {{i}} * {{j}} = {{i * j}}
-                                </view>
-                            </view>
+                        <view class="products-loading" wx:if="{{showLoadingFlag[index]}}">
+                            <image src="../../image/loading-super.gif"></image>
+                            <text>努力加载中</text>
                         </view>
-
+                        <view class="no-more-products" wx:if="{{showLoadedFlag[index]}}">
+                            没有更多数据了~
+                        </view>
                     </view>
                 </swiper-item>
             </swiper>
