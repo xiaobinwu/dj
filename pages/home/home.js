@@ -149,8 +149,70 @@ Page({
             return Promise.reject(e);
         });
   },
-    // 获取商品列表
-  getProductList(cateId,index){
+  // 分页加载商品列表
+  loadingProList: function(cateId,index) {
+      console.log(cateId)
+    return () => {
+        if(typeof this.data.pages[index]=='undefined'){
+            var param1 = {};
+            var string1 = "pages["+index+"]";
+            param1[string1] = {};
+            this.setData(param1);
+        }
+        if(typeof this.data.pages[index].page=='undefined'){
+            var param2 = {};
+            var string2 = "pages["+index+"].page";
+            param2[string2] = 0;            
+            this.setData(param2);
+        }
+        if(typeof this.data.pages[index].totalPage=='undefined'){
+            var param3 = {};
+            var string3 = "pages["+index+"].totalPage";
+            param3[string3] = 1;            
+            this.setData(param3);
+        }
+        var param4 = {};
+        var string4 = "pages["+index+"].page";
+        var i4 = this.data.pages[index].page;
+        param4[string4] = i4++; 
+        this.setData(param4);
+
+        if(this.data.pages[index].page > this.data.pages[index].totalPage) {
+            var param5 = {};
+            var string5 = "showLoadedFlag[" + index + "]";
+            param5[string5] = true;
+            this.setData(param5);
+            return;
+        }
+
+        this.getProductList(cateId,index).then(result=>{
+            var param6 = {};
+            var string6 = "pages["+index+"].totalPage";
+            param6[string6] = result.data.totalPage;            
+            this.setData(param6);
+
+            if(typeof this.data.pros[index]=='undefined'){
+                var param7 = {};
+                var string7 = "pros["+index+"]";
+                param7[string7] = [];            
+                this.setData(param7);
+            }
+            var oldpros = this.data.pros[index];
+            var pros = oldpros.concat(result.data.goodsList);
+            var param8 = {};
+            var string8 = "pros["+index+"]";
+            param8[string8] = pros;            
+            this.setData(param8);
+
+            var param9 = {};
+            var string9 = "showLoadingFlag[" + index + "]";
+            param9[string9] = false;
+            this.setData(param9);             
+        });
+    }
+  },  
+  // 获取商品列表
+  getProductList: function(cateId,index){
         if(typeof this.data.pages[index]=='undefined'){
             //TODO，实现this.pages[index]={}
             var param = {};
@@ -295,6 +357,8 @@ Page({
               wx.showModal(dialog[switchInfo.popType-1]);
           }
       }
+      //ceshi
+      this.loadingProList(0,0);
   },
   onReady:function(){
     // 页面渲染完成
