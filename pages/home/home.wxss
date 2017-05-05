@@ -108,6 +108,22 @@
     border-radius: 4px;
     font-size: 24rpx;
 }
+.dtag.arrow{
+    position: relative;
+    margin-right: 16rpx;
+}
+.dtag.arrow .b{
+    content:'';
+    margin-top: -6rpx;
+    position: absolute;
+    top: 50%;
+    right: -12rpx;
+    width: 0;
+    height: 0;
+    border: solid 8rpx;
+    border-color: transparent;
+    border-left-color: #fd1268;
+}
 /*弹框*/
 .mask-store-detail{
     visibility: hidden;
@@ -383,7 +399,10 @@
     height: 80rpx;
 }
 .com-product .scroll-bar{
+    position: sticky;
+    position: -webkit-sticky;    
     height: 80rpx;
+    border-bottom: solid #e8e8e8 1px;
 }
 .com-product .cate-item{
     float: left;

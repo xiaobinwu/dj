@@ -9,13 +9,17 @@
         <view class="pro-info">
             <text class="pro-title dot-m">{{product.goods_title}}</text>
             <view class="pro-discount">
-                <text class="tag" wx:for="{{product.tags}}">
-                    {{item.name}}
-                </text>
+                <view class="tag" wx:for="{{product.tags}}">
+                    <text class="dtag arrow" style="background-color: {{item.resultColor}}">
+                        <text class="b" style="border-left-color: {{item.resultColor}}"> </text>
+                        <text>{{item.tag}}</text>
+                    </text>
+                    <text>{{item.str}}</text>
+                </view>
             </view>
             <view class="pro-price">
-                <text class="sale_price" >&yen; {{product.sale_price}}</text>
-                <text class="market_price" wx:if="{{product.market_price}}">&yen; {{product.market_price}}</text>
+                <text class="sale_price" >¥ {{product.sale_price}}</text>
+                <text class="market_price" wx:if="{{product.market_price}}">¥ {{product.market_price}}</text>
             </view>
         </view>
         <view class="buy-count" wx:if="{{showCartCtrl}}">

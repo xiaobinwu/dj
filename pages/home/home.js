@@ -76,34 +76,46 @@ Page({
       // 商品分类loading标识
       showLoadingFlag:[],
       //商品分类loaded标识
-      showLoadedFlag: []
+      showLoadedFlag: [],
+      //第一次触发产品列表数据加载标志位
+      firstLoadDataFlag: [],
+      //swiper高度，官方限死固定高度
+      swiperHeight: 40
   },
   //点击分类
   cateClick: function(e){
-      this.scrollLeftChange(e.currentTarget.dataset.index);
       this.setData({
             currentIndex: e.currentTarget.dataset.index,
             currentCateId: e.currentTarget.dataset.id
       });
+      this.scrollLeftChange(e.currentTarget.dataset.index);
   },     
   //滑动产品swiper
   productSwiperScroll: function(e){
       var _self = this;
-      this.scrollLeftChange(e.detail.current);
       this.setData({
             currentIndex: e.detail.current,
             currentCateId: _self.data.idxData.cates[e.detail.current].cate_id
       });
+      this.scrollLeftChange(e.detail.current);
   }, 
   //分类滚动条位置变化
   scrollLeftChange: function(index){
-       var winWidth = wx.getSystemInfoSync().windowWidth;
-       var rpx = 750/winWidth;
+       var rpx = this.getRpx();
        var arr = new Array(this.data.idxData.cates.length).fill(false);
        this.setData({
             scrollLeft: index < 4 ? 0 : index * 168 / rpx,
             showLoadingFlag: arr.fill(true, index, index+1)
        });
+       if(!this.data.firstLoadDataFlag[index]){
+           this.loadingProList(this.data.currentCateId,this.data.currentIndex);
+           this.setData(this.dynamicSetData('firstLoadDataFlag', index, true)); 
+       }
+  },
+  //获取px与rpx之间的比列
+  getRpx(){
+       var winWidth = wx.getSystemInfoSync().windowWidth;
+       return 750/winWidth;
   },
   //点击营销位
   saleTap: function(e){
@@ -149,84 +161,54 @@ Page({
             return Promise.reject(e);
         });
   },
+  //动态setData
+  dynamicSetData: function(field, index, value, suffix=''){
+        var param = {};
+        var string = field + '[' + index + ']' + (suffix ? '.' + suffix : '');
+        param[string] = value;
+        return param;
+  },
   // 分页加载商品列表
   loadingProList: function(cateId,index) {
-      console.log(cateId)
-    return () => {
+        // console.log(cateId)
         if(typeof this.data.pages[index]=='undefined'){
-            var param1 = {};
-            var string1 = "pages["+index+"]";
-            param1[string1] = {};
-            this.setData(param1);
+            //TODO，实现this.pages[index]={}
+            this.setData(this.dynamicSetData('pages', index, {}));
         }
         if(typeof this.data.pages[index].page=='undefined'){
-            var param2 = {};
-            var string2 = "pages["+index+"].page";
-            param2[string2] = 0;            
-            this.setData(param2);
+            this.setData(this.dynamicSetData('pages', index, 0, 'page'));
         }
-        if(typeof this.data.pages[index].totalPage=='undefined'){
-            var param3 = {};
-            var string3 = "pages["+index+"].totalPage";
-            param3[string3] = 1;            
-            this.setData(param3);
+        if(typeof this.data.pages[index].totalPage=='undefined'){      
+            this.setData(this.dynamicSetData('pages', index, 1, 'totalPage'));
         }
-        var param4 = {};
-        var string4 = "pages["+index+"].page";
-        var i4 = this.data.pages[index].page;
-        param4[string4] = i4++; 
-        this.setData(param4);
+        var page = this.data.pages[index].page;
+        this.setData(this.dynamicSetData('pages', index, page+1, 'page'));
 
         if(this.data.pages[index].page > this.data.pages[index].totalPage) {
-            var param5 = {};
-            var string5 = "showLoadedFlag[" + index + "]";
-            param5[string5] = true;
-            this.setData(param5);
+            this.setData(this.dynamicSetData('showLoadingFlag', index, false));   
+            this.setData(this.dynamicSetData('showLoadedFlag', index, true));
             return;
         }
 
-        this.getProductList(cateId,index).then(result=>{
-            var param6 = {};
-            var string6 = "pages["+index+"].totalPage";
-            param6[string6] = result.data.totalPage;            
-            this.setData(param6);
+        this.getProductList(cateId,index).then(result=>{          
+            this.setData(this.dynamicSetData('pages', index, result.data.totalPage, 'totalPage'));
 
-            if(typeof this.data.pros[index]=='undefined'){
-                var param7 = {};
-                var string7 = "pros["+index+"]";
-                param7[string7] = [];            
-                this.setData(param7);
+            if(typeof this.data.pros[index]=='undefined'){          
+                this.setData(this.dynamicSetData('pros', index, []));
             }
             var oldpros = this.data.pros[index];
-            var pros = oldpros.concat(result.data.goodsList);
-            var param8 = {};
-            var string8 = "pros["+index+"]";
-            param8[string8] = pros;            
-            this.setData(param8);
-
-            var param9 = {};
-            var string9 = "showLoadingFlag[" + index + "]";
-            param9[string9] = false;
-            this.setData(param9);             
+            var pros = oldpros.concat(this.handleActList(result.data.goodsList));     
+            this.setData(this.dynamicSetData('pros', index, pros));
+            //动态改变swiper的高度
+            console.log(pros)
+            this.setData({
+                swiperHeight: pros.length * 290 / this.getRpx() + 40 //TODO,这种方式不好,swiper高度，官方限死固定高度
+            });    
+            this.setData(this.dynamicSetData('showLoadingFlag', index, false));             
         });
-    }
   },  
   // 获取商品列表
   getProductList: function(cateId,index){
-        if(typeof this.data.pages[index]=='undefined'){
-            //TODO，实现this.pages[index]={}
-            var param = {};
-            var string = "pages["+index+"]";
-            param[string] = {};
-            this.setData(param);
-        }
-        if(typeof this.data.pages[index].page=='undefined'){
-            //this.pages[index].page=0;
-            var param = {};
-            var string = "pages["+index+"].page";
-            param[string] = 0;            
-            this.setData(param);
-        }
         var _self = this;
         return util.wxRequest({
             method: 'POST',
@@ -235,7 +217,7 @@ Page({
             'content-type': 'application/x-www-form-urlencoded'
             },
             data: {
-                store_id: _self.data.storeData.id,
+                store_id: JSON.parse(util.getStorage('current_store_info')).store_id, //TODO，获取不到this.data.storeData?
                 cat_id: cateId,
                 page: _self.data.pages[index].page
             }
@@ -252,7 +234,7 @@ Page({
             showStoreDetail: !_self.data.showStoreDetail
         });
   },
-  // 处理优惠标签
+  // 处理优惠标签（优惠信息）
   handleAct: function(str,index){
         if(!str){
             return '';
@@ -265,6 +247,36 @@ Page({
             tag: tag,
             tagStr: tagStr
         };
+  },
+  //处理优惠标签（列表）
+  handleActList: function(list){
+        var handleAct = function(str){
+            if(!str){
+                return '';
+            }
+            var arrStr=/[减促]/.exec(str),
+                tag = arrStr[0],
+                colorCfg={
+                    '减':'#fd1268',
+                    '促':'#ffaf04'
+                },
+                resultColor = '#fd1268';
+            if(tag in colorCfg){
+                resultColor = colorCfg[tag];
+            }
+            return {
+                resultColor: resultColor,
+                tag: tag,
+                str: str
+            };           
+        }
+        if(list.length === 0){ return []; }
+        return list.map(item =>{
+            item.tags = item.tags.map(sitem => {
+                return handleAct(sitem.name);
+            });
+            return item;
+        });
   },
   //切分公告字符串
   splitStoreAnnouncement: function(str){
@@ -292,6 +304,14 @@ Page({
         showLoadingFlag: cateFlagArr,
         showLoadedFlag: cateFlagArr
       });
+
+      //默认加载第一个分类的数据
+      var arr = new Array(this.data.idxData.cates.length).fill(false);
+      this.setData({
+         firstLoadDataFlag: arr.fill(true, 0, 1)
+      });          
+      this.loadingProList(this.data.currentCateId,this.data.currentIndex);
+
       this.setData({
          storeAnnouncement: _self.splitStoreAnnouncement(_self.data.idxData.announcement || _self.data.storeData.announcement)
       });
@@ -322,6 +342,14 @@ Page({
       //         deliveryFee:_this.storeData.delivery_fee
       //     }
       // });
+  },
+  onReachBottom: function(){
+      if(this.data.showLoadedFlag[this.data.currentIndex]){
+          //该分类所以数据加载完毕
+          return;
+      }
+      this.setData(this.dynamicSetData('showLoadingFlag', this.data.currentIndex, true));
+      this.loadingProList(this.data.currentCateId,this.data.currentIndex);
   },
   onLoad:function(options){
       //初始化灯箱组件
@@ -357,12 +385,9 @@ Page({
               wx.showModal(dialog[switchInfo.popType-1]);
           }
       }
-      //ceshi
-      this.loadingProList(0,0);
   },
   onReady:function(){
     // 页面渲染完成
-    console.log(this.data)
   },
   onShow:function(){
     // 页面显示

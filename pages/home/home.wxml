@@ -46,7 +46,7 @@
             </view>
         </scroll-view>
         <view class="product-wrap">
-            <swiper class="product-swiper" current="{{currentIndex}}" autoplay="{{false}}"  bindchange="productSwiperScroll">
+            <swiper class="product-swiper" current="{{currentIndex}}" autoplay="{{false}}"  bindchange="productSwiperScroll" style="height: {{swiperHeight}}px">
                 <swiper-item wx:for="{{idxData.cates}}">
                     <view class="pro-list">
                         <block  wx:for="{{pros[index]}}" wx:for-item="pro" wx:for-index="idx">
