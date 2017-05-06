@@ -1,0 +1,24 @@
+.cart-ctrl {
+    display: flex;
+    align-items: center;
+}
+.cart-ctrl .icon,
+.cart-ctrl .cart-count {
+    display: inline-block;
+    vertical-align: middle;
+}
+.cart-ctrl .cart-count{
+    margin: 0 50rpx;
+}
+.cart-ctrl .icon {
+    padding: 10rpx;
+    line-height: 50rpx;
+    font-size: 50rpx;
+    color: #e61773;
+}
+.cart-ctrl .icon.gray{
+    color: #ccc;
+}
+.cart-ctrl .icon .icon-cart-round{
+    font-size: 50rpx;
+}

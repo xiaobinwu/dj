@@ -254,6 +254,27 @@ function getTagColor(){
     ];
 }
 
+// 判断一个对象是否关联某个数组(对象,外键,目标主键,目标数组)
+function objInList(obj,obj_key,target_key,arr){
+    var index=0,
+        isInArray=false,
+        flag=obj[obj_key];
+
+    for(let i=0;i<arr.length;i++){
+        if(arr[i][target_key]==flag){
+            isInArray = true;
+            index = i;
+            break;
+        }else{
+            continue;
+        }
+    }
+    return {
+        flag: isInArray,
+        index: index
+    }
+}
+
 module.exports = {
   formatTime: formatTime,
   getStorage: getStorage,
@@ -261,5 +282,6 @@ module.exports = {
   setStorage: setStorage,
   wxPromisify: wxPromisify,
   wxRequest: wxRequest,
-  getTagColor: getTagColor
+  getTagColor: getTagColor,
+  objInList: objInList
 }

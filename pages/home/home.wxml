@@ -50,7 +50,7 @@
                 <swiper-item wx:for="{{idxData.cates}}">
                     <view class="pro-list">
                         <block  wx:for="{{pros[index]}}" wx:for-item="pro" wx:for-index="idx">
-                             <template is="productItem" data="{{ product: pro, index: idx,  showCartCtrl: storeData.delivery_sta==1 }}" />
+                             <template is="productItem" data="{{ product: pro, index: idx,  showCartCtrl: storeData.delivery_sta==1, currentProCount: currentProCounts[index][idx] }}" />
                         </block>
                         <view class="no-products" wx:if="{{pros[index].length == 0}}">
                             <image src="../../image/no-pros.png"></image>

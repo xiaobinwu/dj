@@ -1,5 +1,6 @@
+<import src="../cart-ctrl/cart-ctrl.wxml"/>
 <template name="productItem">
-    <view class="pro-item" data-goods-id="{{product.goods_id}}" catchtap="goDetail" wx:if="{{product}}">
+    <view class="pro-item" data-goods-id="{{product.goods_id}}" catchtap="_goDetail" wx:if="{{product}}">
         <view class="pro-pic">
             <image src="{{product.goods_grid}}"></image>
             <view class="tag-wrap" wx:if="{{product.valid==0}}">
@@ -23,7 +24,7 @@
             </view>
         </view>
         <view class="buy-count" wx:if="{{showCartCtrl}}">
-
+            <template is="cartCtrl" data="{{ product: product, currentProCount: currentProCount, index: index  }}" />
         </view>
     </view>
 </template>

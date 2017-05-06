@@ -4,6 +4,8 @@ var util = require('../../utils/util.js');
 var ports = require('../../utils/ports.js');
 //引入灯箱组件
 var Slider = require('../../template/slider/slider.js');
+// 引入promise
+var Promise = require('../../lib/es6-promise.min.js'); 
 // 优惠标签配色
 var tagColor = util.getTagColor();
 var dialog = [

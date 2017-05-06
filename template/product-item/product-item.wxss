@@ -46,7 +46,7 @@
     text-overflow: ellipsis;
 }
 .pro-info .pro-title{
-    height: 68rpx;
+    height: 60rpx;
     font-size: 30rpx;
     line-height: 1;
     color: #444;
@@ -91,3 +91,10 @@
     color: #ccc;
     text-decoration: line-through;
 }
+.buy-count{
+    position: absolute;
+    right: 20rpx;
+    bottom: 20rpx;
+    font-size: 28rpx;
+}
+@import "../cart-ctrl/cart-ctrl.wxss";

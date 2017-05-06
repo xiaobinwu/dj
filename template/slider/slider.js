@@ -5,7 +5,6 @@
  */
 class Slider {
     constructor(pageContext, options = { picList: [], showArr:[] }){
-        console.log(options)
         this.page = pageContext; //获取页面上下文
         this.page.data.slider = {
             picList: options.picList,

@@ -1,11 +1,7 @@
 //app.js
 App({
   onLaunch: function (options) {
-
-    //调用API从本地缓存中获取数据， 待删
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    
   },
   getUserInfo:function(cb){
     var that = this
@@ -26,6 +22,23 @@ App({
     }
   },
   globalData:{
-    userInfo:null
+    userInfo:null,
+    cartData:{
+        list:[],
+        totalCount:1,
+        totalPrice:0,
+
+        // 起送价
+        floorPrice:0,
+
+        // 总价达到此价免配送费
+        freeShipPrice:0,
+
+        // 运费
+        deliveryFee:0,
+
+        storeId:0,
+        storeName:''
+    }
   }
 })

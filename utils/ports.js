@@ -13,8 +13,11 @@ module.exports = {
     storeSearch: wdomain + '/store/searchStore',
 
     // 商品
-    goodsDetail: wdomain+'/goods/goodsDetail',
-    goodsSearchGoods:wdomain+'/goods/searchGoods',
-    goodsGoodslist:wdomain+'/goods/goodslist',
+    goodsDetail: wdomain + '/goods/goodsDetail',
+    goodsSearchGoods: wdomain + '/goods/searchGoods',
+    goodsGoodslist: wdomain + '/goods/goodslist',
+
+    // 购物车
+    cartCheck: wdomain + '/Cart/cartCheck',
 
 }

@@ -2,10 +2,19 @@
 var util = require('../../utils/util.js');
 var ports = require('../../utils/ports.js');
 var address = require('../../utils/address.js');
+var polyfill = require('../../utils/polyfill.js');
 //引入灯箱组件
 var Slider = require('../../template/slider/slider.js');
+//引入产品Item组件
+var ProductItem = require('../../template/product-item/product-item.js');
+//引入产品加减部件
+var CartCtrl = require('../../template/cart-ctrl/cart-ctrl.js');
+// 引入promise
+var Promise = require('../../lib/es6-promise.min.js'); 
 // 优惠标签配色
 var tagColor = util.getTagColor();
+//获取app实例
+var appInstance = getApp();
 var dialog = [
     {
       title: '发现您的收货地址已变更',
@@ -111,6 +120,7 @@ Page({
            this.loadingProList(this.data.currentCateId,this.data.currentIndex);
            this.setData(this.dynamicSetData('firstLoadDataFlag', index, true)); 
        }
+       this.changeSwiperHeight(index);
   },
   //获取px与rpx之间的比列
   getRpx(){
@@ -168,9 +178,18 @@ Page({
         param[string] = value;
         return param;
   },
+  //改变swiper的高度
+  changeSwiperHeight(index){
+      if(this.data.pros[index]){
+            var prosLength = this.data.pros[index].length;
+            this.setData({
+                swiperHeight: prosLength * 282 / this.getRpx() + 40 //TODO,这种方式不好,swiper高度，官方限死固定高度
+            });    
+             this.setData(this.dynamicSetData('showLoadingFlag', index, false));   
+      } 
+  },
   // 分页加载商品列表
   loadingProList: function(cateId,index) {
-        // console.log(cateId)
         if(typeof this.data.pages[index]=='undefined'){
             //TODO，实现this.pages[index]={}
             this.setData(this.dynamicSetData('pages', index, {}));
@@ -197,14 +216,11 @@ Page({
                 this.setData(this.dynamicSetData('pros', index, []));
             }
             var oldpros = this.data.pros[index];
-            var pros = oldpros.concat(this.handleActList(result.data.goodsList));     
+            var pros = oldpros.concat(this.handleActList(result.data.goodsList));    
             this.setData(this.dynamicSetData('pros', index, pros));
             //动态改变swiper的高度
-            console.log(pros)
-            this.setData({
-                swiperHeight: pros.length * 290 / this.getRpx() + 40 //TODO,这种方式不好,swiper高度，官方限死固定高度
-            });    
-            this.setData(this.dynamicSetData('showLoadingFlag', index, false));             
+            this.changeSwiperHeight(index);
+            this.cartCtrl.getCurrentProCounts(result.data.goodsList, index); 
         });
   },  
   // 获取商品列表
@@ -312,6 +328,7 @@ Page({
       });          
       this.loadingProList(this.data.currentCateId,this.data.currentIndex);
 
+      //设置公告内容
       this.setData({
          storeAnnouncement: _self.splitStoreAnnouncement(_self.data.idxData.announcement || _self.data.storeData.announcement)
       });
@@ -331,17 +348,14 @@ Page({
           address_id: addressId,
           store_id: storeId
       }));
-
-      // 传递给vuex-cart
-      // store.dispatch('updateCartData', {
-      //     cartData: {
-      //         storeId:storeId,
-      //         storeName:_this.storeData.store_name,
-      //         floorPrice:_this.storeData.floor_price,
-      //         freeShipPrice:_this.storeData.free_ship_price,
-      //         deliveryFee:_this.storeData.delivery_fee
-      //     }
-      // });
+      // 传递给全局变量cartData（购物车数据）
+      appInstance.globalData.cartData = polyfill.object.assignIn(appInstance.globalData.cartData,{
+            storeId:storeId,
+            storeName:_self.data.storeData.store_name,
+            floorPrice:_self.data.storeData.floor_price,
+            freeShipPrice:_self.data.storeData.free_ship_price,
+            deliveryFee:_self.data.storeData.delivery_fee
+      });
   },
   onReachBottom: function(){
       if(this.data.showLoadedFlag[this.data.currentIndex]){
@@ -354,6 +368,10 @@ Page({
   onLoad:function(options){
       //初始化灯箱组件
       this.slider = new Slider(this);
+      //初始化产品加减部件组件
+      this.cartCtrl = new CartCtrl(this);
+      //初始化产品Item组件
+      new ProductItem(this);
       /**
        * 1.拿到处理过的地址信息 final_address
        * 2.通过地址信息获取门店信息(region_id,lat,lng)
