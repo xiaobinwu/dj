@@ -172,9 +172,9 @@ Page({
         });
   },
   //动态setData
-  dynamicSetData: function(field, index, value, suffix=''){
+  dynamicSetData: function(field, index, value, suffix, type='object'){
         var param = {};
-        var string = field + '[' + index + ']' + (suffix ? '.' + suffix : '');
+        var string = field + '[' + index + ']' + (typeof suffix !== 'undefined' ?  type === 'object' ? '.' + suffix  : '[' + suffix + ']' : '');
         param[string] = value;
         return param;
   },

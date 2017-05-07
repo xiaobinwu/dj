@@ -92,7 +92,7 @@ function cartCountChange(pro,flag, index){
             title: '该商品已售罄',
             duration: 1000
         })
-        return;
+        return Promise.reject();
     }
 
     // 当前操作在商品已在购物车中
@@ -108,6 +108,7 @@ function cartCountChange(pro,flag, index){
                     title: `商品数量仅剩${pro.stock_available}件了`,
                     duration: 1000
                 });
+                return Promise.reject();
             }else{
                 wx.showToast({
                     title: `加入购物车成功`,
@@ -143,6 +144,7 @@ function cartCountChange(pro,flag, index){
     appInstance.globalData.cartData.list = cartList;
     // 将购物车数据存至本地
     saveCartDataToLocal(cartList,storeId);
+    return Promise.resolve(flag);
 }
 
 

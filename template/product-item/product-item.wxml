@@ -24,7 +24,7 @@
             </view>
         </view>
         <view class="buy-count" wx:if="{{showCartCtrl}}">
-            <template is="cartCtrl" data="{{ product: product, currentProCount: currentProCount, index: index  }}" />
+            <template is="cartCtrl" data="{{ product: product, currentProCount: currentProCount, index: index, findex: findex  }}" />
         </view>
     </view>
 </template>

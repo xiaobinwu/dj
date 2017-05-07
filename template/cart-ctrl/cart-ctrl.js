@@ -11,7 +11,20 @@ class CartCtrl{
         this.page._cartSet = this._cartSet.bind(this);
     }
     _cartSet(e){
-        cart.cartCountChange(e.currentTarget.dataset.pro,e.currentTarget.dataset.type, e.currentTarget.dataset.index);
+        var findex = e.currentTarget.dataset.findex,
+            index = e.currentTarget.dataset.index;
+        cart.cartCountChange(e.currentTarget.dataset.pro,e.currentTarget.dataset.type).then(result => {
+            if(typeof findex != 'undefined'){
+                var currentProCount = this.page.data.currentProCounts[findex][index];
+                if(result === 'add'){
+                    this.page.setData(this.page.dynamicSetData('currentProCounts', findex, ++currentProCount, index, 'array'));
+                }else if(result === 'reduce'){
+                    this.page.setData(this.page.dynamicSetData('currentProCounts', findex, --currentProCount, index, 'array'));
+                }
+            }else{
+
+            }
+        });
     }
     //获取当前分类所有产品的currentProCount,template没有属于自己js，所有操作都是需要绑定到page实例上
     getCurrentProCounts(pros,index){
@@ -32,13 +45,6 @@ class CartCtrl{
                         }
                     }
                 }
-                // pros.forEach((p, index) =>{
-                //     cartList.forEach(d =>{
-                //         if(d.goods_id == p.goods_id){
-                //             arr[index] = parseInt(d.goods_number);
-                //         }
-                //     });
-                // });
             }
         this.page.setData(this.page.dynamicSetData('currentProCounts', index, currentProCounts.concat(arr)));
     }

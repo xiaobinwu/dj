@@ -1,7 +1,7 @@
 <template name="cartCtrl">
     <view class="cart-ctrl">
-        <text class="cart-reduce icon icon-reduce" wx:if="{{currentProCount > 0}}" data-type="reduce" data-pro="{{product}}" data-index="{{index}}" catchtap="_cartSet"></text>
+        <text class="cart-reduce icon icon-reduce" wx:if="{{currentProCount > 0}}" data-type="reduce" data-pro="{{product}}" data-findex="{{findex}}" data-index="{{index}}"  catchtap="_cartSet"></text>
         <text class="cart-count" wx:if="{{currentProCount}}">{{currentProCount}}</text>
-        <text data-type="add" data-pro="{{product}}"  data-index="{{index}}"  catchtap="_cartSet" class="{{(currentProCount > 0 ? 'icon-add icon' : 'icon-cart-round icon') + ' ' + (!product.valid ? 'gray' : '') }}"></text>
+        <text data-type="add" data-pro="{{product}}" data-findex="{{findex}}"   data-index="{{index}}"  catchtap="_cartSet" class="{{(currentProCount > 0 ? 'icon-add icon' : 'icon-cart-round icon') + ' ' + (!product.valid ? 'gray' : '') }}"></text>
     </view>
 </template>
