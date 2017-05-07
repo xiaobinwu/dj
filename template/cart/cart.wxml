@@ -1,0 +1,15 @@
+<template name="cart">
+<view class="cart-box">
+    <view class="cart-normal" wx:if="{{cartBaseInfo.totalCount>0 || showForce}}">
+        <view class="cart-info" bindtap="_switchCartPanel">
+            <view class="cart-icon">
+                <span class="icon icon-cart cart-show"></span>
+                <text class="cart-count" wx:if="{{cartBaseInfo.totalCount > 0}}">{{cartBaseInfo.totalCount}}</text>
+            </view>
+            <view class="cart-price">¥ {{cartBaseInfo.totalPrice}}</view>
+            <view class="cart-intro">实际金额以订单结算为准</view>
+        </view>
+        <view class="btn-go-checkout {{cartBaseInfo.btnClass[0]}}" catchtap="_goCheckout">{{cartBaseInfo.btnDesc}}</view>
+    </view>
+</view>
+</template>

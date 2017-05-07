@@ -40,3 +40,22 @@ page {
     height: 20rpx;
     background-color: #eee;
 }
+/*警示状态栏*/
+.status-bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90rpx;
+    border-top: solid #efe5a7 3rpx;
+    background-color: #fffae2;
+    font-size: 30rpx;
+    color: #222;
+}
+.status-bar text{
+    padding: 0 3px;
+    color: #e61773;
+}

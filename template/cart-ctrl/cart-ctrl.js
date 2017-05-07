@@ -4,6 +4,7 @@
  * @author xiaobin_wu
  */
 var cart = require('../../utils/cart.js');
+var util = require('../../utils/util.js');
 class CartCtrl{
     constructor(pageContext){
         this.page = pageContext; //获取页面上下文
@@ -17,20 +18,21 @@ class CartCtrl{
             if(typeof findex != 'undefined'){
                 var currentProCount = this.page.data.currentProCounts[findex][index];
                 if(result === 'add'){
-                    this.page.setData(this.page.dynamicSetData('currentProCounts', findex, ++currentProCount, index, 'array'));
+                    this.page.setData(util.dynamicSetData('currentProCounts', findex, ++currentProCount, index, 'array'));
                 }else if(result === 'reduce'){
-                    this.page.setData(this.page.dynamicSetData('currentProCounts', findex, --currentProCount, index, 'array'));
+                    this.page.setData(util.dynamicSetData('currentProCounts', findex, --currentProCount, index, 'array'));
                 }
             }else{
 
             }
+            //与购物车通讯
         });
     }
     //获取当前分类所有产品的currentProCount,template没有属于自己js，所有操作都是需要绑定到page实例上
     getCurrentProCounts(pros,index){
         //获取app实例
         if(typeof this.page.data.currentProCounts[index]=='undefined'){          
-            this.page.setData(this.page.dynamicSetData('currentProCounts', index, []));
+            this.page.setData(util.dynamicSetData('currentProCounts', index, []));
         }
         var arr = new Array(pros.length).fill(0),
             appInstance = getApp(),
@@ -46,7 +48,7 @@ class CartCtrl{
                     }
                 }
             }
-        this.page.setData(this.page.dynamicSetData('currentProCounts', index, currentProCounts.concat(arr)));
+        this.page.setData(util.dynamicSetData('currentProCounts', index, currentProCounts.concat(arr)));
     }
 }
 module.exports = CartCtrl

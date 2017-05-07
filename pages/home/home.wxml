@@ -1,6 +1,7 @@
 <!--pages/home/home.wxml-->
 <import src="../../template/slider/slider.wxml"/>
 <import src="../../template/product-item/product-item.wxml"/>
+<import src="../../template/cart/cart.wxml"/>
 <view class="slider-container">
     <template is="slider" data="{{slider}}"/>
     <view catchtap="toStoreDetail" class="btn-show-store-detail">门店详情</view>
@@ -71,7 +72,7 @@
 </view>
 
 
-<!-- 门店详情弹层 -->
+<!-- 门店公告弹层 -->
 <view class="mask-store-detail {{showStoreDetail ? 'show' : '' }}" catchtap="changeShowStoreDetail">
     <view class="store-detail-scroll">
         <view class="store-detail-name">{{storeData.store_name}}</view>
@@ -112,4 +113,12 @@
             <span class="icon icon-close-round"></span>
         </view>
     </view>    
+</view>
+
+<view class="status-bar" wx:if="{{storeData.delivery_sta > 1}}">
+    {{storeData.delivery_sta_str}}
+</view>
+
+<view wx:else>
+      <template is="cart" data="{{showCartPanel: showCartPanel, cartBaseInfo: cartBaseInfo}}" />
 </view>

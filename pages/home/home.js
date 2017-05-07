@@ -9,6 +9,8 @@ var Slider = require('../../template/slider/slider.js');
 var ProductItem = require('../../template/product-item/product-item.js');
 //引入产品加减部件
 var CartCtrl = require('../../template/cart-ctrl/cart-ctrl.js');
+//引入购物车组件
+var Cart = require('../../template/cart/cart.js');
 // 引入promise
 var Promise = require('../../lib/es6-promise.min.js'); 
 // 优惠标签配色
@@ -62,14 +64,9 @@ Page({
       // 显示商品某项分类
       showProCate:false,
 
-      // 是不中显示购物车列表面板
-      showCartPanel:false,
       // 门店数据
       storeData:{},
-      // 购物车数据
-      cartData:[],
-      // 购物车综合信息
-      cartBaseInfo:[],
+     
 
       
       //单前分类栏目所属类型index
@@ -110,7 +107,7 @@ Page({
   }, 
   //分类滚动条位置变化
   scrollLeftChange: function(index){
-       var rpx = this.getRpx();
+       var rpx = util.getRpx();
        var arr = new Array(this.data.idxData.cates.length).fill(false);
        this.setData({
             scrollLeft: index < 4 ? 0 : index * 168 / rpx,
@@ -118,14 +115,9 @@ Page({
        });
        if(!this.data.firstLoadDataFlag[index]){
            this.loadingProList(this.data.currentCateId,this.data.currentIndex);
-           this.setData(this.dynamicSetData('firstLoadDataFlag', index, true)); 
+           this.setData(util.dynamicSetData('firstLoadDataFlag', index, true));
        }
        this.changeSwiperHeight(index);
-  },
-  //获取px与rpx之间的比列
-  getRpx(){
-       var winWidth = wx.getSystemInfoSync().windowWidth;
-       return 750/winWidth;
   },
   //点击营销位
   saleTap: function(e){
@@ -171,53 +163,46 @@ Page({
             return Promise.reject(e);
         });
   },
-  //动态setData
-  dynamicSetData: function(field, index, value, suffix, type='object'){
-        var param = {};
-        var string = field + '[' + index + ']' + (typeof suffix !== 'undefined' ?  type === 'object' ? '.' + suffix  : '[' + suffix + ']' : '');
-        param[string] = value;
-        return param;
-  },
   //改变swiper的高度
   changeSwiperHeight(index){
       if(this.data.pros[index]){
             var prosLength = this.data.pros[index].length;
             this.setData({
-                swiperHeight: prosLength * 282 / this.getRpx() + 40 //TODO,这种方式不好,swiper高度，官方限死固定高度
+                swiperHeight: prosLength * 282 / util.getRpx() + 40 //TODO,这种方式不好,swiper高度，官方限死固定高度
             });    
-             this.setData(this.dynamicSetData('showLoadingFlag', index, false));   
+             this.setData(util.dynamicSetData('showLoadingFlag', index, false));   
       } 
   },
   // 分页加载商品列表
   loadingProList: function(cateId,index) {
         if(typeof this.data.pages[index]=='undefined'){
             //TODO，实现this.pages[index]={}
-            this.setData(this.dynamicSetData('pages', index, {}));
+            this.setData(util.dynamicSetData('pages', index, {}));
         }
         if(typeof this.data.pages[index].page=='undefined'){
-            this.setData(this.dynamicSetData('pages', index, 0, 'page'));
+            this.setData(util.dynamicSetData('pages', index, 0, 'page'));
         }
         if(typeof this.data.pages[index].totalPage=='undefined'){      
-            this.setData(this.dynamicSetData('pages', index, 1, 'totalPage'));
+            this.setData(util.dynamicSetData('pages', index, 1, 'totalPage'));
         }
         var page = this.data.pages[index].page;
-        this.setData(this.dynamicSetData('pages', index, page+1, 'page'));
+        this.setData(util.dynamicSetData('pages', index, page+1, 'page'));
 
         if(this.data.pages[index].page > this.data.pages[index].totalPage) {
-            this.setData(this.dynamicSetData('showLoadingFlag', index, false));   
-            this.setData(this.dynamicSetData('showLoadedFlag', index, true));
+            this.setData(util.dynamicSetData('showLoadingFlag', index, false));   
+            this.setData(util.dynamicSetData('showLoadedFlag', index, true));
             return;
         }
 
         this.getProductList(cateId,index).then(result=>{          
-            this.setData(this.dynamicSetData('pages', index, result.data.totalPage, 'totalPage'));
+            this.setData(util.dynamicSetData('pages', index, result.data.totalPage, 'totalPage'));
 
             if(typeof this.data.pros[index]=='undefined'){          
-                this.setData(this.dynamicSetData('pros', index, []));
+                this.setData(util.dynamicSetData('pros', index, []));
             }
             var oldpros = this.data.pros[index];
             var pros = oldpros.concat(this.handleActList(result.data.goodsList));    
-            this.setData(this.dynamicSetData('pros', index, pros));
+            this.setData(util.dynamicSetData('pros', index, pros));
             //动态改变swiper的高度
             this.changeSwiperHeight(index);
             this.cartCtrl.getCurrentProCounts(result.data.goodsList, index); 
@@ -362,7 +347,7 @@ Page({
           //该分类所以数据加载完毕
           return;
       }
-      this.setData(this.dynamicSetData('showLoadingFlag', this.data.currentIndex, true));
+      this.setData(util.dynamicSetData('showLoadingFlag', this.data.currentIndex, true));
       this.loadingProList(this.data.currentCateId,this.data.currentIndex);
   },
   onLoad:function(options){
@@ -370,6 +355,8 @@ Page({
       this.slider = new Slider(this);
       //初始化产品加减部件组件
       this.cartCtrl = new CartCtrl(this);
+      //初始化购物车组件
+      this.cart = new Cart(this);
       //初始化产品Item组件
       new ProductItem(this);
       /**
@@ -409,6 +396,7 @@ Page({
   },
   onShow:function(){
     // 页面显示
+    this.cart.initCartData();
   },
   onHide:function(){
     // 页面隐藏

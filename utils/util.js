@@ -275,6 +275,20 @@ function objInList(obj,obj_key,target_key,arr){
     }
 }
 
+//获取px与rpx之间的比列
+function getRpx(){
+    var winWidth = wx.getSystemInfoSync().windowWidth;
+    return 750/winWidth;
+}
+
+//动态setData
+function dynamicSetData(field, index, value, suffix, type='object'){
+    var param = {};
+    var string = field + '[' + index + ']' + (typeof suffix !== 'undefined' ?  type === 'object' ? '.' + suffix  : '[' + suffix + ']' : '');
+    param[string] = value;
+    return param;
+}
+
 module.exports = {
   formatTime: formatTime,
   getStorage: getStorage,
@@ -283,5 +297,7 @@ module.exports = {
   wxPromisify: wxPromisify,
   wxRequest: wxRequest,
   getTagColor: getTagColor,
-  objInList: objInList
+  objInList: objInList,
+  getRpx: getRpx,
+  dynamicSetData: dynamicSetData
 }
