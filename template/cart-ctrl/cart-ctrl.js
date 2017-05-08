@@ -23,7 +23,7 @@ class CartCtrl{
                     this.page.setData(util.dynamicSetData('currentProCounts', findex, { goods_number: --currentProCount.goods_number, goods_id: currentProCount.goods_id }, index, 'array'));
                 }
             }else{
-
+                this.cartChange(result); //不带index、findex，必须保证page里面有当前分类索引
             }
             //与购物车cart.js通讯
             this.page.cart.resetCartData();
@@ -55,6 +55,29 @@ class CartCtrl{
                 });
             }
         this.page.setData(util.dynamicSetData('currentProCounts', index, currentProCounts.concat(arr)));
+    }
+    cartChange(result){
+        var currentIndex = this.page.data.currentIndex,
+            appInstance = getApp(),
+            cartList = appInstance.globalData.cartData.list;
+        if(currentIndex){
+           return wx.showToast({
+                title: '获取不到当前分类',
+                duration: 2000
+            })
+        }
+        var currentProCounts = this.page.data.currentProCounts[currentIndex];
+        for(let i = 0; i < currentProCounts.length; i++){
+            for(let j = 0; j < cartList.length; j++){
+                if(cartList[j].goods_id == currentProCounts[i].goods_id){
+                        if(result === 'add'){
+                            this.page.setData(util.dynamicSetData('currentProCounts', currentIndex, { goods_number: ++currentProCount[i].goods_number, goods_id: currentProCount[i].goods_id }, i, 'array'));
+                        }else if(result === 'reduce'){
+                            this.page.setData(util.dynamicSetData('currentProCounts', currentIndex, { goods_number: --currentProCount[i].goods_number, goods_id: currentProCount[i].goods_id }, i, 'array'));
+                        }
+                }
+            }
+        }
     }
 }
 module.exports = CartCtrl
