@@ -6,7 +6,6 @@
     display: flex;
     align-items: center;
     position:absolute;
-    z-index:2;
     right: 30rpx;
     bottom: 50rpx;
     padding: 0 10rpx;

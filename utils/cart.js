@@ -77,7 +77,7 @@ function syncCartData(store_id){
 }
 
 // 购物车（加减操作）数量变更
-function cartCountChange(pro,flag, index){
+function cartCountChange(pro,flag){
     //获取app实例
     var appInstance = getApp(),
         toastMsg = '',

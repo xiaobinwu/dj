@@ -1,6 +1,46 @@
+<import src="../cart-ctrl/cart-ctrl.wxml"/>
 <template name="cart">
-<view class="cart-box">
-    <view class="cart-normal" wx:if="{{cartBaseInfo.totalCount>0 || showForce}}">
+<view class="cart-box" wx:if="{{cartBaseInfo.totalCount>0 || showForce}}">
+    <view class="cart-panel-box" wx:if="{{showCartPanel}}">
+        <view class="cart-panel-mask {{showCartPanel ? 'show' : ''}}" bindtap="_switchCartPanel"></view>
+        <view class="cart-panel">
+            <!-- 门店信息及操作 -->
+            <view class="title">
+                <view class="send-info">
+                    <span class="icon icon-warning"></span>
+                    <text>本订单由{{cartBaseInfo.StoreName}}配送</text>
+                </view>
+                <view class="btn-clear-all" bindtap="_emptyCart">
+                    <span class="icon icon-trash"></span>
+                    <text>清空</text>
+                </view>
+            </view>
+            <!-- 购物车列表 -->
+            <scroll-view class="cart-list" scroll-y="true">
+                <block wx:for="{{cartBaseInfo.cartList}}" wx:for-item="pro">
+                    <view class="pro-item {{pro.valid == 0 ? 'invalid' : ''}}" wx:if="{{pro.goods_number > 0}}">
+                        <image src="{{pro.goods_thumb}}" class="pro-pic"></image>
+                        <view class="pro-info">
+                            <view class="cart-pro-title">{{pro.goods_title}}</view>
+                            <view class="invalid-msg" wx:if="{{pro.valid == 0}}">
+                                <span class="icon icon-warning"></span>
+                                <text>{{pro.valid_text}}</text>
+                            </view> 
+                            <view class="cart-pro-price">¥ {{pro.avg_price || pro.sale_price ||     pro.goods_price}}</view>
+                        </view>
+                        <view class="buy-count">
+                              <template is="cartCtrl" data="{{product:pro, currentProCount: pro }}" wx:if="{{pro.valid}}" />
+                              <view class="pro-btn-wrap" wx:else>
+                                    <view class="btn-clear" data-goods-id="{{pro.goods_id}}" catchtap="_clearItem">清除</view>
+                              </view>
+                        </view>
+                    </view>
+                </block>
+            </scroll-view>
+
+        </view>
+    </view>
+    <view class="cart-normal">
         <view class="cart-info" bindtap="_switchCartPanel">
             <view class="cart-icon">
                 <span class="icon icon-cart cart-show"></span>

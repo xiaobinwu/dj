@@ -13,22 +13,51 @@ class Cart {
         this.page = pageContext; //获取页面上下文
         this.page.data.showCartPanel = false; //是否中显示购物车列表面板
         this.page.data.cartBaseInfo = {};  // 购物车综合信息
+        this.page._goCheckout = this._goCheckout.bind(this);
+        this.page._switchCartPanel = this._switchCartPanel.bind(this);
         this.appInstance = getApp();
+    }
+    _goCheckout(){
+        wx.showToast({
+            title: '未能支付，期待吧！',
+            duration: 2000
+        })
+    }
+    _switchCartPanel(){
+        var _self = this;
+        // 无商品时不开启
+        if(this.getCartList().length<1){
+            return;
+        }
+        // 开启购物车面板校验购物车
+        if(!this.page.data.showCartPanel){
+            this.initCartData();
+        } 
+        this.page.setData({
+            showCartPanel: !_self.page.data.showCartPanel
+        });
     }
     initCartData(){
          this.validCartData().then(() => {
-            if(this.isShowCartPanel()){
-                this.resetCartData();
-            }
-         })
+            this.resetCartData();
+         });
     }
     resetCartData(){
-        var cartBaseInfo = {
-            cartList: this.getCartList(),
-            totalCount: this.getTotalCount(),
-            totalPrice: this.getTotalPrice(),
-            btnClass: this.getBtnClass(),
-            btnDesc: this.getBtnDesc()
+        var cartBaseInfo = {},
+            cartList = this.getCartList();
+        if(cartList && cartList.length >= 1){
+            cartBaseInfo = {
+                cartList: this.getCartList(),
+                totalCount: this.getTotalCount(),
+                totalPrice: this.getTotalPrice(),
+                StoreName: this.getStoreName(),
+                btnClass: this.getBtnClass(),
+                btnDesc: this.getBtnDesc()
+            }
+        }else{
+            this.page.setData({
+                showCartPanel: false
+            });
         }
         this.page.setData({
             cartBaseInfo: cartBaseInfo
@@ -37,23 +66,14 @@ class Cart {
     // 校验购物车数据
     validCartData(){
         var storeId = this.getStoreId();
-        cart.syncCartData(storeId).then((data)=>{
+        return cart.syncCartData(storeId).then((data)=>{
             var cartList = data.goodsList || [];
             this.appInstance.globalData.cartData.list = cartList;
-            Promise.resolve();
+            return Promise.resolve();
         }).catch(e=>{
             console.warn(e);
-            Promise.reject();
+            return Promise.reject();
         });
-    }
-    isShowCartPanel(){
-        if(this.getCartList().length<1){
-            this.page.data.setData({
-                showCartPanel: false
-            });
-            return false;
-        } 
-        return true;
     }
     getCartData(){
         return this.appInstance.globalData.cartData;
@@ -63,6 +83,9 @@ class Cart {
     }
     getStoreId(){
         return this.appInstance.globalData.cartData.storeId;
+    }
+    getStoreName(){
+        return this.appInstance.globalData.cartData.storeName;
     }
     // 起送价
     getMinPrice(){

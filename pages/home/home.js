@@ -218,7 +218,7 @@ Page({
             'content-type': 'application/x-www-form-urlencoded'
             },
             data: {
-                store_id: JSON.parse(util.getStorage('current_store_info')).store_id, //TODO，获取不到this.data.storeData?
+                store_id: _self.data.storeData.id,
                 cat_id: cateId,
                 page: _self.data.pages[index].page
             }

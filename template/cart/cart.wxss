@@ -5,6 +5,8 @@
     right: 0;
 }
 .cart-normal{
+    position: relative;
+    z-index: 4001;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -59,4 +61,135 @@
     margin-top: 5rpx;
     font-size: 24rpx;
     color: #666;
+}
+.btn-go-checkout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 240rpx;
+    background-color: #e61773;
+    text-align: center;
+    font-size: 32rpx;
+    color: #fff;
+}
+.btn-go-checkout.gray{
+    background-color: #bbb;
+    color:#fff;
+    font-size: 28rpx;
+}
+.btn-go-checkout.red{
+    background-color: #e61773;
+}
+/*购物车面板*/
+.cart-panel-mask{
+    position: fixed;
+    top:0;
+    z-index: 4000;
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,.6);
+    opacity: 0;
+    transition:opacity .2s linear;
+    visibility: hidden;
+}
+.cart-panel-mask.show{
+    opacity: 1;
+    visibility: visible;
+}
+.cart-panel{
+    position: relative;
+    z-index: 4001;
+    width: 100%;
+    background-color: #fff;
+}
+.cart-panel .status-bar{
+    height: 80rpx;
+    font-size: 28rpx;
+}
+.cart-panel .title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    font-size: 28rpx;
+}
+.cart-panel .title .send-info,.cart-panel .title .btn-clear-all{
+    padding: 25rpx 20rpx;
+    color: #333;
+}
+.cart-panel .title .icon{
+    font-size: 30rpx;
+    margin-right: 5rpx;
+}
+.cart-list{
+    max-height: 500rpx;
+}
+.cart-list .pro-item{
+    display: flex;
+    padding: 20rpx;
+    border-bottom: solid #e8e8e8 1px;
+}
+.cart-list .pro-item.invalid .cart-pro-title{
+    color:#ccc;
+}
+.cart-list .pro-item.invalid .cart-pro-price{
+    display: none;
+}
+.cart-list .pro-pic{
+    flex-shrink: 0;
+    width: 100rpx;
+    height: 100rpx;
+}
+.cart-list .pro-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    padding: 10rpx;
+    overflow: hidden;
+}
+.cart-list .pro-info .invalid-msg{
+    color:#e61773;
+    font-size: 26rpx;
+}
+.cart-list .pro-info .invalid-msg .icon{
+    font-size: 26rpx;
+}
+.cart-list .cart-pro-title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 28rpx;
+}
+.cart-list .cart-pro-price{
+    font-size: 36rpx;
+    color: #e61773;
+}
+.cart-list .buy-count{
+    display: flex;
+    justify-content: flex-end;
+    width: 260rpx;
+    font-size: 0;    
+}
+.cart-list .buy-count .cart-count{
+    font-size: 32rpx;
+}
+.cart-list .buy-count .icon{
+    margin: 0 6rpx;
+    font-size: 38rpx;
+}
+.cart-list .buy-count .cart-reduce{
+    font-size: 40rpx;
+}
+.pro-btn-wrap{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.pro-btn-wrap .btn-clear{
+    padding: 1rpx 30rpx;
+    border: solid #666 1px;
+    font-size: 28rpx;
+    border-radius: 5rpx;
 }
