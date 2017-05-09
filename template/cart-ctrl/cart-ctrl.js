@@ -23,13 +23,13 @@ class CartCtrl{
                     this.page.setData(util.dynamicSetData('currentProCounts', findex, { goods_number: --currentProCount.goods_number, goods_id: currentProCount.goods_id }, index, 'array'));
                 }
             }else{
-                this.cartChange(result); //不带index、findex，必须保证page里面有当前分类索引
+                this.cartChange(e); //不带index、findex，必须保证page里面有当前分类索引
             }
             //与购物车cart.js通讯
             this.page.cart.resetCartData();
         });
     }
-    //获取当前分类所有产品的currentProCount,template没有属于自己js，所有操作都是需要绑定到page实例上
+    //获取当前分类所有产品的currentProCount,template没有属于自己js，所有操作都是需要绑定到page实例上（注意滚动时数据添加）
     getCurrentProCounts(pros,index){
         //获取app实例
         if(typeof this.page.data.currentProCounts[index]=='undefined'){          
@@ -56,11 +56,12 @@ class CartCtrl{
             }
         this.page.setData(util.dynamicSetData('currentProCounts', index, currentProCounts.concat(arr)));
     }
-    cartChange(result){
+    //购物车加减产品处理逻辑（只针对当前分类）
+    cartChange(e){
         var currentIndex = this.page.data.currentIndex,
-            appInstance = getApp(),
-            cartList = appInstance.globalData.cartData.list;
-        if(currentIndex){
+            goods_id = e.currentTarget.dataset.pro.goods_id,
+            type = e.currentTarget.dataset.type;
+        if(typeof currentIndex === 'undefined'){
            return wx.showToast({
                 title: '获取不到当前分类',
                 duration: 2000
@@ -68,16 +69,39 @@ class CartCtrl{
         }
         var currentProCounts = this.page.data.currentProCounts[currentIndex];
         for(let i = 0; i < currentProCounts.length; i++){
-            for(let j = 0; j < cartList.length; j++){
-                if(cartList[j].goods_id == currentProCounts[i].goods_id){
-                        if(result === 'add'){
-                            this.page.setData(util.dynamicSetData('currentProCounts', currentIndex, { goods_number: ++currentProCount[i].goods_number, goods_id: currentProCount[i].goods_id }, i, 'array'));
-                        }else if(result === 'reduce'){
-                            this.page.setData(util.dynamicSetData('currentProCounts', currentIndex, { goods_number: --currentProCount[i].goods_number, goods_id: currentProCount[i].goods_id }, i, 'array'));
-                        }
-                }
+            if(goods_id == currentProCounts[i].goods_id){
+                    if(type === 'add'){
+                        this.page.setData(util.dynamicSetData('currentProCounts', currentIndex, { goods_number: ++currentProCounts[i].goods_number, goods_id: currentProCounts[i].goods_id }, i, 'array'));
+                    }else if(type === 'reduce'){
+                        this.page.setData(util.dynamicSetData('currentProCounts', currentIndex, { goods_number: --currentProCounts[i].goods_number, goods_id: currentProCounts[i].goods_id }, i, 'array'));
+                    }
+                    break;
             }
         }
+    }
+    //分类swiper切换时，更新对应分类的购物车数据
+    switchCartCheck(pros,index){
+        console.log(index)
+        var arr = [],
+            appInstance = getApp(),
+            currentProCounts = this.page.data.currentProCounts[index],
+            cartList = appInstance.globalData.cartData.list;
+
+            for(let p = 0; p < pros.length; p++){
+                var goods_number = 0;
+                if(cartList.length >= 1){
+                    for(let c = 0; c < cartList.length; c++){
+                        if(cartList[c].goods_id == pros[p].goods_id){
+                            goods_number = parseInt(cartList[c].goods_number);
+                        }      
+                    }
+                }
+                arr.push({
+                    goods_number: goods_number,
+                    goods_id: pros[p].goods_id
+                });
+            }
+        this.page.setData(util.dynamicSetData('currentProCounts', index, arr));
     }
 }
 module.exports = CartCtrl

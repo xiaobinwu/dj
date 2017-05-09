@@ -10,7 +10,9 @@ class ProductItem{
     }
     _goDetail(e){
         //详情页
-        console.log(e.currentTarget.dataset.goodsId);
+        wx.navigateTo({
+            url: '../detail/detail?id=' + e.currentTarget.dataset.goodsId
+        });        
     }
 }
 module.exports = ProductItem

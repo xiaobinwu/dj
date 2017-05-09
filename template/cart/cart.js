@@ -15,6 +15,7 @@ class Cart {
         this.page.data.cartBaseInfo = {};  // 购物车综合信息
         this.page._goCheckout = this._goCheckout.bind(this);
         this.page._switchCartPanel = this._switchCartPanel.bind(this);
+        this.page._emptyCart = this._emptyCart.bind(this);
         this.appInstance = getApp();
     }
     _goCheckout(){
@@ -35,6 +36,39 @@ class Cart {
         } 
         this.page.setData({
             showCartPanel: !_self.page.data.showCartPanel
+        });
+    }
+    _emptyCart(){
+        var _self = this;
+        wx.showModal({
+            title: '提示',
+            content: '确认清空购物车?',
+            confirmColor: '#e61773',
+            cancelColor: '#666666',
+            success: function(res) {
+                if (res.confirm) {
+                    _self.appInstance.globalData.cartData.list = [];
+                    cart.saveCartDataToLocal([], _self.appInstance.globalData.cartData.storeId);
+                    _self.resetCartData();
+                    //重置currentProCounts
+                    var arr = [],
+                        currentProCounts = _self.page.data.currentProCounts;
+                    for(let i = 0; i < currentProCounts.length; i++){
+                        var arrTemp = [];
+                        for(let j = 0; j < currentProCounts[i].length; j++){
+                            var arrItem = {
+                                    goods_number: 0,
+                                    goods_id: currentProCounts[i][j].goods_id
+                                };
+                            arrTemp.push(arrItem);
+                        }
+                        arr.push(arrTemp);
+                    }
+                    _self.page.setData({
+                        currentProCounts: arr
+                    });
+                }
+            }
         });
     }
     initCartData(){

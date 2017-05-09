@@ -116,6 +116,10 @@ Page({
        if(!this.data.firstLoadDataFlag[index]){
            this.loadingProList(this.data.currentCateId,this.data.currentIndex);
            this.setData(util.dynamicSetData('firstLoadDataFlag', index, true));
+       }else{
+           if(this.data.pros[index]){
+                this.cartCtrl.switchCartCheck(this.data.pros[index],index); //同步对应分类的购物车数据（针对同种商品可以在不同分类）
+           }
        }
        this.changeSwiperHeight(index);
   },
