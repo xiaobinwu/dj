@@ -23,8 +23,8 @@ page {
     height: 100%;
 }
 .slider .default-slide-image{
-    width: 60rpx;
-    height: 60rpx;
+    width: 60rpx!important;
+    height: 60rpx!important;
     position: absolute;
     top: 50%;
     left: 50%;

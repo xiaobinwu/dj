@@ -165,5 +165,6 @@ module.exports = {
   getGPSInfo: getGPSInfo,
   getLocation: getLocation,
   setCurrentAddress: setCurrentAddress,
-  cleanCurrentAddress: cleanCurrentAddress
+  cleanCurrentAddress: cleanCurrentAddress,
+  getCoords: getCoords
 }

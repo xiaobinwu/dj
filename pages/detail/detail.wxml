@@ -1,2 +1,65 @@
 <!--pages/detail/detail.wxml-->
-<text>pages/detail/detail.wxml</text>
+<import src="../../template/slider/slider.wxml"/>
+<view class="pro-dtl-box">
+    <view class="status-msg" wx:if="{{storeData.delivery_sta > 1}}">
+        <text class="msg">{{storeData.delivery_sta_format}}</text>
+    </view>
+    <template is="slider" data="{{slider}}"/>
+    <!-- 限时抢购 -->
+    <view class="spike-bar" wx:if="{{goodsData.miaosha && goodsData.miaosha.left_time>0}}">
+        <view class="spike-bar-cont">
+            <view class="spike-price">
+                <text class="spike-price-label">¥</text> 
+                <text class="spike-price-num">{{goodsData.miaosha.price}}</text>
+            </view>
+            <view class="spike-tag">
+                <span class="icon icon-clock2"></span>
+                <text>限时抢购</text>
+            </view>
+            <view class="spike-countdown">
+                <text>优惠倒计时：</text>
+                <text>{{clock}}</text>
+            </view>
+        </view>
+    </view>
+    <!-- 商品基本信息 -->
+    <view class="product-basic-info">
+        <view class="product-title">{{goodsData.goods_title}}</view>
+        <view class="product-price">
+            <view class="price {{goodsData.miaosha && goodsData.miaosha.left_time>0 ? 'is-sale' : ''}}">
+                <text class="price-label">¥</text>
+                <text class="price-num">{{goodsData.sale_price}}</text>
+            </view>
+        </view>
+        <view class="product-tag">
+            <text class="sale-tag" wx:for="{{goodsData.title_tags}}" wx:for-item="sale" style="color: {{sale.color}};border-color: {{sale.color}}">{{sale.name}}</text>
+        </view>
+        <view class="product-guarantee">
+            <view class="place">
+                <span class="icon icon-true"></span>
+                <text>产地：{{goodsData.country_name}}</text>
+            </view>
+            <view class="postage">
+                <span class="icon icon-true"></span>
+                <text wx:if="{{storeData.delivery_fee>0}}">满{{storeData.free_ship_price}}元免配送费</text>
+                <text wx:else>免邮</text>
+            </view>
+            <view class="exchange">
+                <span class="icon icon-true"></span>
+                <text>7天无忧退换货</text>
+            </view>
+        </view>
+        <view class="buy-btn">
+            <view class="add-to-cart" catchtap="addToCart">加入购物车</view>
+        </view>
+        <view class="product-intro">{{goodsData.maidian}}</view>
+    </view>
+    <view class="pt20"></view>
+    <!-- 商品详情图片 -->
+    <view class="good-detail">
+        <view class="normal-title left-line">图文详情</view>
+        <block wx:for="{{goodsDesc}}" wx:for-item="img">
+            <image src="{{img}}" style="width: {{goodsDescSize[index].width}}px;height: {{goodsDescSize[index].height}}px" bindload="loadimage"></image>
+        </block>    
+    </view>
+</view>

@@ -1,1 +1,174 @@
 /* pages/detail/detail.wxss */
+.slider .slide-image{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 400rpx;
+    width: 400rpx;
+}
+.pro-dtl-box{
+    position: relative;
+}
+.pro-dtl-box .status-msg{
+    position: absolute;
+    z-index: 10000;
+    top: 0;
+    width: 100%;
+    text-align: center;
+}
+.pro-dtl-box .status-msg .msg{
+    padding: 10rpx 20rpx;
+    background-color: rgba(0,0,0,.7);
+    border-radius: 100rpx;
+    color: #fff;
+    font-size: 30rpx; 
+}
+/* 限时抢购标识条 */
+.spike-bar{
+    display: flex;
+    align-items: flex-end;
+    height: 80rpx;
+    background: linear-gradient(to right,#e61773 5%,#fe5085 80%);
+}
+.spike-bar-cont{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 20rpx 16rpx 0;
+    width: 100%;
+    color: #fff;
+}
+ .spike-bar-cont .spike-price{
+    padding-left: 20rpx;
+    font-size: 24rpx;
+    line-height: .9;
+}
+.spike-bar-cont .spike-price .spike-price-label{
+    font-size: 36rpx;
+}
+.spike-bar-cont .spike-price .spike-price-num{
+    font-size: 50rpx;
+}
+.spike-bar-cont .spike-tag{
+    display: flex;
+    margin-left: 8rpx;
+    border-radius: 100rpx 100rpx;
+    border: 1px solid #fff;
+    border-width: 1px 1px 1px 0;
+    color:#fff;
+    font-size: 28rpx;
+}
+.spike-bar-cont .spike-tag .icon, .spike-bar-cont .spike-tag text{
+    display: block;
+}
+.spike-bar-cont .spike-tag text{
+    padding: 4rpx 6rpx;
+    font-size: 22rpx;
+    font-weight: bold;
+}
+.spike-bar-cont .spike-tag .icon{
+    padding: 7rpx 5rpx 3rpx 8rpx;
+    background-color: #fff;
+    border-radius: 50% 0 0  50%;
+    color: #e61773;
+    font-size: 22rpx;
+}
+.spike-bar-cont .spike-countdown{
+    text-align: right;
+    flex-grow:1;
+    font-size: 22rpx;
+}
+/* 商品基本信息 */
+.product-basic-info{
+    padding: 0 20rpx;
+    background-color: #fff;
+    font-weight: bold;
+}
+.product-basic-info .product-title{
+    padding: 30rpx 0 20rpx;
+    font-size: 28rpx;
+    color: #000;
+    text-align: center;
+}
+.product-basic-info .product-price{
+    font-size: 0;
+    text-align: center;
+}
+.product-price .price{
+    padding-right: 20rpx;
+    color: #e61773;
+}
+.product-price .price .price-label{
+    font-size: 36rpx;
+}
+.product-price .price .price-num{
+    font-size: 50rpx;
+}
+.product-price .price.is-sale{
+    text-decoration: line-through;
+    color: #999;
+}
+.product-tag{
+    padding: 15rpx 0;
+    font-size: 0;
+    text-align: center;
+}
+.product-tag .sale-tag{
+    margin: 8rpx 5rpx;
+    padding: 0 4rpx;
+    border: solid 1px;
+    border-radius: 6rpx;
+    font-size: 24rpx;
+}
+.product-guarantee{
+    padding: 25rpx 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 24rpx;
+    color:#999;
+}
+.product-guarantee > view{
+    display: block;
+}
+.product-guarantee .icon{
+    font-size: 26rpx;
+}
+.buy-btn{
+    padding: 30rpx 0;
+    text-align: center;
+}
+.buy-btn .add-to-cart{
+    width: 480rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 32rpx;
+    margin: auto;
+    color: #fff;
+    background-color: #e61773;
+    border-radius: 5rpx;
+}
+.product-intro{
+    padding-bottom: 20rpx;
+    line-height: 1.5;
+    font-size: 24rpx;
+    color: #666;
+    font-weight: normal;
+}
+.normal-title{
+    display: flex;
+    align-items: center;
+    padding:0 15rpx;
+    height: 88rpx;
+    background-color: #fff;
+    border-bottom: solid #e8e8e8 3rpx;
+    font-weight: normal;
+    font-size: 30rpx;
+    color: #2c2c2c;
+}
+.normal-title.left-line{
+    border-left: 6rpx solid #e61773;
+}
+
+@import "../../css/font.wxss";
