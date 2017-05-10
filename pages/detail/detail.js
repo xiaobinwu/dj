@@ -11,8 +11,6 @@ var Promise = require('../../lib/es6-promise.min.js');
 //获取app实例
 var appInstance = getApp();
 var rpx = util.getRpx();
-var proportion = (750/790) * (1/rpx);
-
 Page({
   data:{
       showCart:false,
@@ -189,15 +187,13 @@ Page({
   },
   // image组件无法自动auto，解决方式
   loadimage: function(e){
-    var descSize = this.data.goodsDescSize;
-    console.log(e)
-    descSize.push({
+    var descSize;
+    console.log(e.currentTarget.dataset.index)
+    descSize = {
         width: 750 / rpx,
-        height: e.detail.height * proportion
-    });
-    this.setData({
-        goodsDescSize: descSize
-    });
+        height: (750 / rpx) * e.detail.height / e.detail.width
+    };
+    this.setData(util.dynamicSetData('goodsDescSize', e.currentTarget.dataset.index, descSize));
   },
   onReady:function(){
     // 页面渲染完成

@@ -59,7 +59,7 @@
     <view class="good-detail">
         <view class="normal-title left-line">图文详情</view>
         <block wx:for="{{goodsDesc}}" wx:for-item="img">
-            <image src="{{img}}" style="width: {{goodsDescSize[index].width}}px;height: {{goodsDescSize[index].height}}px" bindload="loadimage"></image>
+            <image src="{{img}}" data-index="{{index}}" style="width: {{goodsDescSize[index].width}}px;height: {{goodsDescSize[index].height}}px" bindload="loadimage"></image>
         </block>    
     </view>
 </view>

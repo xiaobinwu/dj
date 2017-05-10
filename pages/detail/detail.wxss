@@ -170,5 +170,8 @@
 .normal-title.left-line{
     border-left: 6rpx solid #e61773;
 }
+.normal-title image{
+    padding: 0;
+}
 
 @import "../../css/font.wxss";
