@@ -117,11 +117,11 @@ Page({
            this.loadingProList(this.data.currentCateId,this.data.currentIndex);
            this.setData(util.dynamicSetData('firstLoadDataFlag', index, true));
        }else{
+           this.changeSwiperHeight(index);
            if(this.data.pros[index]){
                 this.cartCtrl.switchCartCheck(this.data.pros[index],index); //同步对应分类的购物车数据（针对同种商品可以在不同分类）
            }
        }
-       this.changeSwiperHeight(index);
   },
   //点击营销位
   saleTap: function(e){
@@ -160,7 +160,7 @@ Page({
                 lng: adr.lng
             }
         }).then(function(result) {
-            console.log(result)
+            // console.log(result)
             return Promise.resolve(result);
         })
         .catch(function(e){
@@ -339,7 +339,7 @@ Page({
       }));
       // 传递给全局变量cartData（购物车数据）
       appInstance.globalData.cartData = polyfill.object.assignIn(appInstance.globalData.cartData,{
-            storeId:storeId,
+            storeId:parseInt(storeId),
             storeName:_self.data.storeData.store_name,
             floorPrice:_self.data.storeData.floor_price,
             freeShipPrice:_self.data.storeData.free_ship_price,
@@ -401,6 +401,8 @@ Page({
   onShow:function(){
     // 页面显示
     this.cart.initCartData();
+    //默认执行一次同步操作
+    this.cartCtrl.switchCartCheck(this.data.pros[this.data.currentIndex],this.data.currentIndex);
   },
   onHide:function(){
     // 页面隐藏

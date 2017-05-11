@@ -1,5 +1,6 @@
 <!--pages/detail/detail.wxml-->
 <import src="../../template/slider/slider.wxml"/>
+<import src="../../template/cart/cart.wxml"/>
 <view class="pro-dtl-box">
     <view class="status-msg" wx:if="{{storeData.delivery_sta > 1}}">
         <text class="msg">{{storeData.delivery_sta_format}}</text>
@@ -56,10 +57,14 @@
     </view>
     <view class="pt20"></view>
     <!-- 商品详情图片 -->
-    <view class="good-detail">
-        <view class="normal-title left-line">图文详情</view>
-        <block wx:for="{{goodsDesc}}" wx:for-item="img">
-            <image src="{{img}}" data-index="{{index}}" style="width: {{goodsDescSize[index].width}}px;height: {{goodsDescSize[index].height}}px" bindload="loadimage"></image>
-        </block>    
-    </view>
+    <view class="normal-title left-line">图文详情</view>
+    <block wx:for="{{goodsDesc}}" wx:for-item="img">
+        <view class="goods-detail">
+            <view class="pre-loaded" wx:if="{{!goodsDescSize[index]}}">
+                <image src="../../image/loading-normal.gif"  style="width:36px;height:27px;"></image>
+            </view>
+            <image src="{{img}}" class="goods-detail-image" data-index="{{index}}" style="opacity: {{goodsDescSize[index].opacity ? goodsDescSize[index].opacity : 0}}; width: {{goodsDescSize[index].width}}px;height: {{goodsDescSize[index].height}}px" bindload="loadimage"></image>
+        </view>
+    </block>    
 </view>
+<template is="cart" data="{{showCartPanel: showCartPanel, cartBaseInfo: cartBaseInfo, showForce: true}}" />

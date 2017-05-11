@@ -10,8 +10,8 @@
     flex-shrink: 0;
     width: 220rpx;
     height: 220rpx;
-    background:#f8f8f8 url(../../image/loading-normal.gif) center center no-repeat;
-    background-size: 60rpx auto;    
+    background:#fff url(../../image/loading-normal.gif) center center no-repeat;
+    background-size: 36rpx auto;    
 }
 .pro-pic image{
     width: 100%;

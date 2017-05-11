@@ -58,6 +58,7 @@ class CartCtrl{
     }
     //购物车加减产品处理逻辑（只针对当前分类）
     cartChange(e){
+        if(this.page.data.isNotComputedCurrentProCounts){return;} //商品详情不需要计算currentProCounts
         var currentIndex = this.page.data.currentIndex,
             goods_id = e.currentTarget.dataset.pro.goods_id,
             type = e.currentTarget.dataset.type;

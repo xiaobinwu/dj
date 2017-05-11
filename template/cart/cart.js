@@ -50,19 +50,22 @@ class Cart {
                     _self.appInstance.globalData.cartData.list = [];
                     cart.saveCartDataToLocal([], _self.appInstance.globalData.cartData.storeId);
                     _self.resetCartData();
+                    if(_self.page.data.isNotComputedCurrentProCounts){return;} //商品详情不需要计算currentProCounts
                     //重置currentProCounts
                     var arr = [],
                         currentProCounts = _self.page.data.currentProCounts;
                     for(let i = 0; i < currentProCounts.length; i++){
-                        var arrTemp = [];
-                        for(let j = 0; j < currentProCounts[i].length; j++){
-                            var arrItem = {
-                                    goods_number: 0,
-                                    goods_id: currentProCounts[i][j].goods_id
-                                };
-                            arrTemp.push(arrItem);
+                        if(currentProCounts[i]){
+                            var arrTemp = [];
+                            for(let j = 0; j < currentProCounts[i].length; j++){
+                                var arrItem = {
+                                        goods_number: 0,
+                                        goods_id: currentProCounts[i][j].goods_id
+                                    };
+                                arrTemp.push(arrItem);
+                            }
+                            arr.push(arrTemp);
                         }
-                        arr.push(arrTemp);
                     }
                     _self.page.setData({
                         currentProCounts: arr
@@ -79,19 +82,19 @@ class Cart {
     resetCartData(){
         var cartBaseInfo = {},
             cartList = this.getCartList();
-        if(cartList && cartList.length >= 1){
-            cartBaseInfo = {
-                cartList: this.getCartList(),
-                totalCount: this.getTotalCount(),
-                totalPrice: this.getTotalPrice(),
-                StoreName: this.getStoreName(),
-                btnClass: this.getBtnClass(),
-                btnDesc: this.getBtnDesc()
-            }
-        }else{
+            // console.log(this.appInstance.globalData.cartData);
+        if(cartList.length < 1){
             this.page.setData({
                 showCartPanel: false
             });
+        }
+        cartBaseInfo = {
+            cartList: this.getCartList(),
+            totalCount: this.getTotalCount(),
+            totalPrice: this.getTotalPrice(),
+            StoreName: this.getStoreName(),
+            btnClass: this.getBtnClass(),
+            btnDesc: this.getBtnDesc()
         }
         this.page.setData({
             cartBaseInfo: cartBaseInfo
@@ -99,8 +102,9 @@ class Cart {
     }
     // 校验购物车数据
     validCartData(){
-        var storeId = this.getStoreId();
+        var storeId = this.getStoreId() || JSON.parse(util.getStorage('current_store_info')).store_id; //编译时，this.getStoreId()获取不到值，this.appInstance.globalData.cartData却能打印
         return cart.syncCartData(storeId).then((data)=>{
+            console.log(data)
             var cartList = data.goodsList || [];
             this.appInstance.globalData.cartData.list = cartList;
             return Promise.resolve();
@@ -116,6 +120,9 @@ class Cart {
         return this.appInstance.globalData.cartData.list;
     }
     getStoreId(){
+        // console.log(this.appInstance.globalData.cartData);
+        // console.log(this.appInstance.globalData.cartData.storeId);
+        // console.log(this.appInstance.globalData.cartData);
         return this.appInstance.globalData.cartData.storeId;
     }
     getStoreName(){

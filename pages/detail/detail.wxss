@@ -170,8 +170,14 @@
 .normal-title.left-line{
     border-left: 6rpx solid #e61773;
 }
-.normal-title image{
-    padding: 0;
+.goods-detail .goods-detail-image{
+    transition: opacity .5s ease;
+}
+.goods-detail,
+.goods-detail .pre-loaded{
+    text-align: center;
 }
 
 @import "../../css/font.wxss";
+@import "../../template/cart/cart.wxss";
+@import "../../template/cart-ctrl/cart-ctrl.wxss";

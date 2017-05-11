@@ -3,11 +3,16 @@ var util = require('../../utils/util.js');
 var ports = require('../../utils/ports.js');
 var polyfill = require('../../utils/polyfill.js');
 var address = require('../../utils/address.js');
+var cart = require('../../utils/cart.js');
 var countdown = require('../../utils/countDown.js');
 //引入灯箱组件
 var Slider = require('../../template/slider/slider.js');
 // 引入promise
 var Promise = require('../../lib/es6-promise.min.js'); 
+//引入产品加减部件
+var CartCtrl = require('../../template/cart-ctrl/cart-ctrl.js');
+//引入购物车组件
+var Cart = require('../../template/cart/cart.js');
 //获取app实例
 var appInstance = getApp();
 var rpx = util.getRpx();
@@ -17,16 +22,15 @@ Page({
       allData:{},
       goodsData:{},
       goodsId:0,
-      cartData:[],
       cartBaseInfo:[],
       storeData:[],
       currentStoreInfo:{},
       storeId:20,
-      storeIsOpen:false,
       address:{},
       clock: '',
       goodsDesc: [],
-      goodsDescSize: []
+      goodsDescSize: [],
+      isNotComputedCurrentProCounts: true
   },
  getStoreDetail: function(storeId){
       var 
@@ -75,6 +79,23 @@ Page({
               reject(e);
           });
       });
+  },
+  addToCart: function(){
+    var 
+        dSta = this.data.storeData.delivery_sta,
+        staCfg={
+            2:'不在配送时间内，不可购买',
+            3:'不在配送范围内，不可购买'
+        };
+    if(dSta in staCfg){
+        return wx.showToast({
+            title: staCfg[dSta],
+            duration: 1000
+        });
+    }
+    cart.cartCountChange(this.data.goodsData,'add').then(result => {
+        this.cart.resetCartData();
+    });      
   },
   //获取当前位置信息
   getAddressInfo: function(){
@@ -130,6 +151,10 @@ Page({
   onLoad:function(options){
     //初始化灯箱组件
     this.slider = new Slider(this);
+    //初始化产品加减部件组件
+    this.cartCtrl = new CartCtrl(this);
+    //初始化购物车组件
+    this.cart = new Cart(this);
     var _self = this;
     //当前商品Id
     this.setData({
@@ -172,7 +197,7 @@ Page({
             goodsData: allData.goodsInfo,
             goodsDesc: _self.getSrc(allData.goodsInfo.goods_desc)
         });
-        console.log(allData.goodsInfo)
+        // console.log(allData.goodsInfo)
         this.slider.initData(allData.goodsInfo.pictures);    
         if(allData.goodsInfo.miaosha && allData.goodsInfo.miaosha.left_time > 0){
             countdown.countdown(this,allData.goodsInfo.miaosha.left_time*1000, function(){
@@ -188,8 +213,9 @@ Page({
   // image组件无法自动auto，解决方式
   loadimage: function(e){
     var descSize;
-    console.log(e.currentTarget.dataset.index)
+    // console.log(e.currentTarget.dataset.index)
     descSize = {
+        opacity: 1,
         width: 750 / rpx,
         height: (750 / rpx) * e.detail.height / e.detail.width
     };
@@ -200,6 +226,7 @@ Page({
   },    
   onShow:function(){
     // 页面显示
+    this.cart.initCartData();
   },
   onHide:function(){
     // 页面隐藏
