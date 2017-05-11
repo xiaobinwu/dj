@@ -1,0 +1,47 @@
+<!--pages/store-detail/store-detail.wxml-->
+<import src="../../template/slider/slider.wxml"/>
+<import src="../../template/coupon-item/coupon-item.wxml"/>
+<template is="slider" data="{{slider}}"/>
+<!-- 店铺简介 -->
+<view class="store-intro">
+    <view class="store-intro-list">
+        <view class="store-adress store-intro-item">
+            <span class="icon icon-map"></span>
+            <text>地址：{{storeData.store_address}}</text>
+        </view>
+        <view class="store-phone  store-intro-item">
+            <span class="icon icon-phone3"></span>
+            <text bindtap="phoneCal" data-phone="{{storeData.phone}}">电话：{{storeData.phone}}</text>
+        </view>
+        <view class="store-shop-hours  store-intro-item">
+            <span class="icon icon-clock1"></span>
+            <text>营业时间：{{storeData.business_hours}}（周末正常营业）</text>
+        </view>
+    </view>
+</view>
+<view class="pt20"></view>
+<!-- 优惠信息 -->
+<view class="discount-info">
+    <view class="normal-title">优惠信息</view>
+    <view class="discount-list">
+        <view wx:for="{{storeData.store_activity_list}}" class="discount-list-item">
+            <text class="dtag" style="background-color: {{item.backgroundColor}}">{{item.tag}}</text>
+            <text class="tag-str">{{item.tagStr}}</text>
+        </view>
+    </view>
+</view>
+<view class="pt20"></view>
+<!-- 门店优惠券 -->
+<view class="store-coupon">
+    <view class="normal-title">门店优惠券（<text>仅限实体店使用</text>）</view>
+    <view class="store-coupon-list">
+        <view class="coupon-item" wx:for="{{couponData}}" wx:for-item="cpn">
+            <view class="coupon-name">{{storeData.store_name + cpn.showAimTitle}}现金券</view>
+            <template is="couponItem" data="" />
+            <view class="coupon-count-get">
+                <view class="coupon-count">剩余数量：<text>{{cpn.remain_nums}}</text></view>
+                <button type="default" size="mini" disabled="{{cpn.coupon_sta==2 || cpn.coupon_sta==3}}" class="btn-get-coupon"  data-index="{{index}}" data-cpn="{{cpn}}" catchtap="getCoupon">立即领取</button>
+            </view>
+        </view>
+    </view>
+</view>

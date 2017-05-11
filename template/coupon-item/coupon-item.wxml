@@ -1,0 +1,3 @@
+<template name="couponItem">
+    <view class="classname">优惠券</view>
+</template>

@@ -128,7 +128,9 @@ Page({
       console.log(e);
   },
   toStoreDetail: function(){
-      console.log('打开详情页');
+      wx.navigateTo({
+        url: '../store-detail/store-detail?store_id=' + this.data.storeData.id
+      })
   },
   handleShowByAddress: function(){
       var _self = this;

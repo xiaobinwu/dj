@@ -1,0 +1,110 @@
+/* pages/store-detail/store-detail.wxss */
+.normal-title{
+    padding: 30rpx 20rpx; 
+    background-color: #fff;
+    border-bottom: solid #e8e8e8 3rpx;
+    font-weight: normal;
+    font-size: 32rpx;
+    color: #222;
+}
+.normal-title text{
+    font-weight: bold;
+    color: #e61773;
+}
+.store-intro{
+    background-color: #fff;
+    border-bottom: solid #e8e8e8 1px;
+}
+.store-intro-list .store-intro-item{
+    padding: 30rpx 20rpx 30rpx 70rpx;
+    border-bottom: solid #e8e8e8 1px;
+}
+.store-intro-list .store-shop-hours{
+    border-bottom: 0;
+}
+.store-intro-list .store-intro-item .icon{
+    margin-left: -50rpx;
+    margin-right: 5rpx;
+    font-size: 32rpx;
+}
+.store-intro-list .store-intro-item  text{
+    line-height: 1.4;
+    font-size: 28rpx;
+    color: #222;  
+}
+.discount-info{
+    background-color: #fff;
+}
+.discount-list{
+    padding: 10rpx 0;
+    overflow: hidden;
+}
+.discount-list .discount-list-item{
+    padding: 12rpx 20rpx 12rpx 70rpx;
+}
+.discount-list .discount-list-item .dtag{
+    margin-left: -50rpx;
+    padding: 2rpx 6rpx;
+    font-size: 24rpx;
+}
+.discount-list .discount-list-item .tag-str{
+    line-height: 1.35;
+    padding-left: 10rpx;
+    font-size: 28rpx;
+    color: #666;
+    word-break: break-all;
+}
+/*优惠小标签*/
+.dtag{
+    display: inline-block;
+    margin: 4rpx;
+    padding: 4rpx 6rpx;
+    color: #fff;
+    font-style: normal;
+    font-weight: normal;
+    background-color: #49caec;
+    border-radius: 4px;
+    font-size: 24rpx;
+}
+.dtag.arrow{
+    position: relative;
+    margin-right: 16rpx;
+}
+.dtag.arrow .b{
+    content:'';
+    margin-top: -6rpx;
+    position: absolute;
+    top: 50%;
+    right: -12rpx;
+    width: 0;
+    height: 0;
+    border: solid 8rpx;
+    border-color: transparent;
+    border-left-color: #fd1268;
+}
+.store-coupon .store-coupon-list .coupon-item{
+    margin-bottom: 20rpx;
+    padding: 0 20rpx;
+    background-color: #fff;
+}
+.store-coupon .store-coupon-list .coupon-name{
+    padding: 20rpx 0;
+    font-size: 28rpx;
+}
+.coupon-count-get{
+    display: flex;
+    justify-content: space-between;
+    padding: 20rpx 0;
+}
+.coupon-count-get .coupon-count{
+    font-size: 24rpx;
+}
+.coupon-count-get .coupon-count text{
+    color:#e61773;
+}
+.coupon-count-get .btn-get-coupon{
+    padding: 10rpx 25rpx;
+    font-size: 28rpx;
+}
+
+@import "../../css/font.wxss";
