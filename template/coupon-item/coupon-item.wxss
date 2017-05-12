@@ -1,0 +1,105 @@
+.coupon-info-box{
+    border: solid #ccc 1px;
+    background-color: #fff;
+    position: relative;
+}
+.coupon-info-box .exp-soon{
+    width: 127rpx;
+    height: 130rpx;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.basic-info{
+    display: flex;
+    justify-content: space-between;
+    padding: 30rpx 20rpx 0;
+    min-height: 180rpx;
+    height: auto;
+    background-repeat: no-repeat;
+    background-image: url(../../image/coupon-bg.jpg);
+    border-bottom: dashed #e8e8e8 1px;
+    background-size: 100% auto;
+    font-size: .373333rem/* 28px */;
+}
+.basic-info.basic-info-gray{
+    background-image: url(../../image/coupon-bg-gray.jpg);
+}
+.use-target-price{
+    display: flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+.use-target-price .price{
+    color:#f6559c;
+}
+.use-target-price .price .price-label{
+    font-size: 36rpx;
+}
+.use-target-price .price .price-num{
+    font-size: 100rpx;
+    font-weight: blod;
+}
+.use-target-price .price.price-gray{
+    color:#ccc;
+}
+.use-cate{
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin-right: 35rpx;
+}
+.use-cate view{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 320rpx;
+    font-size: 22rpx;
+}
+.use-cate .line{
+    position: relative;
+    margin: 10rpx 0;
+    width: 100%;
+    height: 3rpx;
+    background-color: #666;
+    text-align: center;
+    line-height: 1px;
+}
+.use-cate .line::after{
+    display: inline-block;
+    background-color: #fff;
+    height: 3rpx;
+    width: 20rpx;
+    font-size: 28rpx;
+    content: "·";
+}
+.detail-switch{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20rpx;
+    font-size: 22rpx;
+    color: #666;
+}
+.detail-switch view{
+    display: flex;
+    align-items: center;
+}
+.detail-switch .icon{
+    margin-left: 5rpx;
+    font-size: 12rpx;
+    transition: transform .4s ease-out;
+}
+.detail-switch .icon.icon-rotating{
+    transform: rotate(180deg);
+}
+.detail-panel{
+    font-size: 24rpx;
+    overflow: hidden;
+    max-height: 1500rpx;
+}
+.detail-cont{
+    padding: 20rpx;
+    line-height: 1.5;
+}

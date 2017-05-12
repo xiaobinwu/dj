@@ -82,7 +82,6 @@ class CartCtrl{
     }
     //分类swiper切换时，更新对应分类的购物车数据
     switchCartCheck(pros,index){
-        console.log(index)
         var arr = [],
             appInstance = getApp(),
             currentProCounts = this.page.data.currentProCounts[index],

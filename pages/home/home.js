@@ -402,9 +402,13 @@ Page({
   },
   onShow:function(){
     // 页面显示
+    var _self = this;
     this.cart.initCartData();
     //默认执行一次同步操作
-    this.cartCtrl.switchCartCheck(this.data.pros[this.data.currentIndex],this.data.currentIndex);
+    while(this.data.pros[this.data.currentIndex]){
+        _self.cartCtrl.switchCartCheck(_self.data.pros[_self.data.currentIndex],_self.data.currentIndex);
+    }
+    
   },
   onHide:function(){
     // 页面隐藏

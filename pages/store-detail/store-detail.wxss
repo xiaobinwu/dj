@@ -98,13 +98,14 @@
 }
 .coupon-count-get .coupon-count{
     font-size: 24rpx;
+    line-height:2.3;
 }
 .coupon-count-get .coupon-count text{
     color:#e61773;
 }
 .coupon-count-get .btn-get-coupon{
-    padding: 10rpx 25rpx;
-    font-size: 28rpx;
+    margin-left: 0;
+    margin-right: 0;
 }
-
 @import "../../css/font.wxss";
+@import "../../template/coupon-item/coupon-item.wxss";

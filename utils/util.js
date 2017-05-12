@@ -135,7 +135,7 @@ function getToken() {
     // });
 
     return getOpenId().then(() => {
-        token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJpc3MiOiJodHRwOlwvXC93d3cud3pob3VodWkuY29tIiwiYXVkIjoiaHR0cDpcL1wvd3d3Lnd6aG91aHVpLmNvbSIsImlhdCI6MTQ5MzI1OTk3OSwibmJmIjoxNDkzMjU5OTc5LCJleHAiOjE0OTM4NjQ3NzksInN1YiI6IjM3ODU2In0.2eAOmIvhkMdjh6ll2swrhtx48sLVb6izyqb-5WfinIorVw6ZS6Mp2L6PRfHybehr';
+        token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwOlwvXC93d3cud3pob3VodWkuY29tIiwiYXVkIjoiaHR0cDpcL1wvd3d3Lnd6aG91aHVpLmNvbSIsImlhdCI6MTQ5NDU3MjEyNiwibmJmIjoxNDk0NTcyMTI2LCJleHAiOjE0OTUxNzY5MjYsInN1YiI6IjM3ODU2In0.Mkq83lLaFr-xZT03Ce_nPQ3gNwQSLD9OJZCmUZXI5vPP_loTtw_tygi169ZAWDjhc-7y6nDWLgjE3dxQCcSE2Q';
         if(token) {
             if(token === '0') {
                 return Promise.reject({
@@ -299,5 +299,6 @@ module.exports = {
   getTagColor: getTagColor,
   objInList: objInList,
   getRpx: getRpx,
-  dynamicSetData: dynamicSetData
+  dynamicSetData: dynamicSetData,
+  getToken: getToken
 }

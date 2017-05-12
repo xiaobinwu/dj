@@ -37,7 +37,7 @@
     <view class="store-coupon-list">
         <view class="coupon-item" wx:for="{{couponData}}" wx:for-item="cpn">
             <view class="coupon-name">{{storeData.store_name + cpn.showAimTitle}}现金券</view>
-            <template is="couponItem" data="" />
+            <template is="couponItem" data="{{cpn: cpn, type: 2, toDetail: false, index: index}}" />
             <view class="coupon-count-get">
                 <view class="coupon-count">剩余数量：<text>{{cpn.remain_nums}}</text></view>
                 <button type="default" size="mini" disabled="{{cpn.coupon_sta==2 || cpn.coupon_sta==3}}" class="btn-get-coupon"  data-index="{{index}}" data-cpn="{{cpn}}" catchtap="getCoupon">立即领取</button>

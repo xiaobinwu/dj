@@ -4,6 +4,8 @@ var ports = require('../../utils/ports.js');
 var polyfill = require('../../utils/polyfill.js');
 //引入灯箱组件
 var Slider = require('../../template/slider/slider.js');
+//引入优惠券组件
+var couponItem = require('../../template/coupon-item/coupon-item.js');
 // 优惠标签配色
 var tagColor = util.getTagColor();
 Page({
@@ -36,6 +38,44 @@ Page({
             tagStr: tagStr
         };
   },  
+  getCoupon: function(e){
+     var cpn = e.currentTarget.dataset.cpn;
+     var index = e.currentTarget.dataset.index;
+     if(cpn.coupon_sta == 2){
+        return wx.showToast({
+            title: '已领完',
+            duration: 1000
+        });
+     }
+     if(cpn.coupon_sta == 3){ 
+        return wx.showToast({
+            title: '已过期',
+            duration: 1000
+        });
+     }
+     return util.getToken().then(token => {
+        util.wxRequest({
+            method: 'POST',
+            url: ports.couponConversion,
+            header:{ 'X-Auth-Token':token,  'content-type': 'application/x-www-form-urlencoded' },
+            data: {
+                pcode: cpn.code
+            }
+        }).then((result)=> {
+            wx.showToast({
+                title: result.msg,
+                duration: 1000
+            });
+            return Promise.resolve(result);
+        }).catch((e)=>{
+            wx.showToast({
+                title: e,
+                duration: 1000
+            });
+            return Promise.reject(e);
+        });
+    });
+  },
   getData: function(){
       var _self = this,
           token = util.getStorage("token"),
@@ -57,7 +97,7 @@ Page({
       }
           
       util.wxRequest(ajaxCfg).then((result)=> {
-          console.log(result);
+          // console.log(result);
           var couponList = result.data.promotion_code_list.list;
           couponList.forEach((cpn)=>{
               cpn.isexpend = false;
@@ -71,7 +111,7 @@ Page({
             couponData: couponList,
             storeData: result.data.store_info
           });
-          console.log(this.data.couponData);
+          this.couponItem.init();
           return Promise.resolve(result);
       }).catch((e)=>{
           return Promise.reject(e);
@@ -80,6 +120,8 @@ Page({
   onLoad:function(options){
     //初始化灯箱组件
     this.slider = new Slider(this);
+    //初始化优惠券组件
+    this.couponItem = new couponItem(this);
     this.setData({
       store_id: options.store_id
     });

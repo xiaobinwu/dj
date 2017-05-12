@@ -21,4 +21,11 @@ module.exports = {
     // 购物车
     cartCheck: wdomain + '/Cart/cartCheck',
 
+    // 优惠券
+    couponConversion: wdomain + '/coupon/conversion',
+    couponList: wdomain + '/coupon/list',
+    couponDetailPage: mdomain + '/h5/couponexplain',
+    couponDetail: wdomain + '/coupon/detail',
+
+
 }
