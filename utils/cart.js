@@ -60,11 +60,7 @@ function syncCartData(store_id){
     };
 
     if(token){
-        if(ajaxCfg.header){
-            ajaxCfg.header.push({'X-Auth-Token': token});
-        }else{
-            ajaxCfg.header = {'X-Auth-Token': token};
-        }
+        ajaxCfg.header['X-Auth-Token'] = token;
     }
 
     return new Promise((resolve,reject)=>{
