@@ -56,7 +56,7 @@ var url = {
     getToken: domain + '/mp/jwtToken'
 };
 function getOpenId() {
-    //微信小程序没有会话管理，因此没有cookie，openId后期需要通过接口获取，openid_sign使用永久储存，代码参考：
+    //微信小程序没有会话管理，因此没有cookie，openId后期需要通过接口获取，openid_sign使用永久储存，这样的话，自行维护与应用自身登录态的对应关系，代码参考：
     // var openId = localStorage.getItem('openid_sign');
     var openId = 'owaFqt9r9p2C_Mc-USOCH-N42lz8';
     return new Promise((resolve, reject) => {
@@ -74,6 +74,8 @@ function getOpenId() {
                                 code: res.code
                             },
                             success: function(res) {
+                                // m/di => /Controllers/WxController.php（需要修改）
+                                // 不通过wx.getUserInfo获取基本信息，是为了获取电话等敏感信息
                                 console.log(res.data);
                                 localStorage.setItem('openid_sign', res.data.openid_sign);
                             }
@@ -135,7 +137,7 @@ function getToken() {
     // });
 
     return getOpenId().then(() => {
-        token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwOlwvXC93d3cud3pob3VodWkuY29tIiwiYXVkIjoiaHR0cDpcL1wvd3d3Lnd6aG91aHVpLmNvbSIsImlhdCI6MTQ5NDU3MjEyNiwibmJmIjoxNDk0NTcyMTI2LCJleHAiOjE0OTUxNzY5MjYsInN1YiI6IjM3ODU2In0.Mkq83lLaFr-xZT03Ce_nPQ3gNwQSLD9OJZCmUZXI5vPP_loTtw_tygi169ZAWDjhc-7y6nDWLgjE3dxQCcSE2Q';
+        token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwOlwvXC93d3cud3pob3VodWkuY29tIiwiYXVkIjoiaHR0cDpcL1wvd3d3Lnd6aG91aHVpLmNvbSIsImlhdCI6MTQ5NDU4MDk0MSwibmJmIjoxNDk0NTgwOTQxLCJleHAiOjE0OTUxODU3NDEsInN1YiI6IjM3ODU2In0.4HgGznLSYS6QoN7PjIESfdjeJZFmmcEKbi4VI3PZdU-T2fA4vi_3fWcCTl86yoDPZyAGYDm4ZV_e0LI62JJQjw';
         if(token) {
             if(token === '0') {
                 return Promise.reject({

@@ -22,7 +22,12 @@ App({
     }
   },
   globalData:{
-    userInfo:null,
+    userInfo:{
+        avatar: null,
+        nickname: '',
+        phone: '',
+        hasData: false 
+    },
     cartData:{
         list:[],
         totalCount:1,

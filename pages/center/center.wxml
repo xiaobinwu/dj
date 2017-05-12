@@ -1,3 +1,34 @@
-<view class="classname">
-    <text>我是个人中心</text>
+<view class="user">
+    <view class="header">
+        <view class="login-wrap" bindtap="goDetail">
+            <view class="user-img">
+                <image src="{{userImg}}" wx:if="{{userImg}}"></image>
+                <image src="../../image/defaultuser.png" wx:else></image>
+            </view>
+            <view class="user-name">{{userName || '去登录'}} ></view>
+        </view>
+    </view>
+    <view class="list section">
+        <navigator url="{{isLogin ? '/page/address/address' : '/page/login/login'}}" >
+            <view class="flex-con">
+                <span class="icon icon-map"></span>
+                <text>配送地址管理</text>
+                <span class="icon icon-right"></span>
+            </view>
+        </navigator>
+        <navigator url="{{isLogin ? '/page/coupon/coupon' : '/page/login/login'}}">
+            <view class="flex-con">
+                <span class="icon icon-mendianyouhuiquan"></span>
+                <text>门店优惠券</text>
+                <span class="icon icon-right"></span>
+            </view>
+        </navigator>
+
+        <view class="flex-con">
+            <span class="icon icon-handshake"></span>
+            <text>招商加盟</text>
+            <span class="icon icon-right"></span>
+        </view>
+
+    </view>
 </view>

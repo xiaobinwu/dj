@@ -3,6 +3,10 @@ var wdomain = "https://www.wzhouhui.com/dj",
     mdomain = "https://m.wzhouhui.com";
 
 module.exports = {
+
+    // 登录模块 login
+    userInfo: wdomain + '/user/info',
+
     // 地址模块
     getLocation: wdomain + '/Location/getLocation',
     // 有门店的省市区列表
