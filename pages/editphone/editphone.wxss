@@ -1,0 +1,51 @@
+/* pages/editphone/editphone.wxss */
+page {
+  display: block;
+  min-height: 100%;
+  background-color: #f5f5f5;
+}
+.phone-box .title{
+    font-size: 24rpx;
+    color: #222;
+    margin: 30rpx 0 20rpx 20rpx;
+}
+.phone-box .input{
+    border: 1px #ddd solid;
+    border-left: 0;
+    border-right: 0;
+    height: 88rpx;
+    background-color: #fff;
+    padding-left: 20rpx;
+    font-size: 28rpx;
+}
+.phone-box .input.new-phone{
+    border-bottom: 1px #ddd solid;
+}
+.phone-box .code-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    height: 88rpx;
+}
+.phone-box .code-box input{
+    border: 0;
+    flex: 1;
+}
+.phone-box .code-box button{
+    border: 1px #e61773 solid;
+    color: #e61773;
+    border-radius: 99px;
+    background-color: transparent!important;
+    margin: 15rpx 20rpx 15rpx 0;
+    font-size: 22rpx;
+    height: 58rpx;
+    width: 220rpx;
+}
+.phone-box .code-box button[disabled]{
+    color: #ccc;
+    border: 1px #ccc solid;
+}
+.bind-btn{
+    margin-top: 50rpx;
+}

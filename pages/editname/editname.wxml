@@ -1,0 +1,5 @@
+<!--pages/editname/editname.wxml-->
+<view class="edit-box">
+    <view class="edit-dec">请在输入框编辑用户名</view>
+    <input value="{{userName}}" focus="true" confirm-type="提交" bindconfirm="submit"/>
+</view>

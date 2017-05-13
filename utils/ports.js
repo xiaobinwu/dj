@@ -6,7 +6,12 @@ module.exports = {
 
     // 登录模块 login
     userInfo: wdomain + '/user/info',
-
+    updateNickName: wdomain + '/user/updateNickname',
+    sendPhoneMessage: mdomain + '/utils/sendPhoneMessage',
+    sendMsg: wdomain + '/user/sendMsg',
+    updatePhone: wdomain + '/user/updatePhone',
+    checkPhone: wdomain + '/user/checkPhone',
+    doLogin: mdomain + '/mp/doLogin',
     // 地址模块
     getLocation: wdomain + '/Location/getLocation',
     // 有门店的省市区列表

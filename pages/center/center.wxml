@@ -9,14 +9,14 @@
         </view>
     </view>
     <view class="list section">
-        <navigator url="{{isLogin ? '/page/address/address' : '/page/login/login'}}" >
+        <navigator url="{{isLogin ? '../address/address' : '../login/login'}}" >
             <view class="flex-con">
                 <span class="icon icon-map"></span>
                 <text>配送地址管理</text>
                 <span class="icon icon-right"></span>
             </view>
         </navigator>
-        <navigator url="{{isLogin ? '/page/coupon/coupon' : '/page/login/login'}}">
+        <navigator url="{{isLogin ? '../coupon/coupon' : '../login/login'}}">
             <view class="flex-con">
                 <span class="icon icon-mendianyouhuiquan"></span>
                 <text>门店优惠券</text>

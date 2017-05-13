@@ -9,6 +9,7 @@ Page({
     isLogin: false,
     userImg: null,
     userName: null,
+    userInfo: {}
   },
   goDetail: function(){
     if(this.data.isLogin){
@@ -37,7 +38,8 @@ Page({
         appInstance.globalData.userInfo = polyfill.object.assignIn(appInstance.globalData.userInfo, res.data);
         _self.setData({
           userImg: appInstance.globalData.userInfo.avatar,
-          userName: appInstance.globalData.userInfo.nickname
+          userName: appInstance.globalData.userInfo.nickname,
+          userInfo: appInstance.globalData.userInfo
         });
     }).catch(err => {
         if(err.status === 4002) {
@@ -56,6 +58,13 @@ Page({
   },
   onShow:function(){
     // 页面显示
+    if(!polyfill.object.isObjectValueEqual(appInstance.globalData.userInfo, this.data.userInfo)){
+        this.setData({
+          userImg: appInstance.globalData.userInfo.avatar,
+          userName: appInstance.globalData.userInfo.nickname,
+          userInfo: appInstance.globalData.userInfo
+        });
+    }
   },
   onHide:function(){
     // 页面隐藏

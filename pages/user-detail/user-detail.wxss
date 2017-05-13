@@ -1,0 +1,42 @@
+/* pages/user-detail/user-detail.wxss */
+.user {
+	background-color: #fff;
+    color: #222;
+    -webkit-tap-highlight-color: transparent;
+}
+.section {
+    background: #fff;
+    padding: 0 20rpx;
+}
+.list .flex-con {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 30rpx 0;
+    border-bottom: 1px solid #e8e8e8;
+}
+.list .flex-con image{
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 50%;	   
+}
+.list .flex-con .icon {
+    font-size: 28rpx;
+}
+.list .flex-con text{
+    display: block;
+    flex: 1;
+    margin: 0 20rpx;
+    font-size: 28rpx;
+}
+.list .flex-con .dec{
+    display: inline-block;
+    width: 160rpx;
+}
+.list .flex-con .detail{
+    text-align: right;
+}
+.list .flex-con .phone{
+    color: #e61773;
+}
+@import "../../css/font.wxss";

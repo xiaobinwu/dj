@@ -1,0 +1,16 @@
+/* pages/editname/editname.wxss */
+
+.edit-box .edit-dec{
+    font-size: 24rpx;
+    color: #222;
+    margin: 30rpx 0 20rpx 20rpx;
+}
+.edit-box  input{
+    border: 1px #efefef solid;
+    height: 88rpx;
+    line-height: 88rpx;
+    display: block;
+    background-color: #efefef;
+    padding-left: 20rpx;
+    font-size: 28rpx;
+}

@@ -59,3 +59,12 @@ page {
     padding: 0 3px;
     color: #e61773;
 }
+/*按钮primary*/
+button[type="primary"] {
+    border-radius: 0;
+    background-color: #e61773;
+}
+button[disabled][type="primary"] {
+    border-radius: 0;
+    background-color:#ccc;
+}

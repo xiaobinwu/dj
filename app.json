@@ -6,7 +6,11 @@
     "pages/detail/detail",
     "pages/list/list",
     "pages/more/more",
-    "pages/center/center"
+    "pages/center/center",
+    "pages/user-detail/user-detail",
+    "pages/editname/editname",
+    "pages/editphone/editphone",
+    "pages/login/login"
   ],
   "window":{
     "navigationBarBackgroundColor": "#e61773",

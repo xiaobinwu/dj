@@ -1,0 +1,3 @@
+<template name="countDown">
+    <button disabled="{{disabled}}" plain="{{plain}}" bindtap="_getCode" type="primary">{{text}}</button>
+</template>

@@ -1,0 +1,27 @@
+<!--pages/user-detail/user-detail.wxml-->
+<view class="user">
+    <view class="list section">
+        <view class="flex-con">
+            <span class="icon icon-woman"></span>
+            <text>头像</text>
+            <image src="{{userImg}}" wx:if="{{userImg}}"></image>
+            <image src="../../image/defaultuser.png" wx:else></image>
+        </view>
+        <navigator url="../editname/editname" >
+            <view class="flex-con">
+                <span class="icon icon-edit"></span>
+                <text class="dec">用户名</text>
+                <text class="detail">{{userName}}</text>
+                <span class="icon icon-right"></span>
+            </view>
+        </navigator>
+        <navigator url="../editphone/editphone" >
+            <view class="flex-con">
+                <span class="icon icon-phone2"></span>
+                <text class="dec">绑定手机号</text>
+                <text class="detail phone">{{userPhone}}</text>
+                <span class="icon icon-right"></span>
+            </view>
+        </navigator>
+    </view>
+</view>

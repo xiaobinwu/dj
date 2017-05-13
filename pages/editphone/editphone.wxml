@@ -1,0 +1,17 @@
+<!--pages/editphone/editphone.wxml-->
+<import src="../../template/count-down/count-down.wxml"/>
+<view class="phone-box">
+    <view class="check-box">
+        <view class="title">输入您当前微信账号绑定的手机号码以校验信息</view>
+        <input class="input" type="number" value="{{oldUserPhone}}" placeholder="手机号码" bindblur="checkOldPhone"/>
+    </view>
+    <view class="edit-box">
+        <view class="title">输入您需要绑定的新手机号码</view>
+        <input class="input new-phone" type="number" value="{{newUserPhone}}" placeholder="手机号码" bindinput="updateNewPhone"/>
+        <view class="code-box">
+            <input class="input" type="text" value="{{code}}" placeholder="短信验证码" bindinput="updateCode"/>
+            <template is="countDown" data="{{disabled: disabled, plain: plain, text: text}}" />
+        </view>
+    </view>
+    <button class="bind-btn" type="primary" disabled="{{isNotSubmit}}" bindtap="submit">验证重新绑定</button>
+</view>

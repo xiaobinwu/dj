@@ -405,7 +405,7 @@ Page({
     var _self = this;
     this.cart.initCartData();
     //默认执行一次同步操作
-    while(this.data.pros[this.data.currentIndex]){
+    if(this.data.pros[this.data.currentIndex]){
         _self.cartCtrl.switchCartCheck(_self.data.pros[_self.data.currentIndex],_self.data.currentIndex);
     }
     
