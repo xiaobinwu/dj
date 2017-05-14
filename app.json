@@ -10,7 +10,8 @@
     "pages/user-detail/user-detail",
     "pages/editname/editname",
     "pages/editphone/editphone",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/order/order"
   ],
   "window":{
     "navigationBarBackgroundColor": "#e61773",
