@@ -55,6 +55,7 @@
     display: block;
     flex: 1;
     margin: 0 20rpx;
+    font-size: 28rpx;
 }
 
 @import "../../css/font.wxss";

@@ -1,1 +1,49 @@
 /* pages/login/login.wxss */
+page {
+  display: block;
+  min-height: 100%;
+  background-color: #f5f5f5;
+}
+.login-panel .title{
+    font-size: 24rpx;
+    color: #222;
+    margin: 30rpx 0 20rpx 20rpx;
+}
+.login-panel .input{
+    border: 1px #ddd solid;
+    border-left: 0;
+    border-right: 0;
+    height: 88rpx;
+    background-color: #fff;
+    padding-left: 20rpx;
+    font-size: 28rpx;
+}
+.login-panel .code-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    height: 88rpx;
+    border-bottom: 1px #ddd solid;
+}
+.login-panel .code-box input{
+    border: 0;
+    flex: 1;
+}
+.login-panel .code-box button{
+    border: 1px #e61773 solid;
+    color: #e61773;
+    border-radius: 99px;
+    background-color: transparent!important;
+    margin: 15rpx 20rpx 15rpx 0;
+    font-size: 22rpx;
+    height: 58rpx;
+    width: 220rpx;
+}
+.login-panel .code-box button[disabled]{
+    color: #ccc;
+    border: 1px #ccc solid;
+}
+.bind-btn{
+    margin-top: 50rpx;
+}

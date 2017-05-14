@@ -1,2 +1,20 @@
 <!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
+<import src="../../template/count-down/count-down.wxml"/>
+<view class="login-panel">
+
+    <view>
+        <view class="title">请输入手机号码</view>
+        <input class="input" type="number" value="{{phone}}" placeholder="手机号码" bindinput="updatePhone"/>
+    </view>
+
+    <view>
+        <view class="title">请填入获取到的验证码</view>
+        <view class="code-box">
+            <input class="input" type="text" value="{{code}}" placeholder="短信验证码" bindinput="updateCode"/>
+            <template is="countDown" data="{{disabled: disabled, plain: plain, text: text}}" />
+        </view>
+    </view>
+
+    <button class="bind-btn" type="primary" hover-class="none" disabled="{{isNotSubmit}}" bindtap="doLogin">登录</button>
+
+</view>
