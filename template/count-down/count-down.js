@@ -14,6 +14,7 @@ class CountDown {
             text: '获取验证码'
         })
     }
+    //尽量将挂载到页面的data修改动作移至组件里面来做
     setDisabledValue(bol){
         this.page.setData({
             disabled: bol
@@ -30,7 +31,7 @@ class CountDown {
                 disabled: true,
                 text: this.time + '秒后重新获取'
             });
-            setTimeout(this.countDown, 1000);
+            setTimeout(this.countDown.bind(this), 1000);
         }else{
             this.page.setData({
                 disabled: false,

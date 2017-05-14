@@ -112,7 +112,7 @@ Page({
             duration: 1000
           });
       }
-      if(!/^\d{6}$/.test(this.code)){
+      if(!/^\d{6}$/.test(this.data.code)){
           return wx.showToast({
             title: '验证码为6个数字',
             duration: 1000
