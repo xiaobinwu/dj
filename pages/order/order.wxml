@@ -25,7 +25,7 @@
             <view class="list-footer">
                 <view class="order-status">
                     <view class="status">
-                        <view class="{{index == item.progress.last_index-1 ? 'active' : ''}}" wx:for="item.progress.info" wx:for-item="icon">
+                        <view wx:for="item.progress.info" wx:for-item="icon" wx:for-index="idx" class="status-item {{idx == item.progress.last_index-1 ? 'active' : ''}}" >
                             <span class="icon {{'icon-' + (icon.icon === 'cancel' ? 'refund' : icon.icon)}}"></span>
                             <view></view>
                             <text>{{icon.text}}</text>
@@ -34,7 +34,7 @@
                     </view>
                     <view class="count">
                         <text>合计：</text>
-                        <text>¥ {{item.order_amount}}</text>
+                        <text class="strong">¥ {{item.order_amount}}</text>
                     </view>
                 </view>
                 <view class="btn-wrap">

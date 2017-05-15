@@ -1,1 +1,120 @@
 /* pages/order/order.wxss */
+Page {
+    background-color: #eee;
+}
+.hint {
+    color: #f7a735;
+}
+.order-list .order-time {
+    text-align: right;
+}
+.order-list .order-status {
+    padding: 36rpx 20rpx;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #d9d9d9;
+}
+.order-list .order-status .status {
+    display: flex;
+    flex: 1;
+}
+.order-list .order-status .status .status-item {
+    position: relative;
+    color: #979797;
+    text-align: center;
+    margin-right: 38rpx;
+
+    &:last-child {
+        &:after {
+            border-top: none;
+        }
+    }
+}
+.order-list .order-status .status .hint {
+    position: absolute;
+    bottom: -30rpx;
+    left: 50%;
+    margin-left: -75rpx;
+    width: 150rpx;
+}
+.order-list .order-status .status .icon{
+    font-size: 40rpx;
+}
+.order-list .order-status .status .status-item.active{
+    color: #e62579;
+}
+.order-list .order-status .status .status-item::after{
+    content: "";
+    position: absolute;
+    top: 20rpx;
+    left: 93%;
+    margin-top: -2rpx;
+    width: 40rpx;
+    border-top: 4rpx dotted #979797;
+}
+.order-list .order-status .count{
+    font-size: 28rpx;
+}
+.order-list .order-status .count .strong {
+    font-size: 36rpx;
+    color: #e61973;
+}
+.order-list .btn-wrap {
+    padding: 14rpx 20rpx;
+    text-align: right;
+}
+
+.list {
+    background: #fff;
+    margin-bottom: 20rpx;
+}
+.list .list-header {
+    padding: 0 20rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    display: flex;
+    align-items: center;
+}
+.list .list-header .header-name{
+    font-size: 28rpx;
+}
+.list .list-header text{
+    flex: 1;
+}
+.list .list-header .icon{
+    color: #6a6a6a;
+    font-size: 32rpx;
+    margin-right: 8rpx;
+}
+.item-list .item{
+    position: relative;
+    display: flex;
+    background: #f9f9f9;
+    padding: 10rpx 20rpx;
+    font-size: 28rpx;
+    margin-bottom: 6rpx;
+}
+.item-list .item-img{
+    width: 140rpx;
+    height: 140rpx;
+    margin-right: 20rpx;
+}
+.item-list .item-img image{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e8e8e8;
+}
+.item-list .item-name{
+    margin-bottom: 18rpx;
+}
+.item-list .item-num{
+    color: #999;
+    margin-left: 20rpx;
+}
+.item-list .item-status {
+    position: absolute;
+    bottom: 10rpx;
+    right: 20rpx;
+    color: #f7a735;
+    font-size: 26rpx;
+}
