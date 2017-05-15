@@ -1,6 +1,7 @@
 // pages/order/order.js
 var util = require('../../utils/util.js');
 var ports = require('../../utils/ports.js');
+var polyfill = require('../../utils/polyfill.js');
 // 引入promise
 var Promise = require('../../lib/es6-promise.min.js'); 
 Page({
@@ -28,8 +29,13 @@ Page({
                       for(let i = 0; i < res.data.msg_list.length; i++) {
                           var item = {};
                           var data = res.data.msg_list[i];
+                          // console.log(data)
                           for(let key in data) {
-                              this.setData(util.dynamicSetData('reasonList',data[key], key));
+                              var val = data[key];
+                              this.setData({
+                                'reasonList': polyfill.object.assignIn(this.data.reasonList, { val: key })
+                              });
+                              // console.log(data[key] + ':' + key)
                               listData.push(data[key]);
                           }
 
