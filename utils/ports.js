@@ -16,6 +16,20 @@ module.exports = {
     getLocation: wdomain + '/Location/getLocation',
     // 有门店的省市区列表
     regionList: wdomain + '/store/regionList',
+
+    // 订单模块
+    // 确认订单
+    checkoutOrder: wdomain + '/order/checkoutOrder',
+    createOrder: wdomain + '/order/createOrder',
+    refundOrder: wdomain + '/Aftersales/applyRefund',
+    cancelOrder: wdomain + '/order/cancelOrder',
+    // 确认收货
+    confirmOrder: wdomain + '/order/confirmGoods',
+    orderList: wdomain + '/order/orderlist',
+    orderDetail: wdomain + '/order/orderDetail',
+    orderProgress: wdomain + '/order/orderProgress',
+    orderMsgBox: wdomain + '/Aftersales/msgBox',
+
     //门店模块
     storeShow: wdomain + '/store/show',
     storeMore: wdomain + '/store/more',

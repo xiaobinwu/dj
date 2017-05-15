@@ -25,7 +25,7 @@
             <view class="list-footer">
                 <view class="order-status">
                     <view class="status">
-                        <view wx:for="item.progress.info" wx:for-item="icon" wx:for-index="idx" class="status-item {{idx == item.progress.last_index-1 ? 'active' : ''}}" >
+                        <view wx:for="item.progress.info" wx:for-item="icon" wx:for-index="idx" class="status-item {{idx == item.progress.last_index-1 ? 'active' : ''}} {{idx === item.progress.info.length - 1 ? 'last-status-item' : ''}}" >
                             <span class="icon {{'icon-' + (icon.icon === 'cancel' ? 'refund' : icon.icon)}}"></span>
                             <view></view>
                             <text>{{icon.text}}</text>
@@ -43,5 +43,18 @@
             </view>
 
         </view>
+    </view>
+</view>
+<view class="order-loading" wx:if="{{showLoadingFlag}}">
+     <image src="../../image/loading-super.gif"></image>
+     <text>努力加载中</text>
+</view>
+<view class="no-more-order" wx:if="{{showLoadedFlag}}">
+    没有更多订单了~
+</view>
+<view class="no-order-box" wx:if="{{!hasOrder}}">
+    <view class="icon">
+        <image src="../../image/no-order.png"></image>
+        <view class="msg">您还没有相关的订单哦</view>
     </view>
 </view>

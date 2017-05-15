@@ -1,7 +1,7 @@
 /* pages/order/order.wxss */
-Page {
+/*Page {
     background-color: #eee;
-}
+}*/
 .hint {
     color: #f7a735;
 }
@@ -23,12 +23,9 @@ Page {
     color: #979797;
     text-align: center;
     margin-right: 38rpx;
-
-    &:last-child {
-        &:after {
-            border-top: none;
-        }
-    }
+}
+.order-list .order-status .status .status-item.last-status-item{
+    border-top: none;
 }
 .order-list .order-status .status .hint {
     position: absolute;
@@ -117,4 +114,47 @@ Page {
     right: 20rpx;
     color: #f7a735;
     font-size: 26rpx;
+}
+/*无订单*/
+.no-order-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 300rpx 0;
+} 
+.no-order-box .icon{
+    text-align: center;
+}
+.no-order-box .icon image{
+    width: 132rpx;
+    height: 132rpx;
+}
+.no-order-box .msg{
+    padding-top: 20rpx;
+    font-size:  30rpx;
+    color: #666;
+}
+/*数据加载时*/
+.order-loading{
+    color: #999;
+    font-size: 28rpx;
+    text-align: center;
+    height: 80rpx;
+    line-height:80rpx;
+}
+.order-loading text{
+    margin-left: 20rpx;
+}
+.order-loading image{
+    width: 40rpx;
+    height: 40rpx;
+    vertical-align: sub;
+}
+/*没有更多数据*/
+.no-more-order{
+    color: #999;
+    text-align: center;
+    font-size: 28rpx;
+    margin-top: 20rpx;
 }
