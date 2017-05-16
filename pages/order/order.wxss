@@ -60,7 +60,9 @@
     padding: 14rpx 20rpx;
     text-align: right;
 }
-
+.order-list .btn-wrap button{
+    margin-left: 15rpx; 
+}
 .list {
     background: #fff;
     margin-bottom: 20rpx;

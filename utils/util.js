@@ -40,6 +40,7 @@ function wxPromisify(fn, scope) {
         reject(res);      
       }
       if(scope){
+        //改变this指向
         var newFn = fn.bind(scope);
         newFn(obj);
       }else{

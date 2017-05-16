@@ -38,7 +38,13 @@
                     </view>
                 </view>
                 <view class="btn-wrap">
-                    
+                    <block wx:for="{{item.button_list}}" wx:for-item="btn">
+                        <!--picker理由取消订单-->
+                        <picker wx:if="{{btn.action === 'refund_order'}}" data-reset-page="{{item.page}}" data-current-sn="{{item.order_sn}}" bindchange="bindPickerChange" value="{{reasonDataIndex}}" range="{{reasonData}}">
+                            <button  type="{{btn.is_highlight == 1 ? 'primary': 'default'}}" size="mini" hover-class="none">{{btn.text}}</button>
+                        </picker>
+                        <button wx:if="{{btn.action !== 'refund_order'}}" type="{{btn.is_highlight == 1 ? 'primary': 'default'}}" data-btn="{{btn}}" data-item="{{item}}" bindtap="orderAction" size="mini" hover-class="none">{{btn.text}}</button>
+                    </block>
                 </view>
             </view>
 
