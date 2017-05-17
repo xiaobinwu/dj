@@ -3,13 +3,13 @@
     <view class="order-list" wx:for="{{orderList}}">
         <view class="list">
 
-            <view class="list-header" data-order-id="{{item.order_id}}" bindtap="goDetail()">
+            <view class="list-header" data-order-id="{{item.order_id}}" bindtap="goDetail">
                 <span class="icon icon-store"></span>
                 <text class="store-name">{{item.store_name}}</text>
                 <text class="order-time">{{item.add_time}}</text>
             </view>
 
-            <view class="item-list product-list" data-order-id="{{item.order_id}}" bindtap="goDetail()">
+            <view class="item-list product-list" data-order-id="{{item.order_id}}" bindtap="goDetail">
                 <view class="item" wx:for="{{item.goods_list}}" wx:for-item="product">
                     <view class="item-img">
                         <image src="{{product.goods_img}}"></image>

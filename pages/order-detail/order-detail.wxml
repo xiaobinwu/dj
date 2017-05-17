@@ -1,0 +1,79 @@
+<!--pages/order-detail/order-detail.wxml-->
+<view class="order-detail-tab">
+    <view class="tab-item {{currentView === 'detail' ? 'active' : '' }}">
+        订单信息
+    </view>
+    <view class="tab-item {{currentView === 'progress' ? 'active' : ''}}">
+        订单进度
+    </view>
+</view>
+<view class="order-detail-container">
+    <view class="detail-view" wx:if="{{currentView === 'detail'}}">
+        <view class="order-sta order-list">
+            <view class="list">
+                <view class="list-header">
+                    <span class="icon icon-clock"></span>
+                    <text class="header-name">订单状态</text>
+                </view>
+            </view>
+            <view class="order-status">
+                <view class="status">
+                    <view wx:for="{{orderData.progress.info}}" wx:for-item="icon" class="{{index == orderData.progress.last_index-1 ? 'active' : ''}}">
+                        <span class="icon {{ 'icon-' + (icon.icon === 'cancel' ? 'refund' : icon.icon) }}"></span>
+                        <view></view>
+                        <text class="icon-text">{{icon.text}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="address section">
+            <span class="icon icon-gps"></span>
+            <view class="info">
+                <view class="people">
+                    <text class="name">{{orderData.consignee_name}}</text>
+                    <text class="phone">{{orderData.delivery_type == 2 ? "自提手机号：" : ""}}{{orderData.consignee_mobile}}</text>
+                </view>
+                <view>{{orderData.consignee_address}}</view>
+            </view>
+        </view>
+
+        <view class="order-detail">
+            <view class="list">
+                <view class="list-header">
+                    <span class="icon icon-store"></span>
+                    <text>{{orderData.store_name}}</text>
+                </view>
+                <view class="item-list product-list">
+                    <view class="item" wx:for="{{orderData.goods_list}}">
+                        <view class="item-img">
+                            <image src="{{item.goods_img}}"></image>
+                        </view>
+                        <view class="item-info item-flex">
+                            <view class="item-name">
+                                {{item.goods_name}}
+                            </view>
+                            <view class="item-price">
+                                {{orderData.currency + item.goods_price}}
+                            </view>
+                        </view>
+                        <view class="item-num item-info">x{{item.goods_number}}</view>
+                    </view>
+                </view>
+                <view class="order-price">
+                    <view class="flex-con" wx:for="{{orderData.money_list}}" wx:for-item="info">
+                        <text>{{info.name}}</text>
+                        <text>{{info.money}}</text>
+                    </view>
+                </view>
+                <view class="list-footer">
+                    共{{orderData.product_num}}件商品，合计
+                    <text>{{orderData.currency + orderData.order_amount}}</text>
+                </view>
+            </view>
+        </view>
+
+    </view>
+    <view class="detail-view" wx:if="{{currentView === 'progress'}}">
+
+    </view>
+</view>
