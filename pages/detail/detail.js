@@ -4,7 +4,7 @@ var ports = require('../../utils/ports.js');
 var polyfill = require('../../utils/polyfill.js');
 var address = require('../../utils/address.js');
 var cart = require('../../utils/cart.js');
-var countdown = require('../../utils/countDown.js');
+var Countdown = require('../../utils/countDown.js');
 //引入灯箱组件
 var Slider = require('../../template/slider/slider.js');
 // 引入promise
@@ -200,9 +200,17 @@ Page({
         // console.log(allData.goodsInfo)
         this.slider.initData(allData.goodsInfo.pictures);    
         if(allData.goodsInfo.miaosha && allData.goodsInfo.miaosha.left_time > 0){
-            countdown.countdown(this,allData.goodsInfo.miaosha.left_time*1000, function(){
-                console.log('刷新完成')
-            });
+            var _self = this;
+            new Countdown({
+                context: this,
+                second: allData.goodsInfo.miaosha.left_time*1000,
+                endText: '优惠已经截止',
+                done: function(options){
+                    _self.setData({
+                        'goodsData.miaosha.left_time': 0
+                    });
+                }
+            }).run();
         }
 
     }).catch(e=>{

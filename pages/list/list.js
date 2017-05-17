@@ -13,6 +13,7 @@ var dialog = [
       content: '是否切换至该收货地址？',
       cancelText: '保留地址',
       confirmText: '切换地址',
+      confirmColor: '#e61773',
       success: function(res){
           if (res.confirm) {
             console.log('用户点击确定')
@@ -26,6 +27,7 @@ var dialog = [
       content: '是否更换收货地址？',
       cancelText: '继续浏览',
       confirmText: '选择地址', 
+      confirmColor: '#e61773',
       success: function(res){
           if (res.confirm) {
             console.log('用户点击确定')

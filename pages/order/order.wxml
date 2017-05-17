@@ -25,11 +25,11 @@
             <view class="list-footer">
                 <view class="order-status">
                     <view class="status">
-                        <view wx:for="item.progress.info" wx:for-item="icon" wx:for-index="idx" class="status-item {{idx == item.progress.last_index-1 ? 'active' : ''}} {{idx === item.progress.info.length - 1 ? 'last-status-item' : ''}}" >
+                        <view wx:for="{{item.progress.info}}" wx:for-item="icon" wx:for-index="idx" class="status-item {{idx == item.progress.last_index-1 ? 'active' : ''}} {{idx === item.progress.info.length - 1 ? 'last-status-item' : ''}}" >
                             <span class="icon {{'icon-' + (icon.icon === 'cancel' ? 'refund' : icon.icon)}}"></span>
                             <view></view>
                             <text>{{icon.text}}</text>
-                            <view class="hint" wx:if="{{icon.icon == 'await_pay' && item.left_time > 0}}"> {{item.left_time}} </view>
+                            <view class="hint" wx:if="{{icon.icon == 'await_pay' && item.left_time > 0}}"> {{item.clock}} </view>
                         </view>
                     </view>
                     <view class="count">

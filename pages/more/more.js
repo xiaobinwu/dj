@@ -20,6 +20,7 @@ var dialog = [
       content: '但发现您有可支持配送的地址',
       cancelText: '继续浏览',
       confirmText: '切换地址',
+      confirmColor: '#e61773',
       success: function(res){
           if (res.confirm) {
             console.log('用户点击确定')
@@ -33,6 +34,7 @@ var dialog = [
       content: '是否更换城市查看',
       cancelText: '继续浏览',
       confirmText: '更换城市', 
+      confirmColor: '#e61773',
       success: function(res){
           if (res.confirm) {
             console.log('用户点击确定')
@@ -46,6 +48,7 @@ var dialog = [
       content: '是否切换至该收货地址？',
       cancelText: '不切换',
       confirmText: '切换',
+      confirmColor: '#e61773',
       success: function(res){
           if (res.confirm) {
             console.log('用户点击确定')

@@ -23,6 +23,7 @@ var dialog = [
       content: '是否保留原收货地址？',
       cancelText: '保留地址',
       confirmText: '切换地址',
+      confirmColor: '#e61773',
       success: function(res){
           if (res.confirm) {
             // 切换至当前定位门店

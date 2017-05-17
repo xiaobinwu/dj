@@ -7,6 +7,7 @@
 }
 .order-list .order-time {
     text-align: right;
+    font-size: 28rpx;
 }
 .order-list .order-status {
     padding: 36rpx 20rpx;
@@ -17,6 +18,7 @@
 .order-list .order-status .status {
     display: flex;
     flex: 1;
+    font-size: 28rpx;
 }
 .order-list .order-status .status .status-item {
     position: relative;
@@ -24,7 +26,7 @@
     text-align: center;
     margin-right: 38rpx;
 }
-.order-list .order-status .status .status-item.last-status-item{
+.order-list .order-status .status .status-item.last-status-item::after{
     border-top: none;
 }
 .order-list .order-status .status .hint {
@@ -103,6 +105,9 @@
     height: 100%;
     border: 1px solid #e8e8e8;
 }
+.item-list .item-info{
+    width: 480rpx;
+}
 .item-list .item-name{
     margin-bottom: 18rpx;
 }
@@ -160,3 +165,4 @@
     font-size: 28rpx;
     margin-top: 20rpx;
 }
+@import "../../css/font.wxss";

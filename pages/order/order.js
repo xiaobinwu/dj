@@ -2,10 +2,11 @@
 var util = require('../../utils/util.js');
 var ports = require('../../utils/ports.js');
 var polyfill = require('../../utils/polyfill.js');
+var Countdown = require('../../utils/countDown.js');
 // 引入promise
 var Promise = require('../../lib/es6-promise.min.js'); 
 
-//test
+//测试对象
 var obj = {
   "code": 0,
   "msg": "门店订单列表接口",
@@ -30,7 +31,7 @@ var obj = {
         "add_time": "2017-02-15 15:06:48",
         "order_status": "10",
         "order_status_name": "",
-        "left_time": 0,
+        "left_time": 3600,
         "province_id": "0",
         "province_name": "广东省",
         "city_id": "0",
@@ -49,37 +50,37 @@ var obj = {
             {
               "icon": "await_pay",
               "text": "待支付"
-            },
-            {
-              "icon": "paid",
-              "text": "已支付"
-            },
-            {
-              "icon": "picking",
-              "text": "待配送"
-            },
-            {
-              "icon": "shipping",
-              "text": "配送中"
-            },
-            {
-              "icon": "confirm_goods",
-              "text": "已送达"
-            },
-            {
-              "icon": "refund",
-              "text": "已取消"
-            },
-            {
-              "icon": "complete",
-              "text": "已完成"
-            },
-            {
-              "icon": "cancel",
-              "text": "已取消"
             }
+            // {
+            //   "icon": "paid",
+            //   "text": "已支付"
+            // },
+            // {
+            //   "icon": "picking",
+            //   "text": "待配送"
+            // },
+            // {
+            //   "icon": "shipping",
+            //   "text": "配送中"
+            // },
+            // {
+            //   "icon": "confirm_goods",
+            //   "text": "已送达"
+            // },
+            // {
+            //   "icon": "refund",
+            //   "text": "已取消"
+            // },
+            // {
+            //   "icon": "complete",
+            //   "text": "已完成"
+            // },
+            // {
+            //   "icon": "cancel",
+            //   "text": "已取消"
+            // }
           ],
-          "last_index": 9
+          "last_index": 2
         },
         "button_list": [
           {
@@ -159,7 +160,8 @@ Page({
     hasOrder: true,
     currPage: 0,
     totalPage: 1,
-    pages: []
+    pages: [],
+    clockFlags: []
   },
   getOrderList(index) {
         if(!index) {
@@ -185,8 +187,8 @@ Page({
         }).then(res => {
             // this.currPage = res.data.pagination.curPageNo
 
-            res = obj; //test
-            console.log(res);
+            res = obj; //测试对象
+
 
             this.setData({
                 totalPage: res.data.pagination.totalPage
@@ -209,6 +211,8 @@ Page({
             this.setData({
                 pages: pages
             });
+            //清除计时器
+            this.clearTimer();
             this.handleList();
         }).catch(err => {
             if(err.status === 4002) {
@@ -218,17 +222,65 @@ Page({
             }
         })
   },
+  //同个页面多个计时器，需要每次更换数据时，清掉上一个计时器标志数组
+  clearTimer: function(){
+    var clockflags = this.data.clockFlags;
+    for(let i = 0; i < clockflags.length; i++){
+        clearInterval(clockflags[i]);
+    }
+  },
+  onReachBottom: function(){  
+    if(this.data.showLoadedFlag){
+        return;
+    }
+    this.setData({
+    showLoadingFlag: true
+    });
+    this.getOrderList();
+  },
   handleList: function(){
     var list = [], val = this.data.pages;
     for(let i = 0; i< val.length; i++) {
         for(let j = 0; j < val[i].length; j++) {
             val[i][j].page = i + 1;
-            list.push(val[i][j]);
+            val[i][j].clock = '';
+            var len = list.push(val[i][j]);
         }
     }
     this.setData({
         orderList: list
     });
+    this.doCountDwon();
+  },
+  doCountDwon: function(){
+    var list = this.data.orderList, _self = this;
+    for(let i = 0; i < list.length; i++){
+        if(list[i].left_time !== 0){  
+            var timer = new Countdown({
+                context: this,
+                second: list[i].left_time*1000,
+                endText: '',
+                isCustom: true,
+                customDataName: 'orderList[' + i + '].' + 'clock',
+                index: i,
+                start: function(flag){
+                    //保存计时器标志
+                    var clockflags = _self.data.clockFlags;
+                    clockflags.push(flag);
+                    _self.setData({
+                        clockFlags: clockflags
+                    });
+                },
+                done: function(options){
+                    //处理后倒计时后，是否需要改变icon
+                    console.log(options.index);
+                }
+            })
+            timer.run();
+        }else{
+            continue;
+        }
+    }
   },
   goDetail: function(e){
     wx.navigateTo({
@@ -294,6 +346,7 @@ Page({
         wx.showModal({
           title: '提示',
           content: btn.confirm || '确定取消该订单吗?',
+          confirmColor: '#e61773',
           success: function(res) {
             if (res.confirm) {
                 util.getToken().then(token => {
@@ -311,10 +364,17 @@ Page({
                             duration: 1000
                         });
                         _self.actionCallback(btn.action, object.page);
+                    }else{
+                        wx.showToast({
+                            title: res.msg,
+                            image: '../../image/wrong.png',
+                            duration: 1000
+                        });                       
                     }
                 }).catch(err => {
                       wx.showToast({
                           title: err,
+                          image: '../../image/wrong.png',
                           duration: 1000
                       });                    
                 });
@@ -344,10 +404,17 @@ Page({
                     duration: 1000
                 });
                 _self.actionCallback(btn.action, object.page);
+            }else{
+                wx.showToast({
+                    title: res.msg,
+                    image: '../../image/wrong.png',
+                    duration: 1000
+                });               
             }
         }).catch(err => {
             wx.showToast({
                 title: err,
+                image: '../../image/wrong.png',
                 duration: 1000
             });    
         })
@@ -361,8 +428,15 @@ Page({
     }
 
     // 申请售后
-    if(btn.method === 'return_order') {
+    if(btn.action === 'return_order') {
         
+    }
+
+    //再来一单
+    if(btn.action === 'buy_again'){
+        wx.switchTab({
+            url: '../home/home'
+        })
     }
 
   },
