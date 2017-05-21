@@ -42,13 +42,13 @@
 <!-- 商品(分类导航|商品列表) -->
 <view class="com-product" wx:if="{{showProCate}}">
         <scroll-view  scroll-x="{{true}}" scroll-left="{{scrollLeft}}"  class="scroll-bar" style="width:100%;" >
-            <view style="width: {{idxData.cates.length * 168}}rpx">
-                <view wx:for="{{idxData.cates}}" wx:for-item="cate" class="cate-item {{index == currentIndex ? 'active' : ''}}" data-id="{{cate.cate_id}}" data-index="{{index}}" bindtap="cateClick">{{cate.cate_name}}</view>
+            <view style="width: {{idxData.navbar.length * 168}}rpx">
+                <view wx:for="{{idxData.navbar}}" wx:for-item="cate" class="cate-item {{index == currentIndex ? 'active' : ''}}" data-id="{{cate.nav_id}}" data-index="{{index}}" bindtap="cateClick">{{cate.nav_name}}</view>
             </view>
         </scroll-view>
         <view class="product-wrap">
             <swiper class="product-swiper" current="{{currentIndex}}" autoplay="{{false}}"  bindchange="productSwiperScroll" style="height: {{swiperHeight}}px">
-                <swiper-item wx:for="{{idxData.cates}}">
+                <swiper-item wx:for="{{idxData.navbar}}">
                     <view class="pro-list">
                         <block  wx:for="{{pros[index]}}" wx:for-item="pro" wx:for-index="idx">
                              <template is="productItem" data="{{ product: pro, index: idx, findex: index,  showCartCtrl: storeData.delivery_sta==1, currentProCount: currentProCounts[index][idx] }}" />

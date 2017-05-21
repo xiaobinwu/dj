@@ -102,14 +102,14 @@ Page({
       var _self = this;
       this.setData({
             currentIndex: e.detail.current,
-            currentCateId: _self.data.idxData.cates[e.detail.current].cate_id
+            currentCateId: _self.data.idxData.navbar[e.detail.current].nav_id
       });
       this.scrollLeftChange(e.detail.current);
   }, 
   //分类滚动条位置变化
   scrollLeftChange: function(index){
        var rpx = util.getRpx();
-       var arr = new Array(this.data.idxData.cates.length).fill(false);
+       var arr = new Array(this.data.idxData.navbar.length).fill(false);
        this.setData({
             scrollLeft: index < 4 ? 0 : index * 168 / rpx,
             showLoadingFlag: arr.fill(true, index, index+1)
@@ -226,7 +226,7 @@ Page({
             },
             data: {
                 store_id: _self.data.storeData.id,
-                cat_id: cateId,
+                nav_id: cateId,
                 page: _self.data.pages[index].page
             }
         }).then(function(result) {
@@ -295,7 +295,7 @@ Page({
   setStoreData: function(idxData){
       this.slider.initData(idxData.store_info.store_picture_list); //初始化swiper图片
       var _self = this,
-          cateFlagArr = new Array(idxData.cates.length).fill(false); //初始化分类标识位数组
+          cateFlagArr = new Array(idxData.navbar.length).fill(false); //初始化分类标识位数组
       //优惠标签处理
       idxData.store_info.store_activity_format = this.handleAct(idxData.store_info.store_activity_format);
       var store_activity_list = idxData.store_info.store_activity_list;
@@ -307,14 +307,14 @@ Page({
         storeData: idxData.store_info, // 门店信息
         saleList: idxData.module.data.slice(0,cfg[idxData.module.show_type]), // 营销位
         saleType: idxData.module.show_type,
-        showProCate: idxData.cates ? true : false,
-        currentCateId: idxData.cates[0].cate_id,
+        showProCate: idxData.navbar ? true : false,
+        currentCateId: idxData.navbar[0].nav_id,
         showLoadingFlag: cateFlagArr,
         showLoadedFlag: cateFlagArr
       });
 
       //默认加载第一个分类的数据
-      var arr = new Array(this.data.idxData.cates.length).fill(false);
+      var arr = new Array(this.data.idxData.navbar.length).fill(false);
       this.setData({
          firstLoadDataFlag: arr.fill(true, 0, 1)
       });          

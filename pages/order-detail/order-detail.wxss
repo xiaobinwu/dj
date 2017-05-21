@@ -4,11 +4,16 @@ page {
   min-height: 100%;
   background-color: #f5f5f5;
 }
+.section {
+    padding: 35rpx 25rpx;
+    background: #fff;
+}
 .order-detail-tab{
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 32rpx;
+    background-color: #fff;
 }
 .order-detail-tab .tab-item{
     padding: 25rpx 0;
@@ -19,5 +24,324 @@ page {
 .order-detail-tab .tab-item.active{
     border-bottom: 3px solid #e61773;
     color: #e61773;
+}
+.order-detail-container{
+    position: relative;
+}
+.detail-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.order-list .order-time {
+    text-align: right;
+    font-size: 28rpx;
+}
+.order-list .order-status {
+    padding: 36rpx 20rpx;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #d9d9d9;
+}
+.order-list .order-status .status {
+    display: flex;
+    flex: 1;
+    font-size: 28rpx;
+}
+.order-list .order-status .status .status-item {
+    position: relative;
+    color: #979797;
+    text-align: center;
+    margin-right: 38rpx;
+}
+.order-list .order-status .status .status-item.last-status-item::after{
+    border-top: none;
+}
+.order-list .order-status .status .hint {
+    position: absolute;
+    bottom: -30rpx;
+    left: 50%;
+    margin-left: -75rpx;
+    width: 150rpx;
+}
+.order-list .order-status .status .icon{
+    font-size: 40rpx;
+}
+.order-list .order-status .status .status-item.active{
+    color: #e62579;
+}
+.order-list .order-status .status .status-item::after{
+    content: "";
+    position: absolute;
+    top: 20rpx;
+    left: 93%;
+    margin-top: -2rpx;
+    width: 40rpx;
+    border-top: 4rpx dotted #979797;
+}
+.order-list .order-status .count{
+    font-size: 28rpx;
+}
+.order-list .order-status .count .strong {
+    font-size: 36rpx;
+    color: #e61973;
+}
+.order-list .btn-wrap {
+    padding: 14rpx 20rpx;
+    text-align: right;
+}
+.order-list .btn-wrap button{
+    margin-left: 15rpx; 
+}
+.order-sta{
+    background-color: #fff;
+    margin-top: 10rpx;
+    margin-bottom: 20rpx;
+}
+.order-sta .list{
+    margin-bottom: 0;
+    border-bottom: 1px solid #e8e8e8;
+}
+.order-sta .header-name .icon{
+    margin-right: 10rpx;
+    font-size: 32rpx;
+}
+.order-sta .order-status{
+    padding: 30rpx 20rpx;
+    border-bottom: none;
+
+}
+.order-sta .order-status .icon{
+    display: inline-block;
+    margin-bottom: 15rpx;
+    font-size: 45rpx;
+}
+.icon-text{
+    font-size: 28rpx;
+}
+.status .status-item{
+    margin-right: 60rpx;
+}
+.status .status-item::after{
+    width: 60rpx;
+    border-top:1px solid #ccc;
+}
+.status .last-status-item::after{
+    border-top: 0!important;
+}
+.list {
+    background: #fff;
+}
+.list .list-header {
+    padding: 0 20rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    display: flex;
+    align-items: center;
+}
+.list .list-header .icon {
+    color: #6a6a6a;
+    font-size: 32rpx;
+    margin-right: 8rpx;
+}
+.list .list-header .header-name {
+    font-size: 28rpx;
+}
+
+.list .list-header .item-right {
+    color: #666;
+    font-size: 24rpx;
+    text-align: right;
+}
+.address {
+    margin-bottom: 20rpx;
+    display: flex;
+    background-color: #fff;
+}
+.address .icon {
+    color: #6a6a6a;
+    font-size: 30rpx;
+    margin-right: 10rpx;
+}
+
+.address .info {
+    font-size: 28rpx;
+}
+
+.address .people {
+    margin-bottom: 15rpx;
+}
+.order-detail {
+    margin-bottom: 20rpx;
+}
+.order-detail  .order-price {
+    padding: 0 20rpx;
+    font-size: 28rpx;
+}
+
+.order-detail  .flex-con {
+    padding: 26rpx 0;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.order-detail  .list-footer {
+    padding: 40rpx 20rpx;
+    text-align: right;
+    font-size: 28rpx;
+}
+.order-detail  .list-footer .amount {
+    font-weight: bold;
+    color: #e61973;
+    margin-left: 10rpx;
+}
+.order-detail .header-name .icon{
+    margin-right: 10rpx;
+    font-size: 32rpx;
+}
+.item-list .item{
+    position: relative;
+    display: flex;
+    background: #f9f9f9;
+    padding: 10rpx 20rpx;
+    font-size: 28rpx;
+    margin-bottom: 6rpx;
+}
+.item-list .item-img{
+    width: 140rpx;
+    height: 140rpx;
+    margin-right: 20rpx;
+}
+.item-list .item-img image{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e8e8e8;
+}
+.item-list .item-name{
+    margin-bottom: 18rpx;
+}
+.item-list .item-num{
+    color: #999;
+    margin-left: 20rpx;
+}
+.item-list .item-status {
+    position: absolute;
+    bottom: 10rpx;
+    right: 20rpx;
+    color: #f7a735;
+    font-size: 26rpx;
+}
+.delivery {
+    padding:0 20rpx;
+    margin-bottom: 20rpx;
+}
+.delivery  .flex-con{
+    padding: 30rpx 0;
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 28rpx;
+}
+.delivery  .flex-con.receiving_time{
+    border-bottom: none;
+}
+.delivery  .flex-con .val{
+    color:#666;
+}
+.flex-con {
+    display: flex;
+    justify-content: space-between;
+}
+.order-info {
+    font-size: 28rpx;
+    margin-bottom: 30rpx;
+    padding-bottom: 15rpx;
+}
+.order-info-no{
+    margin-bottom: 20rpx;
+}
+.order-info .btn-clip-orderno{
+    font-size:25rpx;
+    width:100rpx;
+    height:35rpx;
+    vertical-align:text-bottom;
+    padding:0;
+    line-height:35rpx;
+    margin-left:25rpx;
+}
+.item-flex{
+    flex: 1;
+}
+.order-progress {
+    background: #fff;
+    padding: 0 20rpx;
+}
+.order-progress .progress-item {
+    position: relative;
+    padding: 20rpx 0 0;
+    display: flex;
+    align-items: flex-start;
+}
+.order-progress .progress-item::after{
+    content: "";
+    position: absolute;
+    top: 34rpx;
+    left: 18rpx;
+    height: 105%;
+    border-right: 1px solid #e61973;
+}
+.order-progress .progress-item.progress-last-item::after{
+    border-right: none;
+}
+.order-progress .progress-item .point{
+    width: 40rpx;
+    position: relative;
+    text-align: center;
+}
+.order-progress .progress-item .point::before{
+    content: "";
+    position: relative;
+    display: inline-block;
+    z-index: 2;
+    width: 15rpx;
+    height: 15rpx;
+    background: #e61973;
+    border-radius: 50%;
+}
+.order-progress .progress-item .info {
+    flex: 1;
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 20rpx;
+    margin-left: 40rpx;
+}
+.order-progress .progress-item .title{
+    margin-bottom: 20rpx;
+    font-size: 32rpx;
+    line-height: 1;
+}
+.order-progress .progress-item .time{
+    color: #999;
+    font-size: 24rpx;
+}
+.order-progress .progress-item.active .title{
+    color: #e61973;
+}
+.order-progress .progress-item.active .point::before{
+    content: "";
+    position: relative;
+    z-index: 2;
+    width: 20rpx;
+    height: 20rpx;
+}
+.order-progress .progress-item.active .point::after{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    z-index: 0;
+    top: 50%; 
+    left: 50%;
+    margin-top: -15rpx;
+    margin-left: -15rpx;
+    width: 32rpx;
+    height: 32rpx;
+    background: rgba(230,37,121,0.25);
+    border-radius: 50%;
 }
 @import "../../css/font.wxss";

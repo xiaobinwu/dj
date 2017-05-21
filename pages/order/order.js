@@ -284,7 +284,7 @@ Page({
   },
   goDetail: function(e){
     wx.navigateTo({
-        url: '../order-detail/order-detail?orderid=' + e.currentTarget.dataset.orderId
+        url: '../order-detail/order-detail?orderid=' + e.currentTarget.dataset.orderId + '&page=' + e.currentTarget.dataset.resetPage
     });
   },
   bindPickerChange: function(e) {
@@ -423,7 +423,7 @@ Page({
     // 订单进度
     if(btn.action === 'order_progress') {
         wx.navigateTo({
-          url: '../order-detail/order-detail?orderid=' + object.order_id + '&view=progress'
+          url: '../order-detail/order-detail?orderid=' + object.order_id + '&view=progress&page='+ object.page 
         });
     }
 
