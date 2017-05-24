@@ -1,26 +1,5 @@
 # 微信小程序实战
 
-------
-
-## 先上一波gif图片
-
-#### 首页（定位成功情况且有门店）
-![cmd-markdown-logo](git-image/1.gif)
-#### 门店列表（定位成功情况却没有门店）
-![cmd-markdown-logo](git-image/7.gif)
-#### 更多（定位没有成功情况也没有门店）
-![cmd-markdown-logo](git-image/8.gif)
-#### 产品详情页
-![cmd-markdown-logo](git-image/2.gif)
-#### 门店详情
-![cmd-markdown-logo](git-image/3.gif)
-#### 更多门店
-![cmd-markdown-logo](git-image/4.gif)
-#### 订单及订单详情
-![cmd-markdown-logo](git-image/5.gif)
-#### 个人中心
-![cmd-markdown-logo](git-image/6.gif)
-
 ## 版本：0.15.152900（暂未升级原因：升级后需要图片无法本地引用，必须使用image或是远程路径引用）
 
 ## 目录结构
@@ -178,3 +157,27 @@ module.exports = Slider
 
 ```
 忽略其他乱起八糟的代码，主要是这个`<view style="width: {{idxData.navbar.length * 168}}rpx">`,需要保证scroll-view下面的view的width必须要大于100%，充满整个scroll-view
+
+### 4. swiper高度无法自动撑开，暂时不支持
+![cmd-markdown-logo](git-image/swiper.png) 于是对于红线部分的产品分类swiper，就只能手动计算swiper高度，来实现swiper的效果，但是由于对应每个swiper-item还会有个下拉加载，所以产品数目会一直变化，所以计算起来相当于耗性能，希望官方能尽快让swiper高度允许自动撑开
+
+
+
+## 最后上一波gif图片
+
+#### 首页（定位成功情况且有门店）
+![cmd-markdown-logo](git-image/1.gif)
+#### 门店列表（定位成功情况却没有门店）
+![cmd-markdown-logo](git-image/7.gif)
+#### 更多（定位没有成功情况也没有门店）
+![cmd-markdown-logo](git-image/8.gif)
+#### 产品详情页
+![cmd-markdown-logo](git-image/2.gif)
+#### 门店详情
+![cmd-markdown-logo](git-image/3.gif)
+#### 更多门店
+![cmd-markdown-logo](git-image/4.gif)
+#### 订单及订单详情
+![cmd-markdown-logo](git-image/5.gif)
+#### 个人中心
+![cmd-markdown-logo](git-image/6.gif)
