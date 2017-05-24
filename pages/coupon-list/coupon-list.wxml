@@ -1,0 +1,39 @@
+<!--pages/coupon-list/coupon-list.wxml-->
+<import src="../../template/coupon-item/coupon-item.wxml"/>
+<view class="exchange-coupon">
+    <input placeholder="请输入优惠券码" class="ipt-cpn-code" bindinput="getCodeValue"/>
+    <button class="btn-exchange" bindtap="doExchange">兑换</button>
+</view>
+<view class="coupon-list-tab">
+    <view class="tab-item {{currentView == 1 ? 'active' : '' }}" data-activetab="1" bindtap="switchTab">
+        未使用
+    </view>
+    <view class="tab-item {{currentView == 2 ? 'active' : ''}}" data-activetab="2" bindtap="switchTab">
+        已使用
+    </view>
+    <view class="tab-item {{currentView == 3 ? 'active' : ''}}" data-activetab="3" bindtap="switchTab">
+        已失效
+    </view>
+</view>
+<view>
+    <view class="coupon-list">
+        <block wx:if="{{couponData.length > 0}}">
+            <view class="conpon-item" wx:for="{{couponData}}" wx:for-item="cpn">
+                <template is="couponItem" data="{{cpn: cpn, type: 1, toDetail: true, index: index}}" />
+            </view>
+        </block>
+        <block wx:else>
+            <view class="no-data">
+                <span class="icon icon-coupon-empty"></span>
+                <view>您暂时还没有优惠券~</view>
+            </view>
+        </block>
+    </view>
+</view>
+<view class="coupon-loading" wx:if="{{showLoadingFlag}}">
+     <image src="../../image/loading-super.gif"></image>
+     <text>努力加载中</text>
+</view>
+<view class="no-more-coupon" wx:if="{{showLoadedFlag}}">
+    没有更多订单了~
+</view>

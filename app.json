@@ -12,7 +12,8 @@
     "pages/editphone/editphone",
     "pages/login/login",
     "pages/order/order",
-    "pages/order-detail/order-detail"
+    "pages/order-detail/order-detail",
+    "pages/coupon-list/coupon-list"
   ],
   "window":{
     "navigationBarBackgroundColor": "#e61773",

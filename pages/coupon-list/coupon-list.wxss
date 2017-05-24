@@ -1,0 +1,87 @@
+/* pages/coupon-list/coupon-list.wxss */
+.coupon-list-tab{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32rpx;
+    background-color: #fff;
+}
+.coupon-list-tab .tab-item{
+    padding: 25rpx 0;
+    flex: 1;
+    text-align: center;
+    box-sizing: border-box;
+} 
+.coupon-list-tab .tab-item.active{
+    border-bottom: 3px solid #e61773;
+    color: #e61773;
+}
+.exchange-coupon{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 23rpx 20rpx;
+	background-color: #fff;
+	border-top: solid #c7c7c7 3rpx;
+	font-size: 28rpx;
+}
+.exchange-coupon .ipt-cpn-code{
+    display: block;
+    padding-left: 10rpx;
+    height: 70rpx;
+    border: solid #d5d5d5 3rpx;
+    flex: 1;
+    border-radius: 7rpx;
+}
+.exchange-coupon .btn-exchange{
+    display: block;
+    margin-left: 20rpx;
+    width: 130rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    background-color: #e61773;
+    border: none;
+    color: #fff;
+    text-align: center;
+    border-radius: 7rpx;
+}
+.coupon-list .conpon-item{
+    padding: 10rpx 20rpx;
+}
+.coupon-list .no-data{
+    color: #999;
+    text-align: center;
+    font-size: 28rpx;
+    padding-top: 150rpx;
+}
+.coupon-list .no-data .icon{
+    font-size: 80rpx;
+}
+.coupon-list .no-data view{
+    margin-top: 35rpx;
+}
+/*数据加载时*/
+.coupon-loading{
+    color: #999;
+    font-size: 28rpx;
+    text-align: center;
+    height: 80rpx;
+    line-height:80rpx;
+}
+.coupon-loading text{
+    margin-left: 20rpx;
+}
+.coupon-loading image{
+    width: 40rpx;
+    height: 40rpx;
+    vertical-align: sub;
+}
+/*没有更多数据*/
+.no-more-coupon{
+    color: #999;
+    text-align: center;
+    font-size: 28rpx;
+    margin-top: 20rpx;
+}
+@import "../../css/font.wxss";
+@import "../../template/coupon-item/coupon-item.wxss";

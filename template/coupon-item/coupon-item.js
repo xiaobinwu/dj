@@ -24,10 +24,12 @@ class CouponItem {
         });
     }
     _showCouponDetail(e){
-        var id = e.currentTarget.dataset.id;
-        wx.navigateTo({
-            url: '../coupon-detail/coupon-detail?codeId=' + id
-        });        
+        if(e.currentTarget.dataset.todetail){
+            var id = e.currentTarget.dataset.id;
+            wx.navigateTo({
+                url: '../coupon-detail/coupon-detail?codeId=' + id
+            });        
+        }
     }
     _changeExpend(e){
         var index = e.currentTarget.dataset.index;
