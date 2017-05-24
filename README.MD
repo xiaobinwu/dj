@@ -243,7 +243,20 @@ navigateBackFun: function(){
  <view class="status-item {{index == orderData.progress.last_index? 'active' : ''}} {{index === orderData.progress.info.length - 1 ? 'last-status-item' : ''}}"></view>
 ```
 
-### 11. 购物车功能
+### 11. 对于字体文件的使用
+对于下面的字体文件的引用会导致报错，微信小程序似乎不支持怎么使用
+```css
+@font-face {
+  font-family: 'Glyphicons Halflings';
+
+  src: url('/assets/fonts/glyphicons-halflings-regular.eot');
+  src: url('/assets/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('/assets/fonts/glyphicons-halflings-regular.woff') format('woff'), url('/assets/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+```
+解决办法，将ttf文件拿出，转化成base64，以wxss引入。[base64转化](https://transfonter.org/)
+
+
+### 12. 购物车功能
 对于购车功能也是相当折腾的，通过在app.js定义全局变量：
 ```javascript
 cartData:{
