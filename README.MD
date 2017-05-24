@@ -165,19 +165,11 @@ module.exports = Slider
 
 ## 最后上一波gif图片
 
-#### 首页（定位成功情况且有门店）
-![cmd-markdown-logo](git-image/1.gif)
-#### 门店列表（定位成功情况却没有门店）
-![cmd-markdown-logo](git-image/7.gif)
-#### 更多（定位没有成功情况也没有门店）
-![cmd-markdown-logo](git-image/8.gif)
-#### 产品详情页
-![cmd-markdown-logo](git-image/2.gif)
-#### 门店详情
-![cmd-markdown-logo](git-image/3.gif)
-#### 更多门店
-![cmd-markdown-logo](git-image/4.gif)
-#### 订单及订单详情
-![cmd-markdown-logo](git-image/5.gif)
-#### 个人中心
-![cmd-markdown-logo](git-image/6.gif)
+#### 首页（定位成功情况且有门店）![cmd-markdown-logo](git-image/1.gif)
+#### 门店列表（定位成功情况却没有门店）![cmd-markdown-logo](git-image/7.gif)
+#### 更多（定位没有成功情况也没有门店）![cmd-markdown-logo](git-image/8.gif)
+#### 产品详情页![cmd-markdown-logo](git-image/2.gif)
+#### 门店详情![cmd-markdown-logo](git-image/3.gif)
+#### 更多门店![cmd-markdown-logo](git-image/4.gif)
+#### 订单及订单详情![cmd-markdown-logo](git-image/5.gif)
+#### 个人中心![cmd-markdown-logo](git-image/6.gif)
