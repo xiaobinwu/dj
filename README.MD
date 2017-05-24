@@ -111,6 +111,7 @@ var qqmapsdk = new QQMapWX({
 var ReverseGeocoder = util.wxPromisify(qqmapsdk.reverseGeocoder, qqmapsdk); //需改变作用域
 
 ```
+对于小程序是需要配置对应的安全域名的，这样才能执行request
 
 ### 3. 如何衍生出组件模板
 模板页（template）没有天生配对js，但是也可以实现，实现面向对象的思想，对模板所需要的js进行一层类的封装，保证构造函数需要接受父页面的上下文对象，然后可以把声明好的类方法绑定到父页面上面去，对于模板页js方法，以_FUN()方式命名。下面是为图片懒加载优化而做的swiper模板组件，可以参考一下。 
@@ -173,3 +174,94 @@ module.exports = Slider
 ### 4. swiper高度无法自动撑开，暂时不支持
 ![cmd-markdown-logo](git-image/swiper.png) 于是对于红线部分的产品分类swiper，就只能手动计算swiper高度，来实现swiper的效果，但是由于对应每个swiper-item还会有个下拉加载，所以产品数目会一直变化，所以计算起来相当于耗性能，希望官方能尽快让swiper高度允许自动撑开
 
+### 5. template模板
+template模板，对象传递方式=>`data={{a: x1,b: x2}}`，x1、x2对应data绑定的变量
+
+### 6. setData设置动态数据
+可能你会遇到这种情况（设置动态数据）： 
+```javascript
+this.setData({
+    'array[0]': 1
+});
+/*
+    上面这样设置是没问题的，但是是动态的，那该怎么办？这样...
+
+ */
+this.setData({
+    'array['+ index +']': 1
+});
+/*
+    很遗憾，无法怎么做
+
+*/
+```
+解决办法，声明中间量，如下：
+```javascript
+/* utils/util.js */
+//动态setData
+function dynamicSetData(field, index, value, suffix, type='object'){
+    var param = {};
+    var string = field + '[' + index + ']' + (typeof suffix !== 'undefined' ?  type === 'object' ? '.' + suffix  : '[' + suffix + ']' : '');
+    param[string] = value;
+    return param;
+}
+```
+这样最后就可以这样，`this.setData(util.dynamicSetData('firstLoadDataFlag', index, true));`，即可用于对象的改变，也可以用于数组的改变。
+
+### 7. 设置顶层标签Page的样式，处理安卓机的背景色问题
+
+### 8 px与rpx之间转化
+对于小程序中，也有一些组件需要传递变量单位为px的，如果这个变量是需要计算出来的，但是我们使用的确是rpx单位，那么他们之间的转化比例是有必要知道的 
+```javascript
+/* utils/util.js */
+//获取px与rpx之间的比列
+function getRpx(){
+    var winWidth = wx.getSystemInfoSync().windowWidth;
+    return 750/winWidth;
+}
+```
+
+### 8. image问题
+image组件，其实对于src图片路径，是以背景图展示的，并不是真的类似img，auto是不生效的。
+
+### 9. wx.navigateBack返回无法传参数通知
+wx.navigateBack返回通知上一页执行指定函数的作用，可以使用getCurrentPages()来获取上一页page对象，事先执行，如下： 
+```javascript
+/* pages/order-detail/order-detail.js */
+//返回执行上一个页面的函数,good
+navigateBackFun: function(){
+  var pages = getCurrentPages();
+  var prevPage = pages[pages.length - 2];
+  if(prevPage.__route__.indexOf("pages/order/order") != -1) {
+        prevPage.actionCallback(this.data.btnAction,this.data.page);
+  }
+}
+```
+
+### 10. class可以多组操作
+```html
+ <view class="status-item {{index == orderData.progress.last_index? 'active' : ''}} {{index === orderData.progress.info.length - 1 ? 'last-status-item' : ''}}"></view>
+```
+
+### 11. 购物车功能
+对于购车功能也是相当折腾的，通过在app.js定义全局变量：
+```javascript
+cartData:{
+    list:[],
+    totalCount:1,
+    totalPrice:0,
+
+    // 起送价
+    floorPrice:0,
+
+    // 总价达到此价免配送费
+    freeShipPrice:0,
+
+    // 运费
+    deliveryFee:0,
+
+    storeId:0,
+    storeName:''
+}
+```
+然后每次加减产品，清空购物车来操作cartData的变化，list存储购物车产品数据，在首页和产品详情页，可以来获取购物车的数据，当然也会把购物车数据的商品id和门店id存储到Storage，可以用来异步更新最新的购物车数据，在首页和产品详情页的来回切换，对于购物车需要时刻去检查，映射到对应分类的swiper产品的加减变化，这里有没有像vue中vuex的状态管理能对数据集中管理，（对于vuex的使用https://github.com/xiaobinwu/Wuji），导致监听变化变得很复杂，有把加减部件cart-ctrl和购物车cart提取成template模板组件，结果处理起来，这里一万个省略号，很悲催！
