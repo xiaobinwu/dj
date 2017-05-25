@@ -3,7 +3,7 @@
         <view class="basic-info {{(type === 1 ? cpn.type == 3 : (cpn.coupon_sta == 2 || cpn.coupon_sta == 3)) ? 'basic-info-gray' : ''}}" data-todetail="{{toDetail}}" bindtap="_showCouponDetail" data-id="{{cpn.id}}">
             <image wx:if="{{cpn.exp_soon}}" class="exp-soon" src="../../image/will-expired.png"></image>
             <view class="use-target-price">
-                <view>{{cpn.tag}}</view>
+                <view class="coupon-tag">{{cpn.tag}}</view>
                 <view class="price {{(type === 1 ? cpn.type == 3 : (cpn.coupon_sta == 2 || cpn.coupon_sta == 3)) ? 'price-gray' : ''}}">
                     <text class="price-label">¥</text>
                     <text class="price-num">{{cpn.showDiscountMoney}}</text>

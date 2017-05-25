@@ -107,7 +107,8 @@ Page({
         })
     }).then(res => {
         this.setData({
-            couponData: this.data.couponData.concat(type==3 ? obj : obj1)
+            couponData: this.data.couponData.concat(type==3 ? obj : obj1),
+            showLoadingFlag: false
         });
     }).catch((e)=>{
         console.log(e)

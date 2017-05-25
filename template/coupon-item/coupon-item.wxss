@@ -30,6 +30,9 @@
     flex-direction:column;
     justify-content:space-between;
 }
+.use-target-price .coupon-tag{
+    font-size: 26rpx;
+}
 .use-target-price .price{
     color:#f6559c;
 }
