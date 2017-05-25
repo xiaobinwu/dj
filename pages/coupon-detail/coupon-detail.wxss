@@ -1,0 +1,124 @@
+/* pages/coupon-detail/coupon-detail.wxss */
+.coupon-detail-info-box{
+	background-color: #fff;
+	margin-bottom: 20rpx;
+}
+.coupon-detail-info-box .detail-info{
+    background: url(../../image/coupon-bg.jpg) no-repeat top left;
+    background-size: 750rpx 230rpx;
+    height: 230rpx;
+    display: flex;
+    justify-content:space-between;
+    font-size: 28rpx;
+}
+.use-target-price{
+    display: flex;
+    flex-direction:column;
+    padding: 60rpx 20rpx 0;
+}
+.use-target-price .price{
+    color:#f6559c;
+}
+.use-target-price .price.price-gray{
+    color:#ccc;
+}
+.use-target-price .price .symbol{
+    font-size: 36rpx;
+}
+.use-target-price .price .num{
+    font-weight: bold;
+    font-size: 100rpx;
+}
+
+.use-cate{
+    display: flex;
+    flex-direction:column;
+    padding-top: 100rpx;
+    align-items: center;
+    margin-right: 35rpx;
+}
+.use-cate .line{
+    position:relative;
+    margin: 10rpx 0;
+    width:100%;
+    height:3rpx;
+    background-color: #666;
+    text-align: center;
+    line-height: 1px;
+}
+.use-cate .line::after{
+    display: inline-block;
+    background-color: #fff;
+    padding:0 6rpx;
+    font-size: 28rpx;
+    content:"·";
+}
+.use-cate view{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 320rpx;
+}
+
+.ecode-box{
+    border-top: dashed #e8e8e8 3rpx;
+    height: 560rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.ecode-box .ecode-content{
+    position: relative;
+}
+.ecode-box .ecode-content .status-icon{
+    width: 142rpx;
+    height: 142rpx;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+.ecode-box .ecode-content .qrcode-img{
+    width: 258rpx;
+    height: 258rpx;
+}
+
+.ecode-box .code-text{
+    margin-top: 30rpx;
+    font-size: 32rpx;
+    color: #222;
+}
+.ecode-box .code-dec{
+    margin-top: 10rpx;
+    font-size: 28rpx;
+    color: #999;
+}
+.cpn-des{
+	background-color: #fff;
+	padding-bottom: 20rpx;
+}
+.cpn-des .title{
+    height: 80rpx;
+    line-height: 80rpx;
+    color: #222;
+    font-size: 32rpx;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 20rpx;
+    padding-left: 20rpx;
+}
+.h3,.p,.rule,.dec{
+    padding: 0 20rpx;
+    margin-bottom: 10rpx;	
+}
+.h3{
+    font-size: 28rpx;
+    color: #222;
+}
+.rule,.dec,.p{
+    font-size: 26rpx;
+    color: #666;
+    line-height: 1.5;
+}

@@ -16,7 +16,7 @@
                 <span class="icon icon-right"></span>
             </view>
         </navigator>
-        <navigator url="{{isLogin ? '../coupon/coupon' : '../login/login'}}">
+        <navigator url="{{isLogin ? '../coupon-list/coupon-list' : '../login/login'}}">
             <view class="flex-con">
                 <span class="icon icon-mendianyouhuiquan"></span>
                 <text>门店优惠券</text>

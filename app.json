@@ -13,7 +13,8 @@
     "pages/login/login",
     "pages/order/order",
     "pages/order-detail/order-detail",
-    "pages/coupon-list/coupon-list"
+    "pages/coupon-list/coupon-list",
+    "pages/coupon-detail/coupon-detail"
   ],
   "window":{
     "navigationBarBackgroundColor": "#e61773",

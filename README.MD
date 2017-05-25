@@ -3,7 +3,7 @@
 ## 版本：0.15.152900（暂未升级原因：升级后需要图片无法本地引用，必须使用image或是远程路径引用）
 
 ## 先上一波gif图片
-![cmd-markdown-logo](git-image/1.gif)![cmd-markdown-logo](git-image/7.gif)![cmd-markdown-logo](git-image/8.gif)![cmd-markdown-logo](git-image/2.gif)![cmd-markdown-logo](git-image/3.gif)![cmd-markdown-logo](git-image/4.gif)![cmd-markdown-logo](git-image/5.gif)![cmd-markdown-logo](git-image/6.gif)
+![cmd-markdown-logo](git-image/1.gif)![cmd-markdown-logo](git-image/7.gif)![cmd-markdown-logo](git-image/8.gif)![cmd-markdown-logo](git-image/2.gif)![cmd-markdown-logo](git-image/3.gif)![cmd-markdown-logo](git-image/4.gif)![cmd-markdown-logo](git-image/5.gif)![cmd-markdown-logo](git-image/6.gif)![cmd-markdown-logo](git-image/9.gif)
 ## gif对应功能块
 > * 首页（定位成功情况且有门店）
 > * 门店列表（定位成功情况却没有门店）
@@ -13,6 +13,7 @@
 > * 更多门店
 > * 订单及订单详情
 > * 个人中心
+> *  优惠券
 
 ## 目录结构
 ![mulu](git-image/mulu.png)

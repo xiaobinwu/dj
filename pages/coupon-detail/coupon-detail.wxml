@@ -1,0 +1,41 @@
+<!--pages/coupon-detail/coupon-detail.wxml-->
+<view class="coupon-detail-info-box">
+    <view class="detail-info">
+        <view class="use-target-price">
+            <view class="price">
+                <text class="symbol">￥</text>
+                <text class="num">{{cpn.showDiscountMoney}}</text>
+            </view>
+            <view>{{cpn.startDate}}-{{cpn.endDate}}</view>
+        </view>
+        <view class="use-cate">
+            <view>{{cpn.showDiscountTitle}}</view>
+            <view class="line"></view>
+            <view>{{cpn.showAimTitle}}</view>
+        </view>
+    </view>
+    <view class="ecode-box">
+        <view class="ecode-content">
+            <block wx:if="cpn.type===2 || cpn.type===3">
+                <image class="status-icon" wx:if="{{isUsed}}" src="../../image/used.png"></image>
+                <image class="status-icon" wx:else src="../../image/expired.png"></image>
+            </block>
+            <!--二维码图片，后期改为接口生成-->
+            <image class="qrcode-img"  src="../../image/ercode.png"></image>
+        </view>
+        <view class="code-text">促销码：{{cpn.code}}</view>
+        <view class="code-dec">使用时向导购员出示此二维码</view>
+    </view>
+    <view class="pt20"></view>
+    <view class="cpn-des">
+        <view class="title">使用说明</view>
+        <view class="h3">试用范围：</view>
+        <view class="p">{{cpn.showDiscountTitle}}</view>
+        <view class="h3">有效期：</view>
+        <view class="p">{{cpn.startDate}}-{{cpn.endDate}}</view>
+        <view class="h3">详细信息：</view>
+        <view class="dec">{{cpn.code_desc}}</view>
+        <view class="h3">使用规则：</view>
+        <view class="rule">{{cpn.coupon_rule}}</view>
+    </view>
+</view>
