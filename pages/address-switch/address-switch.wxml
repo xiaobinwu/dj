@@ -1,0 +1,41 @@
+<view class="area-search-bar">
+  <view class="city-select md-select">
+    <text>{{geoAddress.city_name}}</text>
+    <span class="icon icon-down"></span>
+  </view>
+  <input placeholder="搜索写字楼，小区，学校等" class="area-search-ipt" disabled="true" bindtap="showSearchPanel" />
+</view>
+
+<view class="warning-bar">因就近匹配门店配送服务，请选择准确收货地址</view>
+<view class="location-local gray-title">当前位置</view>
+<view class="local-address" bindtap="selectAddress" data-current-pos="{{currentPos}}" data-send-sta="{{sendSta}}" data-type="currentPos" class="{{!showSendSta ? 'spb' : ''}}">
+  <text>{{addressLine}}</text>
+  <block wx:if="{{showSendSta}}">
+    <text class="send-status" wx:if="{{sendSta == 1}}">支持配送</text>
+    <text class="send-status no" wx:if="{{sendSta == 0}}">不支持配送</text>  
+  </block> 
+  <block wx:else>
+    <text class="get-pos-again" catchtap="getCurrentPos" data-active="active">
+      <span class="icon icon-geocoder"></span>
+      <text>重新定位</text>
+    </text>
+  </block>
+</view>
+
+<view class="gray-title">我的收货地址</view>
+<view class="my-address-list">
+  <view class="address-list">
+    <view class="address-item" wx:for="{{addressList}}" data-item="{{item}}" data-delivery-sta="{{item.delivery_sta}}" bindtap="selectAddress">
+      <view class="basic-info">
+        <text class="user-name">{{item.username}}</text>
+        <text class="user-phone">{{item.tel}}</text>
+        <text class="send-status" wx:if="{{item.delivery_sta == 1}}">支持配送</text>
+        <text class="send-status no" wx:else>不支持配送</text> 
+      </view>
+      <view class="address-info">{{item.province_name + item.city_name + item.district_name + ' ' +
+                     item.addressline + item.house_number}}</view>
+    </view>
+  </view>
+</view>
+
+<button type="primary" hover-class="none" class="btn-add-address">+新增地址</button>

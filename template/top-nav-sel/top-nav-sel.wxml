@@ -1,0 +1,11 @@
+<template name="topNavSel">
+  <view class="top-nav-sel">
+    <view class="address-select">
+      <image src="../../image/0.5h.png"></image>
+      <view class="address-contianer" bindtap="_toSwitchAddress">
+        <text class="local_address">{{address}}</text>
+        <span class="icon icon-down"></span>
+      </view>
+    </view>
+  </view>
+</template> 

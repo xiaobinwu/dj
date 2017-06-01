@@ -1,0 +1,33 @@
+.top-nav-sel{
+  position: relative;
+  height: 90rpx;
+  background-color: #fff;
+  border-bottom: solid #e8e8e8 3rpx;
+  text-align: center;
+}
+.address-select{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90rpx;
+    font-size: 0;
+}
+.address-select image{
+    width: 120rpx;
+    height: 24rpx;
+}
+.address-select .address-contianer{
+    display: flex;
+    align-items: center;
+    color:#222;
+    font-size: 30rpx;
+}
+ .address-select .local_address{
+    max-width: 300rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+ .address-select .icon-down{
+    font-size: 28rpx;
+}
