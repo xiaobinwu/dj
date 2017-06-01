@@ -4,6 +4,8 @@ var util = require('../../utils/util.js');
 var ports = require('../../utils/ports.js');
 //引入灯箱组件
 var Slider = require('../../template/slider/slider.js');
+//引入顶部导航组件
+var TopNavSel = require('../../template/top-nav-sel/top-nav-sel.js');
 // 引入promise
 var Promise = require('../../lib/es6-promise.min.js'); 
 // 优惠标签配色
@@ -162,6 +164,8 @@ Page({
   },
   onLoad:function(options){
       this.slider = new Slider(this);
+      //初始化顶部导航组件
+      new TopNavSel(this);
       this.slider.initData([
             'https://img02.wzhouhui.net/optm/ad/2017/03/08/orig/e22542db46cefea5dfb51f7c7ba8d3817824e65c.jpg',
             'https://img02.wzhouhui.net/optm/ad/2017/03/08/orig/610d7f02a200cdb27b005b4d5cb2b67f2e6314d0.jpg',

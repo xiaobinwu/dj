@@ -1,5 +1,7 @@
 <!--pages/more/more.wxml-->
 <import src="../../template/slider/slider.wxml"/>
+<import src="../../template/top-nav-sel/top-nav-sel.wxml"/>
+<template is="topNavSel" data="{{address: showAddress}}" />
 <template is="slider" data="{{slider}}"/>
 <view class="container">
     <!-- 全部门店 -->

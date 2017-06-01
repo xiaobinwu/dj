@@ -463,3 +463,4 @@
 @import "../../css/font.wxss";
 @import "../../template/product-item/product-item.wxss";
 @import "../../template/cart/cart.wxss";
+@import "../../template/top-nav-sel/top-nav-sel.wxss";

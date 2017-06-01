@@ -11,6 +11,8 @@ var ProductItem = require('../../template/product-item/product-item.js');
 var CartCtrl = require('../../template/cart-ctrl/cart-ctrl.js');
 //引入购物车组件
 var Cart = require('../../template/cart/cart.js');
+//引入顶部导航组件
+var TopNavSel = require('../../template/top-nav-sel/top-nav-sel.js');
 // 引入promise
 var Promise = require('../../lib/es6-promise.min.js'); 
 // 优惠标签配色
@@ -364,6 +366,8 @@ Page({
       this.cartCtrl = new CartCtrl(this);
       //初始化购物车组件
       this.cart = new Cart(this);
+      //初始化顶部导航组件
+      new TopNavSel(this);
       //初始化产品Item组件
       new ProductItem(this);
       /**

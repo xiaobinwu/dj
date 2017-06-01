@@ -2,6 +2,9 @@
 <import src="../../template/slider/slider.wxml"/>
 <import src="../../template/product-item/product-item.wxml"/>
 <import src="../../template/cart/cart.wxml"/>
+<import src="../../template/top-nav-sel/top-nav-sel.wxml"/>
+
+<template is="topNavSel" data="{{address: showAddress}}" />
 <view class="slider-container">
     <template is="slider" data="{{slider}}"/>
     <view catchtap="toStoreDetail" class="btn-show-store-detail">门店详情</view>
