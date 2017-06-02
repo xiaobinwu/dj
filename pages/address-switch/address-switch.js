@@ -19,10 +19,12 @@ Page({
           addressline:'获取定位中...'
       },
       geoAddress: {},
-
+      showPanel: false
   },
   showSearchPanel: function(e){
-    console.log(e)
+    this.setData({
+      showPanel: true
+    });
   },
   toRegion: function(e){
     wx.navigateTo({

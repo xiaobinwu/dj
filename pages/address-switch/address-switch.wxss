@@ -1,4 +1,9 @@
 /* pages/address-switch/address-switch.wxss */
+.view-body{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
 .warning-bar{
     padding: 20rpx;
     background-color: #fff9e3;
@@ -115,5 +120,15 @@
 }
 .my-address-list .address-info{
     color:#999;
+}
+.search-view{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #fff;
+  overflow: hidden;
+  z-index: 101;
 }
 @import "../../css/font.wxss";

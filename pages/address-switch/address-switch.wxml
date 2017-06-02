@@ -38,4 +38,8 @@
   </view>
 </view>
 
+<view class="search-view" wx:if="{{showPanel}}">
+  <view class="a"></view>
+</view>
+
 <button type="primary" hover-class="none" class="btn-add-address">+新增地址</button>
