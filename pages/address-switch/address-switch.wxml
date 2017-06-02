@@ -1,5 +1,5 @@
 <view class="area-search-bar">
-  <view class="city-select md-select">
+  <view class="city-select md-select" bindtap="toRegion">
     <text>{{geoAddress.city_name}}</text>
     <span class="icon icon-down"></span>
   </view>

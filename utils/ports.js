@@ -15,9 +15,15 @@ module.exports = {
     // 地址模块
     getLocation: wdomain + '/Location/getLocation',
     addressList: wdomain + '/address/addressList',
+    // 省市区接口
+    areaData: wdomain + '/address/getAreaData',
+    // 城市列表接口
+    cityList: wdomain + '/store/citylist',
+    // 搜索城市
+    searchArea: wdomain + '/Address/searchAreaData',
     // 有门店的省市区列表
     regionList: wdomain + '/store/regionList',
-
+    initialAddress: wdomain + '/Address/initialsAddressData',
     // 订单模块
     // 确认订单
     checkoutOrder: wdomain + '/order/checkoutOrder',

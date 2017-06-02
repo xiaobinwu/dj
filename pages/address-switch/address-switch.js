@@ -24,6 +24,11 @@ Page({
   showSearchPanel: function(e){
     console.log(e)
   },
+  toRegion: function(e){
+    wx.navigateTo({
+      url: '../region/region'
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */

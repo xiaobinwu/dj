@@ -15,7 +15,8 @@
     "pages/order-detail/order-detail",
     "pages/coupon-list/coupon-list",
     "pages/coupon-detail/coupon-detail",
-    "pages/address-switch/address-switch"
+    "pages/address-switch/address-switch",
+    "pages/region/region"
   ],
   "window":{
     "navigationBarBackgroundColor": "#e61773",

@@ -1,0 +1,35 @@
+<!--pages/region/region.wxml-->
+<view class="region-wrap">
+  <view class="search-wrap">
+    <input placeholder="输入城市或地区名称" class="textfield search-input" bindinput="searchRegion"/>
+  </view>
+
+  <view class="sub-list search-list" wx:if="{{searchList.length > 0}}">
+    <view class="item-list">
+      <view class="item" wx:for="{{searchList}}" bindtap="selectItem" data-region-name="{{item.region_name}}">
+        <text>{{item.region_name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="list section">
+      <view class="list-header">热门城市</view>
+      <view class="item-list tag-list">
+        <view wx:for="{{hotCity}}" wx:for-item="hotCityItem" bindtap="selectItem" data-region-name="{{hotCityItem.region_name}}">
+          <text>{{hotCityItem.region_name}}</text>
+        </view>
+      </view>
+  </view>
+
+  <view class="list">
+    <view class="sub-list" wx:for="{{cityList}}" wx:for-item="cityListItem" wx:for-index="cityListIdx">
+      <view class="list-header">{{cityListIdx}}</view>
+      <view class="item-list">
+        <view class="item" wx:for="{{cityListItem}}" wx:for-item="cityItem" bindtap="selectItem" data-region-name="{{cityItem.region_name}}">
+          <text>{{cityItem.region_name}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>
