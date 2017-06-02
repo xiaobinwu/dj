@@ -28,16 +28,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.initData();
+  },
+  initData: function(){
     var finalAddress = JSON.parse(util.getStorage('final_address')),
-        regionShowName = '请选择';
-    if (finalAddress && finalAddress.region_name){
+      regionShowName = '请选择';
+    if (finalAddress && finalAddress.region_name) {
       regionShowName = finalAddress.region_name;
     }
     appInstance.globalData.geoAddress.city_name = regionShowName;
+    this.setGeoAddress();
     //定位当前位置
     this.getCurrentPos();
     //我的收货地址
     this.getAddressList();
+  },
+  setGeoAddress: function(){
+    this.setData({
+      geoAddress: appInstance.globalData.geoAddress
+    });
   },
   // 定位到当前位置
   getCurrentPos: function(type){
@@ -127,7 +136,7 @@ Page({
       });
     }
 
-    // 设置当前地址
+    // 设置当前地址(存进本地储存)
     location.setCurrentAddress(add);
 
     // 跳转到首页
@@ -136,6 +145,12 @@ Page({
     });
   },
 
+  selectAddressEvent: function(e){
+    var curresntPos = e.currentTarget.dataset.currentPos,
+        sendSta = e.currentTarget.dataset.sendSta,
+        type = e.currentTarget.dataset.type;
+    this.selectAddress(curresntPos, sendSta, type);
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

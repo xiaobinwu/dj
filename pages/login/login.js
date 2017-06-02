@@ -36,6 +36,7 @@ Page({
       if(!this.checkPhone(this.data.phone)){
         return wx.showToast({
           title: '手机号格式不正确或为空',
+          image: '../../image/wrong.png',
           duration: 1000
         });
       }
@@ -60,12 +61,14 @@ Page({
         }else{
             return wx.showToast({
               title: res.msg,
+              image: '../../image/wrong.png',
               duration: 1000
             });
         }
       }).catch((err) => {
           return wx.showToast({
             title: err,
+            image: '../../image/wrong.png',
             duration: 1000
           });
       });
@@ -75,6 +78,7 @@ Page({
       if(!this.checkCode(this.data.code)){
         return wx.showToast({
           title: '验证码错误',
+          image: '../../image/wrong.png',
           duration: 1000
         });
       }
@@ -89,18 +93,27 @@ Page({
       }).then(res => {
           if(res.status === 0) {
               return util.updateToken().then((res) => {
-                  wx.navigateBack({
-                    delta: 1
-                  });
+                  //约定触发上一Page的initData函数
+                var pages = getCurrentPages();
+                var prevPage = pages[pages.length - 2]; //上一个页面对象
+                prevPage.initData && prevPage.initData();
+                wx.navigateBack({
+                  delta: 1
+                });
               })
           }else {
             return wx.showToast({
               title: res.msg,
+              image: '../../image/wrong.png',
               duration: 1000
             });
           }
       }).catch(err => {
-          console.log(err)
+          return wx.showToast({
+            title: err,
+            image: '../../image/wrong.png',
+            duration: 1000
+          });
       })
   },
 

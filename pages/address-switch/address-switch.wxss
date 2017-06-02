@@ -50,8 +50,8 @@
 .area-search-bar .area-search-ipt{
     display: block;
     flex-grow:1;
-    padding: 20rpx;
-    border-radius: 50rpx;
+    padding: 10rpx;
+    border-radius: 5rpx;
     background: #e8e8e8;
     border: none;
     font-size: 28rpx;
@@ -73,7 +73,7 @@
 .local-address{
     display: flex;
     align-items:center;
-    padding: 30rpx 20rpx;
+    padding: 10rpx 20rpx;
     height: 88rpx;
     border-top: solid #e8e8e8 1px;
     background-color: #fff;    
@@ -116,3 +116,4 @@
 .my-address-list .address-info{
     color:#999;
 }
+@import "../../css/font.wxss";

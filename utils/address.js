@@ -18,11 +18,11 @@ function getCoords(){
         type: 'wgs84'
     }).then(function(res){
         //列表 => 22.5373800000 114.0129300000
-        //主页 => 22.5099650000 113.9256690000
+        //主页 => 22.514278  113.923374
         //更多 => 29.6441500000 91.1145000000
         return Promise.resolve({
-            lat: 22.5099650000 ,
-            lng: 113.9256690000
+            lat: 22.514278 ,
+            lng: 113.923374
         });
     }).catch(function(err){
         wx.showToast({
@@ -54,7 +54,7 @@ function getGPSInfo(){
             region_name:''
         };
         getCoords().then((point)=>{
-            console.log(point)
+            // console.log(point)
             // 请求用户授权定位
             //逆地址解析
             var ReverseGeocoder = util.wxPromisify(qqmapsdk.reverseGeocoder, qqmapsdk); //需改变作用域
@@ -70,8 +70,8 @@ function getGPSInfo(){
             data.lng = res.result.ad_info.location.lng;
             // 纬度
             data.lat=res.result.ad_info.location.lat;
-            //详细地址
-            data.location_addr = res.result.address;
+            //详细地址(获取就近建筑)
+            data.location_addr = res.result.address_reference.landmark_l1.title || res.result.address_reference.landmark_l2.title  || res.result.address_reference.street_number.title  || res.result.address_reference.street_number.title || res.result.address;
             return region.getRegionId(res.result.address_component.city);
         }).then((region)=>{// 通过城市名拿到城市区域id后
             data.region_id = region.value;
@@ -106,6 +106,11 @@ function getLocation(options){
             ajaxCfg.header={'X-Auth-Token':token};
         }        
         return new Promise((resolve,reject)=>{
+            if (ajaxCfg.header) {
+              ajaxCfg.header.push({ 'content-type': 'application/x-www-form-urlencoded' });
+            } else {
+              ajaxCfg.header = { 'content-type': 'application/x-www-form-urlencoded' };
+            }
             // 如果有已存在的定位信息(一般来自本地存储)
             if(typeof options.gpsInfo != 'undefined'){
                 ajaxCfg.data = options.gpsInfo;
@@ -119,11 +124,6 @@ function getLocation(options){
                 getGPSInfo().then(result=>{
                     if(result.err){
                         options.gpsError && options.gpsError(result.err);
-                    }
-                    if(ajaxCfg.header){
-                        ajaxCfg.header.push({'content-type': 'application/x-www-form-urlencoded'});
-                    }else{
-                        ajaxCfg.header={'content-type': 'application/x-www-form-urlencoded'};
                     }
                     ajaxCfg.data= result.data;
                     return util.wxRequest(ajaxCfg, true);

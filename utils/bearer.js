@@ -57,7 +57,6 @@ address.prototype = {
             gpsInfo: addressData,
             token: addressData ? false : true
         }).then((result)=>{
-            // console.log(result)
             _self.userLocationData = result.data;
             // 将最终得到地址地址存入本地
             util.setStorage("final_address", JSON.stringify(_self.userLocationData.final_address));

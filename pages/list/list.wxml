@@ -1,6 +1,6 @@
 <!--pages/list/list.wxml-->
 <import src="../../template/slider/slider.wxml"/>
-<template is="slider" data="{{slider}}"/>
+<template is="slider" data="{{slider}}" wx:if="{{storeData.length > 0}}"/>
 <view class="container">
     <view class="warn-msg-box">
         <span class="icon icon-warning"></span>
