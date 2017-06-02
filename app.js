@@ -28,6 +28,20 @@ App({
         phone: '',
         hasData: false 
     },
+    //geo page address
+    geoAddress: {
+      province: null,
+      city: null,
+      district: null,
+      province_name: null,
+      city_name: null,
+      district_name: null,
+      addressline: null,
+      address_lng: null,
+      address_lat: null,
+      hasLocationStore: null
+    },
+    //购物车数据
     cartData:{
         list:[],
         totalCount:1,

@@ -29,6 +29,7 @@ Page({
     if(!this.checkPhone(e.detail.value)){
         return wx.showToast({
           title: '旧手机号格式不正确或为空',
+          image: '../../image/wrong.png',
           duration: 1000
         });
     }
@@ -45,6 +46,7 @@ Page({
               if(res.status !== 0){
                 return wx.showToast({
                   title: res.msg,
+                  image: '../../image/wrong.png',
                   duration: 1000
                 });
               }
@@ -55,6 +57,7 @@ Page({
             }).catch((err) => {
               return wx.showToast({
                 title: err,
+                image: '../../image/wrong.png',
                 duration: 1000
               });
             });
@@ -74,6 +77,7 @@ Page({
       if(!this.checkPhone(this.data.newUserPhone)){
         return wx.showToast({
           title: '新手机号格式不正确或为空',
+          image: '../../image/wrong.png',
           duration: 1000
         });
       }
@@ -99,6 +103,7 @@ Page({
               }).catch((err) => {
                   return wx.showToast({
                     title: err,
+                    image: '../../image/wrong.png',
                     duration: 1000
                   });
               });
@@ -109,12 +114,14 @@ Page({
       if(!this.checkPhone(this.data.newUserPhone)){
           return wx.showToast({
             title: '手机号格式不正确或为空',
+            image: '../../image/wrong.png',
             duration: 1000
           });
       }
       if(!/^\d{6}$/.test(this.data.code)){
           return wx.showToast({
             title: '验证码为6个数字',
+            image: '../../image/wrong.png',
             duration: 1000
           });
       }
@@ -146,12 +153,14 @@ Page({
             }else{
                 return wx.showToast({
                   title: res.msg,
+                  image: '../../image/wrong.png',
                   duration: 1000
                 });
             }
           }).catch((err) => {
                 return wx.showToast({
                   title: err,
+                  image: '../../image/wrong.png',
                   duration: 1000
                 });
           });

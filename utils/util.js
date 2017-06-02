@@ -138,7 +138,7 @@ function getToken() {
     // });
 
     return getOpenId().then(() => {
-      token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwOlwvXC93d3cud3pob3VodWkuY29tIiwiYXVkIjoiaHR0cDpcL1wvd3d3Lnd6aG91aHVpLmNvbSIsImlhdCI6MTQ5NjMwMjUzMywibmJmIjoxNDk2MzAyNTMzLCJleHAiOjE0OTY5MDczMzMsInN1YiI6IjM2NzM1In0.sxs6ZsyAjUUx8qUqwDEBN4nRuXZ70E6AltTIRaCdVi6CbeuY3NhCTTigt8W0HlNwDKxxyjJFswp6UjUjsyij4Q';
+      token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwOlwvXC93d3cud3pob3VodWkuY29tIiwiYXVkIjoiaHR0cDpcL1wvd3d3Lnd6aG91aHVpLmNvbSIsImlhdCI6MTQ5NjM3MjY1NSwibmJmIjoxNDk2MzcyNjU1LCJleHAiOjE0OTY5Nzc0NTUsInN1YiI6IjM0NjQxIn0.cGlVfz0MDH7mpn2tyfICYYKFw88cNzbjhWc3W_LAVv-7HFn6chmigZEQkJojxsp93EjDe1pxQbC9mkRu1auBtw';
         if(token) {
             if(token === '0') {
                 return Promise.reject({
@@ -292,6 +292,17 @@ function dynamicSetData(field, index, value, suffix, type='object'){
     return param;
 }
 
+//toast提取
+function wxToast(flag, options){
+  if(flag === 'wrong'){
+    options.image = "../../image/wrong.png";
+  } else if (flag === 'success' || flag === 'loading'){
+    options.icon = flag;
+  }
+  options.duration = options.duration || 1000;
+  wx.showToast(options);
+}
+
 module.exports = {
   formatTime: formatTime,
   getStorage: getStorage,
@@ -303,5 +314,6 @@ module.exports = {
   objInList: objInList,
   getRpx: getRpx,
   dynamicSetData: dynamicSetData,
-  getToken: getToken
+  getToken: getToken,
+  wxToast: wxToast
 }

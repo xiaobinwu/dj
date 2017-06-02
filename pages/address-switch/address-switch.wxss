@@ -1,1 +1,118 @@
 /* pages/address-switch/address-switch.wxss */
+.warning-bar{
+    padding: 20rpx;
+    background-color: #fff9e3;
+    border-bottom: 1px solid #efe5a6;
+    font-size: 26rpx;
+    color: #d08d3d;
+}
+.gray-title{
+    padding: 40rpx 20rpx 8rpx;
+    background-color: #e8e8e8;
+    font-size: 28rpx;
+    color:#999;
+}
+.send-status{
+    padding: 4rpx;
+    display: inline-block;
+    border: solid #25ae5f 1px;
+    border-radius: 4rpx;
+    font-size: 22rpx;
+    color:#25ae5f;
+}
+.send-status.yes{
+    color:#25ae5f;
+    border-color: #25ae5f;
+}
+.send-status.no{
+    color:#999;
+    border-color: #999;
+}
+.get-pos-again{
+    padding: 20rpx 50rpx 20rpx 20rpx;
+    color: #e61773;
+    font-size: 28rpx;
+}
+.area-search-bar{
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+    padding: 20rpx;
+    border-bottom: 1px solid #e8e8e8;
+    background-color: #fff;
+}
+.area-search-bar .city-select{
+    flex-shrink:0;
+    display: flex;
+    padding-right: 20rpx;
+    font-size: 28rpx;
+}
+.area-search-bar .area-search-ipt{
+    display: block;
+    flex-grow:1;
+    padding: 20rpx;
+    border-radius: 50rpx;
+    background: #e8e8e8;
+    border: none;
+    font-size: 28rpx;
+    outline: none;
+}
+.area-search-bar .area-search-ipt::-webkit-input-placeholder{
+    border-radius: 5rpx;
+    font-size: 28rpx;
+    color:#ccc;
+}
+.area-search-bar .area-search-btn{
+    flex-shrink:0;
+    padding-right: 15rpx;
+    background: none;
+    border: none;
+    font-size: 28rpx;
+    color:#222;
+}
+.local-address{
+    display: flex;
+    align-items:center;
+    padding: 30rpx 20rpx;
+    height: 88rpx;
+    border-top: solid #e8e8e8 1px;
+    background-color: #fff;    
+}
+.local-address .address-line{
+    padding-right: 20rpx;
+    font-size: 28rpx; 
+}
+.local-address.spb{
+    justify-content: space-between;
+}
+.local-address.spb text{
+     display: block;
+}
+.my-address-list .address-item{
+    padding: 30rpx 20rpx;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-bottom: solid #e8e8e8 1px;
+    font-size: 28rpx;
+}
+.my-address-list .address-item.last-address-item{
+    border-bottom: none;
+}
+.my-address-list .basic-info{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30rpx;
+}
+.my-address-list .basic-info text{
+    margin-right: 15rpx;
+}
+.my-address-list .basic-info .is-default{
+    padding: 2rpx 6rpx;
+    border-radius: 20rpx;
+    background-color: #e61773;
+    color:#fff;
+}
+.my-address-list .address-info{
+    color:#999;
+}

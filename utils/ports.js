@@ -14,6 +14,7 @@ module.exports = {
     doLogin: mdomain + '/mp/doLogin',
     // 地址模块
     getLocation: wdomain + '/Location/getLocation',
+    addressList: wdomain + '/address/addressList',
     // 有门店的省市区列表
     regionList: wdomain + '/store/regionList',
 

@@ -153,6 +153,7 @@ Page({
       }).catch((e)=>{
           wx.showToast({
               title: '获取数据失败',
+              image: '../../image/wrong.png',
               duration: 2000
           }); 
       });

@@ -9,7 +9,7 @@
 <view class="warning-bar">因就近匹配门店配送服务，请选择准确收货地址</view>
 <view class="location-local gray-title">当前位置</view>
 <view class="local-address" bindtap="selectAddress" data-current-pos="{{currentPos}}" data-send-sta="{{sendSta}}" data-type="currentPos" class="{{!showSendSta ? 'spb' : ''}}">
-  <text>{{addressLine}}</text>
+  <text class="address-line">{{addressLine}}</text>
   <block wx:if="{{showSendSta}}">
     <text class="send-status" wx:if="{{sendSta == 1}}">支持配送</text>
     <text class="send-status no" wx:if="{{sendSta == 0}}">不支持配送</text>  
@@ -25,7 +25,7 @@
 <view class="gray-title">我的收货地址</view>
 <view class="my-address-list">
   <view class="address-list">
-    <view class="address-item" wx:for="{{addressList}}" data-item="{{item}}" data-delivery-sta="{{item.delivery_sta}}" bindtap="selectAddress">
+    <view class="address-item {{addressList.length - 1 == index ? 'last-address-item' : ''}}" wx:for="{{addressList}}" data-item="{{item}}" data-delivery-sta="{{item.delivery_sta}}" bindtap="selectAddress">
       <view class="basic-info">
         <text class="user-name">{{item.username}}</text>
         <text class="user-phone">{{item.tel}}</text>

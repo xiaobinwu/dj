@@ -44,12 +44,14 @@ Page({
      if(cpn.coupon_sta == 2){
         return wx.showToast({
             title: '已领完',
+            image: '../../image/wrong.png',
             duration: 1000
         });
      }
      if(cpn.coupon_sta == 3){ 
         return wx.showToast({
             title: '已过期',
+            image: '../../image/wrong.png',
             duration: 1000
         });
      }
@@ -70,6 +72,7 @@ Page({
         }).catch((e)=>{
             wx.showToast({
                 title: e,
+                image: '../../image/wrong.png',
                 duration: 1000
             });
             return Promise.reject(e);
