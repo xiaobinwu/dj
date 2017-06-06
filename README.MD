@@ -1,6 +1,6 @@
 # 微信小程序实战
 
-## 版本：0.15.152900（暂未升级原因：升级后需要图片无法本地引用，必须使用image或是远程路径引用）
+## 版本：0.17.172600（wxss背景图设置会不成功）
 
 ## 先上一波gif图片
 ![cmd-markdown-logo](git-image/1.gif)![cmd-markdown-logo](git-image/7.gif)![cmd-markdown-logo](git-image/8.gif)![cmd-markdown-logo](git-image/2.gif)![cmd-markdown-logo](git-image/3.gif)![cmd-markdown-logo](git-image/4.gif)![cmd-markdown-logo](git-image/5.gif)![cmd-markdown-logo](git-image/6.gif)![cmd-markdown-logo](git-image/9.gif)
