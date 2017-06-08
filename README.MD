@@ -281,3 +281,42 @@ cartData:{
 }
 ```
 然后每次加减产品，清空购物车来操作cartData的变化，list存储购物车产品数据，在首页和产品详情页，可以来获取购物车的数据，当然也会把购物车数据的商品id和门店id存储到Storage，可以用来异步更新最新的购物车数据，在首页和产品详情页的来回切换，对于购物车需要时刻去检查，映射到对应分类的swiper产品的加减变化，这里有没有像vue中vuex的状态管理能对数据集中管理，（对于vuex的使用 [点击](https://github.com/xiaobinwu/Wuji)），导致监听变化变得很复杂，有把加减部件cart-ctrl和购物车cart提取成template模板组件，结果处理起来，这里一万个省略号，很悲催！
+### 13. require原理
+微信小程序类似浏览器一样，借助一个HTML页面来引用加载所有的JS文件，但是并不会马上去执行，代理服务部分代码又怎么两个全局函数define和require，类似amd，使用define函数对请求回来的js文件内容进行包装，但是不去执行，然后可以使用require函数按需递归式进行初始化，这个时候js就会执行了，并且只执行一次，那么对于Page页面为什么js能一开始不使用require函数就能加载呢？因为默认page页面js文件，会自动添加上require自己，加载后立即初始化。这样是不需要担心多次require会执行多次js的。
+这篇文章写得很详细 [微信小程序的require机制浅析](https://segmentfault.com/a/1190000007586766)，顺便贴一下几段代码（帮助理解）：
+```javascript
+代理服务部分代码:
+(projectManager.js)
+function getScripts(projInfo, callback) {
+  ...
+    fs.readFile(fname, 'utf8', function(err, scripts) {
+        ....
+        scripts = 'define("' + moduleName + '", function(require, module, exports, ' + noBrowserStr +
+        '){ ' + scripts + '\n});',
+        needRequire && (scripts += 'require("' + moduleName + '")'), //page页面js文件，会添加上require自己，加载后立即初始化。
+        .....
+        callback(null, scripts) //scripts串内容作为HTTP GET的返回
+```
+```javascript
+    var 
+    ......
+    moduleList = {}; 
+    define = function(moduleName, factory) {  //define是全局函数,每个JS文件都默认会调用. 
+        moduleList[moduleName] = { status: status1, factory: factory }
+    };
+```
+```javascript
+....
+    require = function(moduleName) {       
+        ....
+        var module = moduleList[moduleName]; //define函数调用时为moduleList赋的值
+        .....
+        if (module.status === status1) {  
+            //如果未初始化,则初始化
+            var factory = module.factory,  //这个factory就是这个JS文件的脚本.
+            obj = { exports: {} }, u = void 0;
+            factory && (u = factory(o(moduleName), obj, obj.exports)), module.exports = obj.exports || u, module.status = status2
+        }
+        return module.exports
+    }
+```
