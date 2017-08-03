@@ -21,8 +21,8 @@ function getCoords(){
         //主页 => 22.514278  113.923374
         //更多 => 29.6441500000 91.1145000000
         return Promise.resolve({
-            lat: 22.514278 ,
-            lng: 113.923374
+          lat: res.latitude,
+          lng: res.longitude
         });
     }).catch(function(err){
         wx.showToast({
@@ -70,6 +70,7 @@ function getGPSInfo(){
             data.lng = res.result.ad_info.location.lng;
             // 纬度
             data.lat=res.result.ad_info.location.lat;
+            // console.log(data)
             //详细地址(获取就近建筑)
             data.location_addr = res.result.address_reference.landmark_l1.title || res.result.address_reference.landmark_l2.title  || res.result.address_reference.street_number.title  || res.result.address_reference.street_number.title || res.result.address;
             return region.getRegionId(res.result.address_component.city);
