@@ -11,7 +11,7 @@
     </view>
     <view class="store-list" wx:if="{{storeData.store_list}}">
         <view class="store-item" wx:for="{{storeData.store_list}}" wx:for-index="idx" wx:for-item="store" data-store="{{store}}" bindtap="toStoreDetail" wx:key="id">
-            <image src="{{store.store_logo_format}}" class="store-pic"></image>
+            <image src="{{store.store_logo_format}}" class="store-pic" lazyload="{{true}}"></image>
             <view class="store-info">
                 <view class="store-name"> {{store.store_name}} </view>
                 <view class="store-address">{{store.store_address}}</view>

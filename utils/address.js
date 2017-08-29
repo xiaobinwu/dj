@@ -18,7 +18,7 @@ function getCoords(){
         type: 'wgs84'
     }).then(function(res){
         //列表 => 22.5373800000 114.0129300000
-        //主页 => 22.514278  113.923374
+        //主页 => 22.514779  113.92579
         //更多 => 29.6441500000 91.1145000000
         return Promise.resolve({
           lat: res.latitude,
@@ -65,7 +65,7 @@ function getGPSInfo(){
                 }
             });
         }).then((res)=>{// 拿到腾讯地图解析过后的数据
-            // console.log(res)
+            console.log(res)
             // 经度
             data.lng = res.result.ad_info.location.lng;
             // 纬度

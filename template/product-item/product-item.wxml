@@ -2,7 +2,7 @@
 <template name="productItem">
     <view class="pro-item" data-goods-id="{{product.goods_id}}" catchtap="_goDetail" wx:if="{{product}}">
         <view class="pro-pic">
-            <image src="{{product.goods_grid}}"></image>
+            <image src="{{product.goods_grid}}" lazyload="{{true}}"></image>
             <view class="tag-wrap" wx:if="{{product.valid==0}}">
                 <view class="tag-soldout"></view>
             </view>

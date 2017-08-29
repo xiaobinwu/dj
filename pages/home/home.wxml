@@ -36,7 +36,7 @@
     <view class="pt20"></view>
     <view class="sale-md sale-md{{saleType}}">
         <view wx:for="{{saleList}}" wx:for-item="sale_item" class="sale-md-item{{index}}" data-title="{{sale_item.actionTitle}}" data-href="{{sale_item.actionValue}}" bindtap="saleTap">
-            <image src="{{sale_item.iconUrl}}" mode="aspectFill"></image>
+            <image src="{{sale_item.iconUrl}}" mode="aspectFill" lazyload="{{true}}"></image>
         </view>
     </view>
 </view>

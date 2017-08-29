@@ -138,7 +138,7 @@ function getToken() {
     // });
 
     return getOpenId().then(() => {
-      token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC93d3cud3pob3VodWkuY29tIiwiYXVkIjoiaHR0cDpcL1wvd3d3Lnd6aG91aHVpLmNvbSIsImlhdCI6MTUwMTcyOTQyNCwibmJmIjoxNTAxNzI5NDI0LCJleHAiOjE1MDIzMzQyMjQsInN1YiI6IjM3ODU2In0.XPJHtJ_tH1cnj3p2n9ws2JpimCPYOvIwW4L-BymWEyc';
+      token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC93d3cud3pob3VodWkuY29tIiwiYXVkIjoiaHR0cDpcL1wvd3d3Lnd6aG91aHVpLmNvbSIsImlhdCI6MTUwMzk2OTQ4NSwibmJmIjoxNTAzOTY5NDg1LCJleHAiOjE1MDQ1NzQyODUsInN1YiI6IjM3ODU2In0.HYzBuH1ngWZcQjjKS-NESIXtR3JyLqLT-HuFkRZmJpE';
         if(token) {
             if(token === '0') {
                 return Promise.reject({
