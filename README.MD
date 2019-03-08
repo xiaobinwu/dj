@@ -2,7 +2,8 @@
 
 ## 版本：0.22.202200
 
-##转载请标明来处
+##转载请标明来处，原文:http://wushaobin.top/2017/07/11/dj/
+
 
 ## 先上一波gif图片
 ![cmd-markdown-logo](git-image/1.gif)![cmd-markdown-logo](git-image/7.gif)![cmd-markdown-logo](git-image/8.gif)![cmd-markdown-logo](git-image/2.gif)![cmd-markdown-logo](git-image/3.gif)![cmd-markdown-logo](git-image/4.gif)![cmd-markdown-logo](git-image/5.gif)![cmd-markdown-logo](git-image/6.gif)![cmd-markdown-logo](git-image/9.gif)
